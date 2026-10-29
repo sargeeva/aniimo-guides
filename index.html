@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aniimo Guides</title>
+<meta name="description" content="Fan-made Aniimo guides built from the game's own data: friendship and Illusory, Operation: Egg Heist loot tables, and the Night Parade event.">
+<style>
+:root{
+  --bg:#f6f4fc; --surface:#ffffff; --surface-2:#efeaff; --ink:#24213a; --ink-2:#5c5878; --line:#ddd6f3;
+  --accent:#6e5ce6; --accent-ink:#ffffff; --shadow:0 1px 2px rgba(40,30,90,.06),0 10px 28px rgba(40,30,90,.09);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+    --accent:#9a8cff; --accent-ink:#15131f; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+  --accent:#9a8cff; --accent-ink:#15131f; --shadow:none;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(135deg,#6e5ce6 0%,#3f8de0 55%,#e8792b 130%);color:#fff;padding:52px 0 40px;position:relative}
+header h1{font-size:clamp(32px,6vw,52px);margin:0 0 8px;letter-spacing:-.01em}
+header p{margin:0;max-width:620px;opacity:.95;font-size:17px}
+.themebtn{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+main{padding:32px 0 20px}
+.guides{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.guide{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:inherit;transition:transform .15s ease,border-color .15s ease}
+.guide:hover{transform:translateY(-2px);border-color:var(--accent)}
+.guide:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.guide .pic{height:180px;position:relative;overflow:hidden;background:#2c2a55}
+.guide .pic img{width:100%;height:100%;object-fit:cover}
+.guide .pic img.contain{object-fit:contain;padding:12px;background:linear-gradient(135deg,#6e5ce6,#3f8de0)}
+.guide .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.guide h2{margin:0;font-size:21px}
+.guide p{margin:0;color:var(--ink-2);font-size:15px}
+.guide ul{margin:2px 0 0;padding-left:18px;color:var(--ink-2);font-size:14px}
+.guide .go{margin-top:auto;padding-top:6px;color:var(--accent);font-weight:700}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;background:#e8792b;color:#fff;margin-left:6px;vertical-align:middle}
+.about{margin-top:26px;background:var(--surface-2);border-radius:14px;padding:14px 16px;color:var(--ink-2);font-size:14px}
+footer{color:var(--ink-2);font-size:13px;padding:24px 0 48px}
+</style>
+</head>
+<body>
+<header>
+  <button class="themebtn" id="themeBtn" type="button">Toggle theme</button>
+  <div class="wrap">
+    <h1>Aniimo Guides</h1>
+    <p>Fan-made guides built straight from Aniimo's game data: how systems work, exact numbers, and every reward.</p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="guides">
+    <a class="guide" href="night-parade/">
+      <div class="pic"><img src="assets/night-parade.webp" alt=""></div>
+      <div class="body">
+        <h2>Night Parade <span class="tag">Event</span></h2>
+        <p>The limited-time event, Oct 29 – Dec 10.</p>
+        <ul><li>Candy House tiers and candy planner</li><li>Every working perfume recipe for all 5 visitors</li><li>Interactive recipe tester and all rewards</li></ul>
+        <span class="go">Open guide →</span>
+      </div>
+    </a>
+    <a class="guide" href="egg-heist/">
+      <div class="pic"><img src="assets/egg-heist.webp" alt=""></div>
+      <div class="body">
+        <h2>Egg Heist Loot Tables</h2>
+        <p>Operation: Egg Heist, PvP and Team Mode on Normal, Hard, Nightmare and Chaos.</p>
+        <ul><li>Loot sources per mode</li><li>Every egg, including scent variants and Prismana species</li><li>Rank, daily chest and Display Case rewards</li></ul>
+        <span class="go">Open guide →</span>
+      </div>
+    </a>
+    <a class="guide" href="friendship/">
+      <div class="pic"><img class="contain" src="assets/friendship.webp" alt=""></div>
+      <div class="body">
+        <h2>Friendship &amp; Illusory</h2>
+        <p>Friend Affinity, what each of the 6 levels unlocks, and how Illusory Friends work.</p>
+        <ul><li>Fastest daily Affinity routine</li><li>Affinity planner and Illusory odds calculator</li><li>How to get an Illusory Aniimo</li></ul>
+        <span class="go">Open guide →</span>
+      </div>
+    </a>
+  </div>
+  <div class="about">All three guides are updated for the <b>Oct 28, 2026</b> game update. Numbers come from the game's client data files. Anything the server decides (like drop odds) is marked on each page.</div>
+</main>
+<footer class="wrap">Fan-made. Aniimo and its assets belong to their respective owners.</footer>
+<script>
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement, dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme=dark?"light":"dark"; try{localStorage.setItem("fg-theme",r.dataset.theme)}catch(e){}
+});
+try{const t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}
+</script>
+</body>
+</html>

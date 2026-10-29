@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Night Parade Guide</title>
+<meta name="description" content="Complete guide to Aniimo's Night Parade event: Night Candies, the Candy House, Night Perfume Making recipes for every visitor, the Night Journal and all rewards.">
+<style>
+:root{
+  --bg:#f7f3fb; --surface:#ffffff; --surface-2:#f1e9fa; --ink:#2a2140; --ink-2:#655a80; --line:#e2d6f2;
+  --accent:#7b4fd6; --accent-ink:#ffffff; --pumpkin:#e8792b; --pumpkin-ink:#ffffff;
+  --good:#1f9a63; --good-bg:#e3f6ec; --bad:#c2410c; --bad-bg:#fdeee5;
+  --warn-bg:#fff4df; --warn-ink:#7a5000;
+  --sweet:#d6488d; --rich:#8a5a2b; --airy:#2f8fd1;
+  --shadow:0 1px 2px rgba(50,20,90,.06),0 8px 24px rgba(50,20,90,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#140f22; --surface:#1d1630; --surface-2:#2a2044; --ink:#efe9fb; --ink-2:#b3a8cf; --line:#3a2f57;
+    --accent:#b294ff; --accent-ink:#140f22; --pumpkin:#ff9a4d; --pumpkin-ink:#1a1020;
+    --good:#4fd39a; --good-bg:#16352a; --bad:#ff9a6b; --bad-bg:#3d2018;
+    --warn-bg:#3a2d12; --warn-ink:#f5d58d;
+    --sweet:#ff7ab8; --rich:#e0a774; --airy:#6cbcf5; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#140f22; --surface:#1d1630; --surface-2:#2a2044; --ink:#efe9fb; --ink-2:#b3a8cf; --line:#3a2f57;
+  --accent:#b294ff; --accent-ink:#140f22; --pumpkin:#ff9a4d; --pumpkin-ink:#1a1020;
+  --good:#4fd39a; --good-bg:#16352a; --bad:#ff9a6b; --bad-bg:#3d2018;
+  --warn-bg:#3a2d12; --warn-ink:#f5d58d;
+  --sweet:#ff7ab8; --rich:#e0a774; --airy:#6cbcf5; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+header.hero{position:relative;color:#fff;overflow:hidden;background:#241a44}
+.hero .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(22,12,48,.88) 0%,rgba(22,12,48,.6) 50%,rgba(22,12,48,.15) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-top:56px;padding-bottom:44px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.hero .txt{flex:1 1 420px}
+.hero h1{font-size:clamp(32px,6vw,52px);margin:0 0 6px;letter-spacing:-.01em;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.hero p{margin:0;max-width:580px;opacity:.96}
+.hero .when{display:inline-flex;gap:8px;align-items:center;margin-top:14px;background:rgba(255,255,255,.14);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:600}
+.hero .deco{flex:0 1 300px;max-width:min(300px,100%);filter:drop-shadow(0 8px 20px rgba(0,0,0,.4))}
+.crumbs{font-size:14px;margin-bottom:10px}
+.crumbs a{color:#fff;opacity:.92}
+.themebtn{position:absolute;z-index:2;top:12px;right:16px;background:rgba(255,255,255,.18);color:#fff;border:0;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 16px;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-2);padding:6px 12px;border-radius:999px;font-size:14px}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink)}
+section{padding:38px 0 8px;scroll-margin-top:52px}
+h2{font-size:27px;margin:0 0 6px}
+h3{font-size:18px;margin:22px 0 10px}
+.lede{color:var(--ink-2);margin:0 0 18px;max-width:780px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.note{background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:12px 14px;font-size:14px;margin:14px 0}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:2px 9px;border-radius:99px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+/* facts */
+.stat{display:flex;gap:12px;align-items:center}
+.stat img{width:52px;height:52px;object-fit:contain;flex:none}
+.stat b{display:block;font-size:22px;line-height:1.15}
+.stat span{color:var(--ink-2);font-size:14px}
+/* three parts */
+.part{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:start}
+.part img{width:72px;height:72px;object-fit:contain}
+.part h3{margin:0 0 4px}
+.part p{margin:0;color:var(--ink-2);font-size:15px}
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.chip{display:inline-flex;gap:6px;align-items:center;background:var(--surface-2);border-radius:10px;padding:3px 10px 3px 3px;font-size:13px;white-space:nowrap}
+.chip img{width:28px;height:28px;object-fit:contain}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+/* candy house */
+.tiers{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.tier{text-align:center}
+.tier img.house{width:100%;height:150px;object-fit:contain}
+.tier b{display:block;font-size:17px}
+.tier .cost{color:var(--pumpkin);font-weight:700}
+.tier .sub{color:var(--ink-2);font-size:13px}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin:8px 0 2px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#f7b267,var(--pumpkin))}
+/* flavors & ingredients */
+.fl{display:inline-flex;align-items:center;gap:4px;font-weight:700;font-variant-numeric:tabular-nums;font-size:13px;border-radius:8px;padding:1px 7px 1px 3px;background:var(--surface-2)}
+.fl img{width:18px;height:18px;object-fit:contain}
+.fl.s{color:var(--sweet)}.fl.r{color:var(--rich)}.fl.a{color:var(--airy)}
+.fl.zero{opacity:.45}
+.ing{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:center;background:var(--surface-2);border-radius:12px;padding:8px}
+.ing img{width:52px;height:52px;object-fit:contain}
+.ing b{font-size:15px;display:block;margin-bottom:3px}
+.ings{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.ing .fls{display:flex;gap:4px;flex-wrap:wrap}
+/* visitors */
+.vtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.vtabs button{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:16px;padding:6px 12px 6px 6px;cursor:pointer;display:flex;gap:8px;align-items:center;font-weight:600}
+.vtabs button img{width:36px;height:36px;object-fit:contain;border-radius:50%;background:var(--surface-2)}
+.vtabs button small{display:block;font-weight:500;color:var(--ink-2);font-size:12px;line-height:1}
+.vtabs button[aria-selected="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.visitor{display:grid;grid-template-columns:minmax(200px,280px) 1fr;gap:20px;align-items:start}
+.visitor .portrait{background:radial-gradient(circle at 50% 60%,#4a3480,#241a44);border-radius:16px;padding:12px;text-align:center}
+.visitor .portrait img{width:100%;max-height:300px;object-fit:contain}
+.bubble{position:relative;background:var(--surface-2);border-radius:14px;padding:12px 14px;font-style:italic;margin:0 0 12px}
+.reqs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 14px}
+.req{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:4px 10px 4px 4px;font-size:14px;font-weight:600}
+.req img{width:22px;height:22px;object-fit:contain}
+.req.must{border-color:var(--pumpkin)}
+/* blender */
+.pick{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.pick button{font:inherit;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:6px;cursor:pointer;display:grid;grid-template-columns:40px 1fr;gap:8px;align-items:center}
+.pick button img{width:40px;height:40px;object-fit:contain}
+.pick button span{font-size:13px;font-weight:600;line-height:1.2}
+.pick button .fls{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px}
+.pick button .fl{font-size:11px;padding:0 5px 0 2px}
+.pick button .fl img{width:14px;height:14px}
+.pick button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset;background:var(--surface-2)}
+.pick button.req-ing{border-color:var(--pumpkin)}
+.meters{display:grid;gap:10px;margin:14px 0}
+.meter{display:grid;grid-template-columns:76px 1fr 46px;gap:10px;align-items:center;font-size:14px;font-weight:600}
+.meter .track{position:relative;height:14px;border-radius:99px;background:var(--surface-2)}
+.meter .track i{position:absolute;top:0;bottom:0;border-radius:99px}
+.meter .track .mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--line)}
+.meter .track .goal{position:absolute;top:-4px;bottom:-4px;border-radius:4px;background:rgba(31,154,99,.22);border:1px dashed var(--good)}
+.meter .val{text-align:right;font-variant-numeric:tabular-nums}
+.verdict{border-radius:12px;padding:10px 14px;font-weight:600;font-size:15px}
+.verdict.ok{background:var(--good-bg);color:var(--good)}
+.verdict.no{background:var(--bad-bg);color:var(--bad)}
+.verdict.wait{background:var(--surface-2);color:var(--ink-2)}
+.sols{display:grid;gap:6px}
+.sol{display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:var(--surface-2);border-radius:12px;padding:6px 8px;cursor:pointer;border:1px solid transparent}
+.sol:hover{border-color:var(--accent)}
+.sol .ings3{display:flex;gap:4px;flex-wrap:wrap;flex:1 1 260px}
+.sol .ings3 .chip{background:var(--surface)}
+.sol .tot{display:flex;gap:4px}
+/* journal */
+.stickers{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.stk{background:var(--surface-2);border-radius:14px;padding:8px;text-align:center}
+.stk img{width:100%;height:92px;object-fit:contain}
+.stk span{display:block;font-size:12px;color:var(--ink-2);margin-top:4px}
+.ms{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.ms:first-child{border-top:0}
+.ms .n{width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800;font-size:18px}
+.frame{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.frame img{width:120px;height:120px;object-fit:contain}
+.totals .chip{font-size:14px}
+.totals .chip img{width:34px;height:34px}
+footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
+@media (max-width:720px){
+  .visitor{grid-template-columns:1fr}
+  .visitor .portrait img{max-height:220px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="bgimg" src="assets/UI_Img_Event_Halloween_Bg.webp" alt="">
+  <button class="themebtn" id="themeBtn" type="button">Toggle theme</button>
+  <div class="wrap">
+    <div class="txt">
+      <div class="crumbs"><a href="../">← Aniimo Guides</a> · <a href="../friendship/">Friendship</a> · <a href="../egg-heist/">Egg Heist</a> · <a href="../night-parade/">Night Parade</a></div>
+      <h1>Night Parade Guide</h1>
+      <p id="heroSummary"></p>
+      <div class="when" id="heroWhen"></div>
+    </div>
+    <img class="deco" src="assets/UI_Img_Event_Halloween_Room_5.webp" alt="The fully decorated Candy House">
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#overview">Overview</a><a href="#candy">Candy House</a><a href="#perfume">Perfume Making</a><a href="#blender">Recipe tester</a><a href="#journal">Night Journal</a><a href="#rewards">All rewards</a><a href="#notes">Notes</a><a href="../friendship/" style="color:var(--accent);font-weight:600">Friendship →</a><a href="../egg-heist/" style="color:var(--accent);font-weight:600">Egg Heist →</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+  <h2>How the event works</h2>
+  <p class="lede">Night Parade has two activities. Both feed a sticker book called the <b>Night Journal</b>, and filling the Journal unlocks the big rewards.</p>
+  <div class="grid g3" id="facts"></div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="card part"><img src="assets/ui_item_halloween_candy.webp" alt=""><div><h3>Night Candy House</h3><p>Do your daily Parade quests to earn up to <b>3 Night Candies a day</b>. Spend them to decorate the Candy House through 4 tiers (<b>30 candies</b> in total). Each tier gives a gift and a Journal sticker.</p></div></div>
+    <div class="card part"><img src="assets/UI_Img_Event_Halloween_Settlement_Icon.webp" alt=""><div><h3>Night Perfume Making</h3><p><b>5 Aniimo visitors</b> arrive on days 1, 3, 5, 7 and 9. Blend each one a perfume from <b>3 ingredients</b> that matches their taste. Each one you finish gives Sparkling Crystals and a Journal sticker.</p></div></div>
+    <div class="card part"><img src="assets/UI_Img_Event_Halloween_Room_Icon1.webp" alt=""><div><h3>Night Journal</h3><p>There are <b>9 stickers</b> to collect: 4 Candy House tiers plus 5 visitors. Collecting them unlocks <b>5 milestone rewards</b>, and the last one is the <b>Halloween Frolic</b> avatar frame.</p></div></div>
+  </div>
+</section>
+
+<section id="candy">
+  <h2>Night Candy House</h2>
+  <p class="lede">Night Candies come only from the daily <b>Parade quests</b>. Unspent candies carry over with no cap, so missing a day just means catching up later.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0">Daily Parade quests</h3>
+      <div class="tablewrap"><table id="dailyTable"><thead><tr><th>Quest</th><th>Reward</th></tr></thead><tbody></tbody></table></div>
+      <p style="color:var(--ink-2);font-size:14px;margin:10px 0 0">At 3 candies a day, you'll fully decorate the house in <b>10 days</b>. The event lasts about 6 weeks, so you have plenty of slack.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Candy planner</h3>
+      <label style="display:grid;gap:4px;font-size:14px;color:var(--ink-2)">Candies you have now (spent + unspent)
+        <input id="candyHave" type="number" min="0" max="30" value="0" style="font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)">
+      </label>
+      <div class="bar"><i id="candyBar" style="width:0"></i></div>
+      <p id="candyOut" style="margin:8px 0 0"></p>
+    </div>
+  </div>
+  <h3>Decoration tiers</h3>
+  <div class="tiers" id="tierList"></div>
+</section>
+
+<section id="perfume">
+  <h2>Night Perfume Making</h2>
+  <p class="lede">Each visitor offers <b>7 ingredients</b>. You pick <b>3</b>. Every ingredient pushes the perfume's three flavor scales (<b>Sweet</b>, <b>Rich</b> and <b>Airy</b>) up or down, and the totals have to meet the visitor's requirements. Some visitors also insist on one specific ingredient. You can only submit a perfume that passes.</p>
+  <div class="card" style="margin-bottom:14px">
+    <div class="chips" id="flavorLegend"></div>
+    <p style="color:var(--ink-2);font-size:14px;margin:10px 0 0">Visitors come one at a time in a fixed order, and each stays until the event ends, so you can't miss one. The day count starts when the event opens for you.</p>
+  </div>
+  <h3>All 12 ingredients</h3>
+  <div class="ings" id="ingList"></div>
+  <h3>Visitors and every working recipe</h3>
+  <div class="vtabs" role="tablist" id="vTabs"></div>
+  <div class="card" id="visitorPanel"></div>
+</section>
+
+<section id="blender">
+  <h2>Recipe tester</h2>
+  <p class="lede">Try a blend before you commit it in game. Pick a visitor, then tap 3 of their ingredients. The green dashed box on each scale is the range the visitor accepts.</p>
+  <div class="card">
+    <div class="vtabs" id="bTabs"></div>
+    <div class="pick" id="bPick"></div>
+    <div class="meters" id="bMeters"></div>
+    <div id="bVerdict"></div>
+  </div>
+</section>
+
+<section id="journal">
+  <h2>Night Journal</h2>
+  <p class="lede">The Journal holds 9 stickers. You get one for each Candy House tier you finish and one for each visitor you make a perfume for. The in-game Journal shows how many stickers each milestone needs.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0">Stickers</h3>
+      <div class="stickers" id="stickerList"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Milestone rewards</h3>
+      <div id="msList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="rewards">
+  <h2>Everything you can earn</h2>
+  <p class="lede">Totals for completing the whole event.</p>
+  <div class="card totals"><div class="chips" id="totals"></div></div>
+  <div class="grid g2" style="margin-top:14px" id="itemNotes"></div>
+</section>
+
+<section id="notes">
+  <h2>Notes</h2>
+  <div class="card">
+    <ul id="noteList" style="margin:0;padding-left:20px;color:var(--ink-2)"></ul>
+  </div>
+</section>
+
+</main>
+<footer class="wrap">Fan-made guide compiled from the game's client data files (Oct 28, 2026 update). Aniimo and its assets belong to their respective owners.</footer>
+
+<script>
+const DATA={"name":"Night Parade","summary":"Aniimo guests are already waiting beneath the Pumpkin House. Decorate the Candy House, blend custom scents, keep your encounters as keepsakes, and claim Night Parade rewards!","rules":"During the event, Pathfinders can participate in the Night Candy House and Night Perfume Making events to collect stickers, fill out the Night Journal, and claim parade rewards. [Night Candy House]  1. Complete daily Parade quests to earn Night Candies, up to 3 per day. Candies can be saved up with no limits. 2. Spend Night Candies on the main event page to decorate the Candy House and receive a gift. After spending 30 Candies in total, the Candy House will be fully decorated.  [Night Perfume Making] 1. Aniimo companions will visit one after another during the event. Make a perfume for each visitor in the order they arrive. Aniimo that have already visited will remain available until the event ends. 2. Based on each visiting Aniimo’s preferences, choose 3 ingredients from those offered to make a perfume. If the fragrance meets the requirements, you can submit it to receive rewards and an Aniimo sticker. If it doesn’t meet the requirements, you cannot submit it.  [Night Journal] 1. Decorate the Candy House and make perfume for visitors to obtain corresponding Journal stickers. Collect enough stickers to claim the corresponding rewards.","start":{"1":"2026-10-28T20:00:00Z","2":"2026-10-29T04:00:00Z","3":"2026-10-29T08:00:00Z","4":"2026-10-28T20:00:00Z"},"end":{"1":"2026-12-09T19:59:59Z","2":"2026-12-10T03:59:59Z","3":"2026-12-10T07:59:59Z","4":"2026-12-09T19:59:59Z"},"flavors":["Sweet","Rich","Airy"],"materials":[{"id":1,"name":"Sunny Daisy","eff":[-2,-2,0],"icon":"ui_item_400001"},{"id":2,"name":"Truffle","eff":[-2,2,0],"icon":"ui_item_400009"},{"id":3,"name":"Starine","eff":[2,0,1],"icon":"ui_item_130112"},{"id":4,"name":"Lunar Daisy","eff":[0,-1,2],"icon":"ui_item_400002"},{"id":5,"name":"Azure Grass","eff":[0,-2,1],"icon":"ui_item_400003"},{"id":6,"name":"Dewfall Iris","eff":[1,2,0],"icon":"ui_item_913058"},{"id":7,"name":"Red Cap","eff":[0,2,-1],"icon":"ui_item_400004"},{"id":8,"name":"Orange Cap","eff":[1,1,0],"icon":"ui_item_400005"},{"id":9,"name":"Blue Cap","eff":[-1,0,-2],"icon":"ui_item_400006"},{"id":10,"name":"Coral Branch","eff":[0,1,-2],"icon":"ui_item_CoralBranches"},{"id":11,"name":"Fragrancia","eff":[0,2,1],"icon":"ui_item_913059"},{"id":12,"name":"Dried Algae Leaf","eff":[-1,0,-1],"icon":"ui_item_913194"}],"visitors":[{"idx":1,"petId":1005100,"name":"Emberpup","day":1,"offers":[4,5,8,3,6,12,9],"req":{"flavor":[["ge",1],["le",-1],["ge",2]],"must":null},"ask":"Woof! Lightly sweet and refreshing—gotta be airy!","thanks":"Woof! Thanks for mixing that fragrance for me!","solutions":[{"ids":[4,5,8],"tot":[1,-2,3]},{"ids":[4,5,3],"tot":[2,-3,4]},{"ids":[4,5,6],"tot":[1,-1,3]},{"ids":[4,3,12],"tot":[1,-1,2]},{"ids":[5,8,3],"tot":[3,-1,2]}],"art":"10051"},{"idx":2,"petId":1001100,"name":"Celestis","day":3,"offers":[1,4,5,7,3,11,8],"req":{"flavor":[["ge",2],null,["ge",2]],"must":3},"ask":"Starine! I want it all—sweet and airy!","thanks":"Smells amazing! It’s got that Starine scent!","solutions":[{"ids":[4,5,3],"tot":[2,-3,4]},{"ids":[4,7,3],"tot":[2,1,2]},{"ids":[4,3,11],"tot":[2,1,4]},{"ids":[4,3,8],"tot":[3,0,3]},{"ids":[5,3,11],"tot":[2,0,3]},{"ids":[5,3,8],"tot":[3,-1,2]},{"ids":[3,11,8],"tot":[3,3,2]}],"art":"10011"},{"idx":3,"petId":1026105,"name":"Nimbi","day":5,"offers":[8,9,2,6,11,12,7],"req":{"flavor":[["le",-2],["ge",2],["le",-2]],"must":null},"ask":"Oh... Bitter, rich, and mellow—that’s all I need.","thanks":"Thanks... This scent gets how I’m feeling.","solutions":[{"ids":[8,9,2],"tot":[-2,3,-2]},{"ids":[9,2,6],"tot":[-2,4,-2]},{"ids":[9,2,12],"tot":[-4,2,-3]},{"ids":[9,2,7],"tot":[-3,4,-3]},{"ids":[9,11,12],"tot":[-2,2,-2]},{"ids":[9,12,7],"tot":[-2,2,-4]},{"ids":[2,12,7],"tot":[-3,4,-2]}],"art":"1026105"},{"idx":4,"petId":1061100,"name":"Puffby","day":7,"offers":[7,8,2,3,10,6,4],"req":{"flavor":[["ge",2],["ge",2],null],"must":6},"ask":"Add Dewfall Iris—sweet and rich, just for you!","thanks":"Thank you! I’ll share half the scent with you!","solutions":[{"ids":[7,8,6],"tot":[2,5,-1]},{"ids":[7,3,6],"tot":[3,4,0]},{"ids":[8,3,6],"tot":[4,3,1]},{"ids":[8,10,6],"tot":[2,4,-2]},{"ids":[8,6,4],"tot":[2,2,2]},{"ids":[3,10,6],"tot":[3,3,-1]}],"art":"10611"},{"idx":5,"petId":1058100,"name":"Bubbeep","day":9,"offers":[1,4,5,2,10,12,11],"req":{"flavor":[["le",0],null,["le",-1]],"must":12},"ask":"Mmm, add Dried Algae Leaf. Skip the sweetness, keep it subtle and deep.","thanks":"Thanks... I’ll sleep a little longer while I enjoy the fragrance.","solutions":[{"ids":[1,2,12],"tot":[-5,0,-1]},{"ids":[1,10,12],"tot":[-3,-1,-3]},{"ids":[4,10,12],"tot":[-1,0,-1]},{"ids":[5,10,12],"tot":[-1,-1,-2]},{"ids":[2,10,12],"tot":[-3,3,-3]},{"ids":[10,12,11],"tot":[-1,3,-2]}],"art":"10581"}],"candy":{"id":990092,"name":"Night Candy","q":3,"icon":"ui_item_halloween_candy"},"tiers":[{"tier":1,"cost":9,"total":9},{"tier":2,"cost":6,"total":15},{"tier":3,"cost":6,"total":21},{"tier":4,"cost":9,"total":30}],"candyGift":[{"id":533002,"name":"Whisperwake Isles Dewdrop Crystal","q":4,"icon":"UI_Icon_PetEssence_530008","n":10}],"perfumeReward":[{"id":110908,"name":"Sparkling Crystal","q":5,"icon":"ui_item_110908","n":20}],"journal":[[{"id":533002,"name":"Whisperwake Isles Dewdrop Crystal","q":4,"icon":"UI_Icon_PetEssence_530008","n":50}],[{"id":110908,"name":"Sparkling Crystal","q":5,"icon":"ui_item_110908","n":100}],[{"id":1103,"name":"Vein Essence","q":4,"icon":"ui_item_1103","n":2}],[{"id":110003,"name":"Aniipod Ultra","q":5,"icon":"ui_item_110003","n":2}],[{"id":110556,"name":"Halloween Frolic","q":4,"icon":"ui_item_110556","n":1}]],"preview":[{"id":110556,"name":"Halloween Frolic","q":4,"icon":"ui_item_110556","n":0},{"id":110003,"name":"Aniipod Ultra","q":5,"icon":"ui_item_110003","n":0},{"id":110908,"name":"Sparkling Crystal","q":5,"icon":"ui_item_110908","n":0},{"id":1103,"name":"Vein Essence","q":4,"icon":"ui_item_1103","n":0},{"id":533002,"name":"Whisperwake Isles Dewdrop Crystal","q":4,"icon":"UI_Icon_PetEssence_530008","n":0}],"daily":[{"points":100,"reward":[{"id":990092,"name":"Night Candy","q":3,"icon":"ui_item_halloween_candy","n":1}]},{"points":300,"reward":[{"id":990092,"name":"Night Candy","q":3,"icon":"ui_item_halloween_candy","n":1}]},{"points":500,"reward":[{"id":990092,"name":"Night Candy","q":3,"icon":"ui_item_halloween_candy","n":1}]}],"items":{"990092":{"name":"Night Candy","desc":"A sweet little gift wrapped in colorful candy foil, hiding a touch of magic to make this spooky night even more festive.","use":"Use in the Night Parade event to decorate the Candy House and get special gifts."},"110556":{"name":"Halloween Frolic","desc":"As the night falls, the mischievous parade begins.","use":"Unlocks the Avatar Frame upon use."},"533002":{"name":"Whisperwake Isles Dewdrop Crystal","desc":"Dewdrop Crystal born from the Vein energy of Whisperwake Isles. It holds abundant energy, and local Aniimo can resonate with it to draw strength.","use":"Can be used for Resonance Star-up to enhance attributes of Aniimo in the Whisperwake Isles."},"110908":{"name":"Sparkling Crystal","desc":"An essential material for crafting Sparkling Cubes. Tesella Pod in Astra is buying up this item wherever it can.","use":"Collect 1,000 Sparkling Crystals to exchange for 1 Sparkling Cube at an outpost vendor."},"1103":{"name":"Vein Essence","desc":"Essence condensed from the rich nutrients of the earth to repair Vein damage and nourish the local ecosystem.","use":"Pure Vein energy condensed into essence. Absorbed by a Branch in Breezy Plains, it attracts Aniimo."},"110003":{"name":"Aniipod Ultra","desc":"Aniipod developed by the Polaris Institute with amazing performance in every way. It represents the spirit of a champion.","use":"A rare Aniipod that guarantees successful Aniimo capture. The Potential rating of the caught Aniimo will be at least Elite."}}};
+const A=n=>"assets/"+n+".webp";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const FL=[{k:"s",name:DATA.flavors[0],icon:"UI_Img_Event_Halloween_PlayGame_Icon3"},{k:"r",name:DATA.flavors[1],icon:"UI_Img_Event_Halloween_PlayGame_Icon1"},{k:"a",name:DATA.flavors[2],icon:"UI_Img_Event_Halloween_PlayGame_Icon2"}];
+const MAT={};DATA.materials.forEach(m=>MAT[m.id]=m);
+const sign=v=>v>0?"+"+v:String(v);
+const flv=(i,v,showZero)=>(!v&&!showZero)?"":`<span class="fl ${FL[i].k}${v?"":" zero"}" title="${FL[i].name} ${sign(v)}"><img src="${A(FL[i].icon)}" alt="${FL[i].name}">${sign(v)}</span>`;
+const chip=(it,n)=>`<span class="chip"><img src="${A(it.icon)}" alt="">${esc(it.name)}${(n??it.n)?" ×"+(n??it.n).toLocaleString():""}</span>`;
+const matChip=id=>`<span class="chip"><img src="${A(MAT[id].icon)}" alt="">${esc(MAT[id].name)}</span>`;
+const OPS={ge:"≥",le:"≤",eq:"="};
+const STICK={1005100:1,1001100:2,1026105:3,1061100:4,1058100:5};
+
+// ---- hero & facts ----
+document.getElementById("heroSummary").textContent=DATA.summary;
+const fmtDate=s=>new Date(s).toLocaleDateString(undefined,{month:"short",day:"numeric",timeZone:"UTC"});
+const s1=DATA.start["2"],e1=DATA.end["2"];
+document.getElementById("heroWhen").innerHTML=`🎃 ${fmtDate(s1)} – ${fmtDate(e1)} · 4:00 AM server reset`;
+const perfumeR=DATA.perfumeReward[0], gift=DATA.candyGift[0];
+document.getElementById("facts").innerHTML=[
+  [DATA.candy.icon,"30 candies","Fully decorates the Candy House: 10 days of daily quests"],
+  ["UI_Img_Event_Halloween_Settlement_Icon","5 visitors","Arrive on days 1 · 3 · 5 · 7 · 9 and stay until the event ends"],
+  ["UI_PlayerHeadFrame_Halloween","Avatar frame","Halloween Frolic, the final Night Journal reward"],
+].map(([i,b,s])=>`<div class="card stat"><img src="${A(i)}" alt=""><div><b>${b}</b><span>${s}</span></div></div>`).join("");
+
+// ---- candy ----
+document.querySelector("#dailyTable tbody").innerHTML=DATA.daily.map(d=>`<tr><td>Earn <b>${d.points}</b> Daily Activity points</td><td>${d.reward.map(r=>chip(r)).join("")}</td></tr>`).join("");
+const tl=document.getElementById("tierList");
+tl.innerHTML=`<div class="card tier"><img class="house" src="${A("UI_Img_Event_Halloween_Room_1")}" alt=""><b>Start</b><span class="sub">An undecorated pumpkin house</span></div>`+
+ DATA.tiers.map(t=>`<div class="card tier"><img class="house" src="${A("UI_Img_Event_Halloween_Room_"+(t.tier+1))}" alt=""><b>Tier ${t.tier}</b><span class="cost">${t.cost} candies</span> <span class="sub">(${t.total} total)</span><div class="chips" style="justify-content:center;margin-top:8px">${chip(gift)}<span class="chip"><img src="${A("UI_Img_Event_Halloween_Collection_Room"+t.tier)}" alt="">Sticker</span></div></div>`).join("");
+const ch=document.getElementById("candyHave");
+function candyCalc(){
+  const n=Math.max(0,Math.min(30,+ch.value||0));
+  document.getElementById("candyBar").style.width=(n/30*100)+"%";
+  const done=DATA.tiers.filter(t=>n>=t.total).length, next=DATA.tiers.find(t=>n<t.total);
+  const left=30-n, days=Math.ceil(left/3);
+  document.getElementById("candyOut").innerHTML=next?`Tiers done: <b>${done}/4</b>. You need <b>${next.total-n}</b> more for Tier ${next.tier}, and <b>${left}</b> more to finish (about <b>${days} day${days===1?"":"s"}</b> of full dailies).`:`<b>House fully decorated!</b> All 4 tiers done.`;
+}
+ch.addEventListener("input",()=>{candyCalc();try{localStorage.setItem("np-candy",ch.value)}catch(e){}});
+try{const v=localStorage.getItem("np-candy");if(v)ch.value=v}catch(e){}
+candyCalc();
+
+// ---- flavors & ingredients ----
+document.getElementById("flavorLegend").innerHTML=FL.map(f=>`<span class="fl ${f.k}" style="font-size:15px;padding:3px 10px 3px 4px"><img src="${A(f.icon)}" alt="" style="width:24px;height:24px">${f.name}</span>`).join(" ")+`<span class="pill">Ingredient values add together. Negative values pull the scale down.</span>`;
+document.getElementById("ingList").innerHTML=DATA.materials.map(m=>`<div class="ing"><img src="${A(m.icon)}" alt=""><div><b>${esc(m.name)}</b><div class="fls">${m.eff.map((v,i)=>flv(i,v,true)).join("")}</div></div></div>`).join("");
+
+// ---- visitors ----
+const reqHTML=v=>v.req.flavor.map((c,i)=>c?`<span class="req"><img src="${A(FL[i].icon)}" alt="">${FL[i].name} ${OPS[c[0]]} ${c[1]}</span>`:"").join("")+(v.req.must?`<span class="req must"><img src="${A(MAT[v.req.must].icon)}" alt="">Must include ${esc(MAT[v.req.must].name)}</span>`:"");
+const solHTML=(v,s)=>`<div class="sol" data-v="${v.idx}" data-ids="${s.ids.join(",")}" title="Load into the recipe tester"><div class="ings3">${s.ids.map(matChip).join("")}</div><div class="tot">${s.tot.map((x,i)=>flv(i,x,true)).join("")}</div></div>`;
+function renderVisitor(v){
+  document.getElementById("visitorPanel").innerHTML=`<div class="visitor">
+    <div class="portrait"><img src="${A("UI_Img_Event_Halloween_Pet"+v.idx)}" alt="${esc(v.name)}"></div>
+    <div>
+      <h3 style="margin:0 0 2px">${esc(v.name)} <span class="pill">Visitor ${v.idx} · day ${v.day}</span></h3>
+      <p class="bubble">“${esc(v.ask)}”</p>
+      <div style="font-size:13px;color:var(--ink-2);font-weight:600;text-transform:uppercase;letter-spacing:.04em">Requirements</div>
+      <div class="reqs">${reqHTML(v)}</div>
+      <div style="font-size:13px;color:var(--ink-2);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Offered ingredients</div>
+      <div class="chips" style="margin-bottom:14px">${v.offers.map(matChip).join("")}</div>
+      <div style="font-size:13px;color:var(--ink-2);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">All ${v.solutions.length} working recipes (tap one to test it)</div>
+      <div class="sols">${v.solutions.map(s=>solHTML(v,s)).join("")}</div>
+      <div class="chips" style="margin-top:12px">${chip(perfumeR)}<span class="chip"><img src="${A("UI_Img_Event_Halloween_Collection_Pet"+v.idx)}" alt="">${esc(v.name)} sticker</span></div>
+      <p style="color:var(--ink-2);font-size:14px;margin:10px 0 0">When you're done: <i>“${esc(v.thanks)}”</i></p>
+    </div></div>`;
+  document.querySelectorAll("#visitorPanel .sol").forEach(el=>el.addEventListener("click",()=>{
+    loadBlend(+el.dataset.v, el.dataset.ids.split(",").map(Number));
+    document.getElementById("blender").scrollIntoView();
+  }));
+}
+function tabs(el,onPick){
+  el.innerHTML=DATA.visitors.map(v=>`<button type="button" role="tab" data-i="${v.idx}" aria-selected="false"><img src="${A("UI_PetHead_"+v.art)}" alt=""><span>${esc(v.name)}<small>Day ${v.day}</small></span></button>`).join("");
+  el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{select(el,+b.dataset.i);onPick(+b.dataset.i)}));
+}
+function select(el,i){el.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",String(+b.dataset.i===i)))}
+tabs(document.getElementById("vTabs"),i=>renderVisitor(DATA.visitors[i-1]));
+select(document.getElementById("vTabs"),1);renderVisitor(DATA.visitors[0]);
+
+// ---- blender ----
+let bv=1, bsel=[];
+const bt=document.getElementById("bTabs");
+tabs(bt,i=>{bv=i;bsel=[];renderBlend()});
+function loadBlend(v,ids){bv=v;bsel=ids.slice(0,3);select(bt,v);renderBlend()}
+function renderBlend(){
+  const v=DATA.visitors[bv-1];
+  const pick=document.getElementById("bPick");
+  pick.innerHTML=v.offers.map(id=>{const m=MAT[id];return `<button type="button" data-id="${id}" aria-pressed="${bsel.includes(id)}" class="${v.req.must===id?"req-ing":""}"><img src="${A(m.icon)}" alt=""><span>${esc(m.name)}${v.req.must===id?" ★":""}<div class="fls">${m.eff.map((x,i)=>flv(i,x,false)).join("")}</div></span></button>`}).join("");
+  pick.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    const id=+b.dataset.id;
+    if(bsel.includes(id))bsel=bsel.filter(x=>x!==id); else if(bsel.length<3)bsel.push(id); else {bsel.shift();bsel.push(id)}
+    renderBlend();
+  }));
+  const tot=[0,0,0];bsel.forEach(id=>MAT[id].eff.forEach((x,i)=>tot[i]+=x));
+  const R=6;
+  document.getElementById("bMeters").innerHTML=FL.map((f,i)=>{
+    const c=v.req.flavor[i], val=tot[i];
+    const pos=x=>Math.max(0,Math.min(100,(x+R)/(2*R)*100));
+    let goal="";
+    if(c){const lo=c[0]==="ge"?c[1]:c[0]==="le"?-R:c[1], hi=c[0]==="le"?c[1]:c[0]==="ge"?R:c[1];goal=`<span class="goal" style="left:${pos(lo)}%;width:${Math.max(2,pos(hi)-pos(lo))}%"></span>`}
+    const l=Math.min(pos(0),pos(val)), w=Math.abs(pos(val)-pos(0));
+    const col=getComputedStyle(document.documentElement).getPropertyValue(f.k==="s"?"--sweet":f.k==="r"?"--rich":"--airy");
+    return `<div class="meter"><span class="fl ${f.k}" style="background:none"><img src="${A(f.icon)}" alt="">${f.name}</span><div class="track">${goal}<span class="mid"></span><i style="left:${l}%;width:${w}%;background:${col}"></i></div><span class="val">${sign(val)}</span></div>`;
+  }).join("");
+  let msg,cls;
+  if(bsel.length<3){msg=`Pick ${3-bsel.length} more ingredient${3-bsel.length===1?"":"s"}.`;cls="wait"}
+  else{
+    const fails=[];
+    v.req.flavor.forEach((c,i)=>{if(!c)return;const [op,x]=c, val=tot[i];if((op==="ge"&&val<x)||(op==="le"&&val>x)||(op==="eq"&&val!==x))fails.push(`${FL[i].name} is ${sign(val)}, needs ${OPS[op]} ${x}`)});
+    if(v.req.must&&!bsel.includes(v.req.must))fails.push(`missing ${MAT[v.req.must].name}`);
+    if(fails.length){msg="Won't submit: "+fails.join("; ")+".";cls="no"} else {msg=`This works! ${v.name} will accept it.`;cls="ok"}
+  }
+  document.getElementById("bVerdict").innerHTML=`<div class="verdict ${cls}">${esc(msg)}</div>`;
+}
+select(bt,1);renderBlend();
+
+// ---- journal ----
+const sl=[...DATA.tiers.map(t=>({img:"UI_Img_Event_Halloween_Collection_Room"+t.tier,label:"Candy House tier "+t.tier})),...DATA.visitors.map(v=>({img:"UI_Img_Event_Halloween_Collection_Pet"+v.idx,label:v.name}))];
+document.getElementById("stickerList").innerHTML=sl.map(s=>`<div class="stk"><img src="${A(s.img)}" alt=""><span>${esc(s.label)}</span></div>`).join("");
+document.getElementById("msList").innerHTML=DATA.journal.map((r,i)=>`<div class="ms"><div class="n">${i+1}</div><div class="chips">${r.map(x=>chip(x)).join("")}${i===DATA.journal.length-1?'<span class="pill">Final reward</span>':""}</div></div>`).join("")+
+ `<div class="frame" style="margin-top:12px"><img src="${A("UI_PlayerHeadFrame_Halloween")}" alt="Halloween Frolic avatar frame"><div><b>Halloween Frolic</b><br><span style="color:var(--ink-2);font-size:14px">${esc(DATA.items[110556].desc)} ${esc(DATA.items[110556].use)}</span></div></div>`;
+
+// ---- totals ----
+const tot={};const add=(it,n)=>{tot[it.id]=tot[it.id]||{...it,n:0};tot[it.id].n+=n};
+DATA.tiers.forEach(()=>DATA.candyGift.forEach(g=>add(g,g.n)));
+DATA.visitors.forEach(()=>DATA.perfumeReward.forEach(g=>add(g,g.n)));
+DATA.journal.forEach(r=>r.forEach(g=>add(g,g.n)));
+document.getElementById("totals").innerHTML=Object.values(tot).sort((a,b)=>b.q-a.q).map(x=>chip(x)).join("");
+document.getElementById("itemNotes").innerHTML=[110908,533002,110003,1103].map(id=>{const d=DATA.items[id];const it=Object.values(tot).find(x=>x.id===id);return `<div class="card stat"><img src="${A(it.icon)}" alt=""><div><b style="font-size:17px">${esc(d.name)}</b><span>${esc(d.use)}</span></div></div>`}).join("");
+const nl=[
+ "Perfume rewards: each finished visitor gives "+perfumeR.n+" "+perfumeR.name+". Each Candy House tier gives "+gift.n+" "+gift.name+".",
+ "Visitors unlock on day 1, 3, 5, 7 and 9, counted from when the event opens for you. The game shows a countdown (“Visiting in Xh Ym”) for the next one.",
+ "The ingredient values and visitor requirements come straight from the event's data tables. The recipe list was found by testing every 3-ingredient combination.",
+ "The Night Journal milestone thresholds (stickers needed per milestone) are set by the server, so they aren't listed here. The final milestone is the Halloween Frolic frame.",
+ "Event dates are the same in every region: it opens at the 4:00 AM daily reset (Oct 28 20:00 UTC in Asia, Oct 29 04:00 UTC in Europe, 08:00 UTC in the Americas) and runs until the reset on Dec 10.",
+];
+document.getElementById("noteList").innerHTML=nl.map(n=>`<li style="margin:4px 0">${esc(n)}</li>`).join("");
+
+// theme
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement, dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme=dark?"light":"dark"; try{localStorage.setItem("fg-theme",r.dataset.theme)}catch(e){}
+  renderBlend();
+});
+try{const t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}
+</script>
+</body>
+</html>

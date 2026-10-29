@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aniimo Friendship Guide</title>
+<style>
+:root{
+  --bg:#f6f4fc; --surface:#ffffff; --surface-2:#efeaff; --ink:#24213a; --ink-2:#5c5878; --line:#ddd6f3;
+  --accent:#6e5ce6; --accent-2:#3f8de0; --accent-ink:#ffffff; --chip:#4a3fa8; --warn-bg:#fff6e0; --warn-ink:#7a5300;
+  --good:#2f9e6e; --shadow:0 1px 2px rgba(40,30,90,.06),0 6px 20px rgba(40,30,90,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+    --accent:#9a8cff; --accent-2:#6fb1ff; --accent-ink:#15131f; --chip:#3a3270; --warn-bg:#3a2f12; --warn-ink:#f3d58c;
+    --good:#5fd3a0; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+  --accent:#9a8cff; --accent-2:#6fb1ff; --accent-ink:#15131f; --chip:#3a3270; --warn-bg:#3a2f12; --warn-ink:#f3d58c;
+  --good:#5fd3a0; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.hero{background:linear-gradient(135deg,#6e5ce6 0%,#3f8de0 60%,#5fc4d8 100%);color:#fff;padding:40px 0 32px;position:relative;overflow:hidden}
+.hero .wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 6px;letter-spacing:-.01em}
+.hero p{margin:0;max-width:560px;opacity:.95}
+.hero .deco{flex:0 1 340px;max-width:min(340px,100%);filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+.hero .badges{display:flex;gap:6px;margin-top:16px;flex-wrap:wrap}
+.hero .badges img{width:40px;height:40px;object-fit:contain;background:rgba(255,255,255,.18);border-radius:12px;padding:4px}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 16px;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-2);padding:6px 12px;border-radius:999px;font-size:14px}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink)}
+section{padding:36px 0 8px;scroll-margin-top:52px}
+h2{font-size:26px;margin:0 0 6px}
+h3{font-size:18px;margin:20px 0 8px}
+.lede{color:var(--ink-2);margin:0 0 20px;max-width:760px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.stat{display:flex;gap:12px;align-items:center}
+.stat b{display:block;font-size:22px;line-height:1.1}
+.stat span{color:var(--ink-2);font-size:14px}
+.stat img{width:48px;height:48px;object-fit:contain;flex:none}
+.chipicon{width:44px;height:44px;border-radius:12px;background:var(--chip);display:inline-grid;place-items:center;flex:none}
+.chipicon img{width:30px;height:30px;object-fit:contain}
+.ladder{display:grid;gap:12px}
+.lvl{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start}
+.lvl .badge{position:relative;width:96px;height:96px}
+.lvl .badge img{position:absolute;inset:0;margin:auto}
+.lvl .badge .bg{width:96px;height:96px}
+.lvl .badge .fg{width:52px;height:52px;object-fit:contain}
+.lvl h3{margin:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.lvl h3 small{font-weight:500;color:var(--ink-2);font-size:14px}
+.range{font-variant-numeric:tabular-nums;font-weight:600;color:var(--accent)}
+.bar{height:8px;border-radius:99px;background:var(--surface-2);margin:8px 0 10px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.unlocks{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.unlocks li{display:flex;gap:8px;align-items:center;background:var(--surface-2);border-radius:12px;padding:6px 10px 6px 6px;font-size:14px}
+.unlocks li .chipicon{width:32px;height:32px;border-radius:9px}
+.unlocks li .chipicon img{width:22px;height:22px}
+.quote{font-style:italic;color:var(--ink-2);font-size:14px;margin:8px 0 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.thumb{width:56px;height:61px;object-fit:cover;border-radius:10px;flex:none}
+.rowhead{display:flex;gap:12px;align-items:center}
+.pill{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.pill.hot{background:var(--accent);color:var(--accent-ink)}
+.gift{display:flex;gap:14px;align-items:center}
+.gift img{width:84px;height:84px;object-fit:contain;flex:none}
+.gift b{font-size:17px}
+.gift .pts{font-size:24px;font-weight:700;color:var(--accent)}
+.note{background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:12px 14px;font-size:14px;margin:14px 0}
+.steps{counter-reset:s;display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.steps>li{counter-increment:s;position:relative;padding:16px 16px 16px 60px}
+.steps>li::before{content:counter(s);position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700}
+.steps h3{margin:0 0 4px}
+.illus-hero{border-radius:16px;overflow:hidden;position:relative;background:#cfc6f5}
+.illus-hero img{display:block;width:100%;height:220px;object-fit:cover;object-position:70% 50%}
+.illus-hero .cap{position:absolute;left:16px;bottom:14px;right:16px;display:flex;gap:10px;align-items:center;color:#2a2257;font-weight:700;font-size:20px}
+.illus-hero .cap img{width:40px;height:40px;object-fit:contain;background:#4a3fa8;border-radius:10px;padding:5px}
+.calc{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));align-items:end}
+.calc label{display:grid;gap:4px;font-size:14px;color:var(--ink-2)}
+.calc input,.calc select{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);width:100%}
+.result{font-size:18px;margin-top:14px}
+.result b{color:var(--accent)}
+.checks{display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:10px 0}
+.checks label{display:flex;gap:8px;align-items:center;font-size:14px;background:var(--surface-2);border-radius:10px;padding:8px 10px}
+.gallery{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+.gallery figure{margin:0;background:var(--surface-2);border-radius:12px;padding:10px;display:grid;gap:6px;justify-items:center}
+.gallery figure.dark{background:#2b2550}
+.gallery img{height:72px;width:100%;object-fit:contain}
+.gallery figcaption{font-size:11px;color:var(--ink-2);word-break:break-all;text-align:center}
+.gallery figure.dark figcaption{color:#cfc8f5}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.88em;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
+.themebtn{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+@media (max-width:560px){
+  .lvl{grid-template-columns:64px 1fr;gap:12px}
+  .lvl .badge,.lvl .badge .bg{width:64px;height:64px}
+  .lvl .badge .fg{width:36px;height:36px}
+  .steps>li{padding-left:52px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <button class="themebtn" id="themeBtn" type="button">Toggle theme</button>
+  <div class="wrap">
+    <div style="flex:1 1 420px">
+      <div style="font-size:14px;margin-bottom:10px"><a href="../" style="color:#fff;opacity:.92">← Aniimo Guides</a> · <a href="../egg-heist/" style="color:#fff;opacity:.92">Egg Heist</a> · <a href="../night-parade/" style="color:#fff;opacity:.92">Night Parade</a></div>
+      <h1>Aniimo Friendship Guide</h1>
+      <p>How Friend <b>Affinity</b> works, the fastest ways to raise it, what each of the 6 levels unlocks, and how to become <b>Illusory Friends</b> and create an <b>Illusory Aniimo</b>.</p>
+      <div class="badges">
+        <img src="assets/UI_Img_Likability_2.png" alt="Level 1 badge"><img src="assets/UI_Img_Likability_3.png" alt="Level 2 badge"><img src="assets/UI_Img_Likability_4.png" alt="Level 3 badge"><img src="assets/UI_Img_Likability_5.png" alt="Level 4 badge"><img src="assets/UI_Img_Likability_6.png" alt="Level 5 badge"><img src="assets/UI_Img_Likability_7.png" alt="Level 6 badge">
+      </div>
+    </div>
+    <img class="deco" src="assets/UI_Img_Pop_LikabilityUp_Deco1.png" alt="Friends Forever!">
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#tldr">Quick facts</a><a href="#levels">Affinity levels</a><a href="#earn">Earning Affinity</a><a href="#gifts">Gifts</a><a href="#calc">Planner</a><a href="#illusory">Illusory</a><a href="#data">Raw data</a><a href="#assets">Assets</a><a href="../egg-heist/" style="color:var(--accent);font-weight:600">Egg Heist →</a><a href="../night-parade/" style="color:var(--accent);font-weight:600">Night Parade →</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="tldr">
+  <h2>Quick facts</h2>
+  <p class="lede">Friendship in Aniimo is a per-friend number called <b>Affinity</b> (internally "friendship" / "intimacy"). It climbs through 6 named levels, each unlocking perks with that one friend.</p>
+  <div class="grid g3">
+    <div class="card stat"><img src="assets/UI_Img_Likability_Gain_Intimacy.png" alt=""><div><b>100 / day</b><span>Max Affinity per friend per day from activities</span></div></div>
+    <div class="card stat"><img src="assets/UI_Img_Likability_7.png" alt=""><div><b>4,500</b><span>Affinity needed for Soulmate (max level). That's 45 days at the daily cap</span></div></div>
+    <div class="card stat"><img src="assets/ui_item_7002.png" alt=""><div><b>+10 / +30 / +99</b><span>Bonus Affinity from Gift of Encounter / Affection / Celebration</span></div></div>
+    <div class="card stat"><span class="chipicon"><img src="assets/UI_Icon_PetBelong_Illusion.png" alt=""></span><div><b>1 Illusory Friend</b><span>Unlocks at Soulmate. After that, each interaction rolls a 1–3% chance to make you Illusory Friends</span></div></div>
+    <div class="card stat"><span class="chipicon"><img src="assets/UI_Img_Filter_Rarity_Illusion.png" alt=""></span><div><b>1 Illusory Aniimo</b><span>Limit per player (<code>VARIANT_LIMIT_1 = 1</code>). Illusifying a new one reverts the old one</span></div></div>
+    <div class="card stat"><img src="assets/UI_Img_Likability_Gain_Give.png" alt=""><div><b>5 gifts</b><span>Gift-sending limit per friend per period (<code>SendGiftLimitParam = 5</code>)</span></div></div>
+  </div>
+</section>
+
+<section id="levels">
+  <h2>The 6 Affinity levels</h2>
+  <p class="lede">Ranges, perks and level-up messages come straight from <code>friendship_level_data</code> and <code>friendship_level_func_data</code>. The badge grows from a sprout into a tree as the friendship deepens.</p>
+  <div class="ladder" id="ladder"></div>
+  <div class="note"><b>Heads-up:</b> a few in-game tooltip strings disagree with the level table. They place <i>Perfect Sync</i> at the level-3 badge and <i>Face Cradle</i> at the level-4 badge. The level table, which the Affinity panel actually reads, puts them at levels 4 and 5. The levels shown here follow the table. Snapshot invitations unlock at Affinity level 3, according to their own text string.</div>
+</section>
+
+<section id="earn">
+  <h2>How to earn Affinity</h2>
+  <p class="lede">From <code>friendship_level_up_data</code>. The game caps the total at <b>100 Affinity per friend per day</b> (<code>FRIENDSHIP_DAILY_LIMIT</code>), and each activity also has its own daily cap. Capped activities add up to 160, so pick any mix that reaches 100.</p>
+  <div class="card tablewrap">
+    <table>
+      <thead><tr><th>Activity (with that friend)</th><th class="num">Affinity each</th><th class="num">Daily cap</th><th class="num">Times/day</th><th class="num">Illusory-Friend chance</th></tr></thead>
+      <tbody id="actTable"></tbody>
+    </table>
+  </div>
+  <p class="lede" style="margin-top:14px">Multiplayer dungeons that count: <b>Duo Sanctums</b>, <b>Holo-Battle Interlink</b> and <b>Operation: Egg Heist</b>. "Interaction Gestures" means using a two-person emote with the friend, and the gestures you can use depend on your Affinity level.</p>
+
+  <h3>Fastest daily routine (100/day)</h3>
+  <div class="grid g2">
+    <div class="card"><b>Option A: no combat</b><p style="margin:6px 0 0">Visit Home (20) + 2 chats (20) + 1 emote (20) + 2 Alpha/Omega kills (40) = <b>100</b></p></div>
+    <div class="card"><b>Option B: co-op focused</b><p style="margin:6px 0 0">1 multiplayer dungeon (40) + 3 Alpha/Omega kills (60) = <b>100</b>. It also gives the most Illusory-Friend rolls at the highest odds</p></div>
+  </div>
+
+  <h3>Affinity Storage &amp; Companion Memories</h3>
+  <div class="card">
+    <p style="margin:0">The Affinity info panel also has an <b>Affinity Storage</b> page. The in-game text says you collect <b>Companion Memories</b> each day, up to <b>3 points per day</b>, from three sources: playing a multiplayer match with the friend, gifting them an Aniimo in Companion Mode, and logging in. Stored points <b>auto-convert to Affinity at 1 point per day</b>, and you can also convert them by hand ("Convert {0} into Affinity").</p>
+  </div>
+</section>
+
+<section id="gifts">
+  <h2>Friend gifts</h2>
+  <p class="lede">Gift items from <code>item_data</code> (IDs 7000–7002, listed in <code>FRIEND_GIFTS_ID</code>). Gift Affinity is described as "bonus Affinity". Gifts are capped at <b>5 sends</b> per friend per limit period (<code>SendGiftLimitType = 2</code>, most likely weekly).</p>
+  <div class="grid g3">
+    <div class="card gift"><img src="assets/ui_item_7000.png" alt="Gift of Encounter"><div><b>Gift of Encounter</b><div class="pts">+10</div><span class="pill">Quality 3</span><p style="margin:6px 0 0;font-size:14px;color:var(--ink-2)">The recipient gets <b>6,000 Credits</b> and so do you, on top of the Affinity.</p></div></div>
+    <div class="card gift"><img src="assets/ui_item_7001.png" alt="Gift of Affection"><div><b>Gift of Affection</b><div class="pts">+30</div><span class="pill">Quality 3</span></div></div>
+    <div class="card gift"><img src="assets/ui_item_7002.png" alt="Gift of Celebration"><div><b>Gift of Celebration</b><div class="pts">+99</div><span class="pill hot">Quality 4</span></div></div>
+  </div>
+</section>
+
+<section id="calc">
+  <h2>Affinity planner</h2>
+  <p class="lede">Estimate how long it takes to reach a level with one friend.</p>
+  <div class="card">
+    <div class="calc">
+      <label>Current Affinity<input id="cCur" type="number" min="0" max="9999" value="0"></label>
+      <label>Target level<select id="cTgt"></select></label>
+      <label>Affinity per day from activities<input id="cDay" type="number" min="0" max="100" value="100"></label>
+      <label>Gift bonus per week<input id="cGift" type="number" min="0" value="0" title="e.g. 5 Gifts of Celebration = 495"></label>
+    </div>
+    <div class="result" id="cOut"></div>
+    <p style="font-size:13px;color:var(--ink-2);margin:8px 0 0">Assumes gift Affinity is added on top of the 100/day activity cap. The client files call it "bonus Affinity" but don't confirm whether it bypasses the cap.</p>
+  </div>
+</section>
+
+<section id="illusory">
+  <h2>Illusory: Illusory Friends &amp; Illusory Aniimo</h2>
+  <div class="illus-hero"><img src="assets/UI_Img_LikabilityUp_Ischange_Bg.png" alt=""><div class="cap"><img src="assets/UI_Icon_PetBelong_Illusion.png" alt="">Aniimo Illusory</div></div>
+  <p class="lede" style="margin-top:16px">In the game code Illusory is called <b>"Variant"</b> (<code>petVariantInteract</code>, <code>PET_LABEL_MASK.VARIANT</code>) and your Illusory Friend is your <b>"Special Friend"</b>. The in-game description:</p>
+  <div class="card" style="font-size:17px">"Daily interactions have a chance of making you <b>Illusory Friends</b>. Once you become Illusory Friends, you can pair your Aniimo with theirs to cuddle and become <b>Illusory Aniimo</b>."</div>
+
+  <h3>How to get an Illusory Aniimo</h3>
+  <ol class="steps">
+    <li class="card"><h3>Reach Soulmate (Affinity level 6)</h3>
+      <b>Aniimo Illusory</b> is one of the Soulmate unlocks in <code>friendship_level_data</code>, and the system config agrees (<code>CHANGE_FRIEND_FRIENDSHIPLV = 6</code>). Below <b>4,500 Affinity</b>, interactions don't roll for Illusory Friendship at all, so max the friendship first.</li>
+    <li class="card"><h3>Keep interacting daily to trigger the Illusory-Friend roll</h3>
+      Once you're Soulmates, each logged interaction has its own chance (<code>changeFriendRate</code>) to make you Illusory Friends: <b>3%</b> for multiplayer dungeon clears and PvP battles, <b>2%</b> for team Alpha/Omega kills, Aniimo exchanges and gifting an Aniimo in Companion Mode, <b>1%</b> for chatting, home visits and emotes. When it hits you'll see <i>"You and {friend} are now Illusory Friends!"</i>
+      <div id="illusOdds" style="margin-top:10px"></div></li>
+    <li class="card"><h3>Only one Illusory Friend at a time</h3>
+      You have a single Illusory Friend slot (<code>specialFriendUId</code>). Until then, Illusory options show <i>"Not Illusory Friends yet"</i>. Blocking a friend ends the friendship and resets Affinity.</li>
+    <li class="card"><h3>Do the Aniimo Illusory together</h3>
+      Once you're Illusory Friends, you'll get an <i>"Illusory Invite: You can perform Aniimo Illusory now."</i> Use <b>Go to Illusory</b> from the friend's Affinity panel. Each of you picks <b>one of your own Aniimo</b>, both confirm, and the pair cuddle and become Illusory. Aniimo that are <b>dispatched, placed in your Home, or in your team / exploring / in battle</b> can't be picked (<i>"This Aniimo cannot be selected."</i>). If either side backs out you'll see "Illusory interrupted" / "The friend has canceled Illusory."</li>
+    <li class="card"><h3>Mind the limit: 1 Illusified Aniimo</h3>
+      <code>VARIANT_LIMIT_1 = 1</code>. If you already have one, the game warns: <i>"You've reached your Illusory Aniimo limit… illusifying this Aniimo will revert your other Aniimo to its original form."</i> The Aniimo's details page shows <b>Illusifying Friend</b> and <b>Illusification Date</b>, and the Aniimo box has an <b>Illusory</b> filter.</li>
+  </ol>
+
+  <h3>What being Illusory does</h3>
+  <div class="card">
+    <ul style="margin:0;padding-left:20px">
+      <li>The Aniimo gets the <b>Illusory (VARIANT) label</b>, a separate rarity flag next to Shiny, Elite, Rainbow and Umbral/Dark, with its own icon <img src="assets/UI_Img_Filter_Rarity_Illusion.png" alt="" style="height:20px;vertical-align:middle;background:#4a3fa8;border-radius:5px;padding:2px">.</li>
+      <li><code>PetVariantUtils.genVariantInfo</code> can roll extra <b>potential (IV) level-ups</b> when an Aniimo is illusified (cap <code>CHANGE_PET_IV_MAX = 5</code>). In the current data, the roll table at every Affinity level is <code>changeAdd = {0: 100}</code>, a 100% weight on <b>0 extra level-ups</b>, and the re-roll chance <code>changeRate</code> is 0. So in this version illusifying <b>doesn't raise stats</b>. What changes is the Illusory label and look. The server could still apply its own rules.</li>
+      <li>Illusory status also counts for breeding: <code>Utils</code> has <code>variantGeneticProb</code> / <code>variantBreedRandomProb</code>, so offspring can inherit the trait (exact odds not in client data).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="data">
+  <h2>Raw data</h2>
+  <p class="lede">Decoded values, for anyone who wants to verify them.</p>
+  <div class="grid g2">
+    <div class="card tablewrap"><b>sys_config_data</b>
+      <table><tbody>
+        <tr><td><code>FRIENDSHIP_DAILY_LIMIT</code></td><td class="num">100</td></tr>
+        <tr><td><code>IntimacyDailyLimit</code> / <code>IntimacyTotalLimit</code></td><td class="num">100 / 100</td></tr>
+        <tr><td><code>CHANGE_FRIEND_FRIENDSHIPLV</code></td><td class="num">6</td></tr>
+        <tr><td><code>VARIANT_LIMIT_1</code></td><td class="num">1</td></tr>
+        <tr><td><code>CHANGE_PET_IV_MAX</code></td><td class="num">5</td></tr>
+        <tr><td><code>GIVE_GIFT_NEED_FRIENDSHIPLEVEL</code></td><td class="num">3</td></tr>
+        <tr><td><code>SendGiftLimitType</code> / <code>SendGiftLimitParam</code></td><td class="num">2 / 5</td></tr>
+        <tr><td><code>FRIEND_GIFTS_ID</code></td><td class="num">7000, 7001, 7002</td></tr>
+        <tr><td><code>CHANGE_PETS_DAILY_LIMIT</code> (exchanges)</td><td class="num">200</td></tr>
+        <tr><td><code>CHANGE_PETS_CD</code> (exchange cooldown)</td><td class="num">30</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card tablewrap"><b>friendship_level_data: per level</b>
+      <table><thead><tr><th>Lv</th><th>Name</th><th class="num">Range</th><th class="num">irisPower</th></tr></thead><tbody id="rawLv"></tbody></table>
+      <p style="font-size:13px;color:var(--ink-2);margin:8px 0 0"><code>irisPower</code> rises with level, but no client script reads it. It's probably a server-side strength value.</p>
+    </div>
+  </div>
+  <div class="note">How this was extracted: text from <code>LuaScripts.xdf</code> → <code>Data/I18N/Compress_en.bin</code> + <code>NewTextMap_en.json</code>; tables from the packed <code>Common/Data/pmdata.bin</code>; logic from the compiled UI scripts (<code>FriendIntimacyCtrl</code>, <code>FriendIntimacyExplainCtrl</code>, <code>PetVariantUtils</code>, <code>PetExchangeVariantComponent</code>); images from the Unity bundles under <code>cvs/res/uab</code>. Server-side rules can differ from the client copy and can change with patches. This guide reflects client build data from October 2026.</div>
+</section>
+
+<section id="assets">
+  <h2>Game assets</h2>
+  <p class="lede">The friendship and Illusory UI art extracted from the game, all saved in the <code>assets/</code> folder next to this page.</p>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+</main>
+<footer class="wrap">Fan-made reference compiled from game files (updated for the Oct 28, 2026 game update). Aniimo and its assets belong to their respective owners.</footer>
+
+<script>
+const A=n=>(window.IMG&&IMG[n])||"assets/"+n+".png";
+const LEVELS=[
+ {n:1,name:"New Friend",min:0,max:99,icon:2,iris:0.2,msg:"You've made a new friend: {0}. Let the adventure begin!",
+  un:[["UI_Img_PlayerInfoCard_IconGiveGifts","Companion Mode Surprise","Turn on Companion Mode in a party: gift them Lumin-Stage Basic-Form regular Aniimo (max potential 7) and share Companion Mode report rewards"],["UI_Img_Intimacy_FirstMeet","First Meeting gesture","Interaction Gesture – Nice to Meet You · unlock for 100 Voxel Coins"],["UI_Img_Likability_Gain_ExplainDec5","Wild Surge I","Joining a Wild Surge in their world grows your own Prismatic Energy a little"]]},
+ {n:2,name:"Good Friend",min:100,max:499,icon:3,iris:0.2,msg:"Your friendship with {0} is heating up like blooming flowers!",
+  un:[["UI_Img_PlayerInfoCard_IconImoExchange","Aniimo Exchange","Swap Lumin-Stage Basic-Form regular Aniimo (max potential 8)"],["UI_Img_Intimacy_PeaceGesture","Peace Sign gesture","Unlock for 100 Voxel Coins"],["UI_Img_PlayerInfoCard_IconGiveGifts","Companion Mode Surprise I","Gift them Lumin-Stage Basic-Form regular Aniimo (max potential 8) caught in Companion Mode"]]},
+ {n:3,name:"Close Friend",min:500,max:1199,icon:4,iris:0.2,msg:"You've grown closer and closer to {0}—now inseparable companions who share everything!",
+  un:[["UI_Img_PlayerInfoCard_IconGiveGifts","Companion Mode Surprise II","Gift them Basic-Form regular Aniimo (max potential 8) caught in Companion Mode, any stage"],["UI_Img_PlayerInfoCard_IconImoExchange","Aniimo Exchange I","Swap Basic-Form regular Aniimo (max potential 8)"],["UI_Img_PlayerInfoCard_IconGiveGifts","Companion report bonus","Shared Companion Mode report bonus increases"],["UI_Img_Intimacy_DualActionNoConsent","Travel Perks","Auto-accept their requests to join your world"],["UI_Img_Intimacy_TeamCrossNoConsent","Team-Up Perks","Auto-approve their team invites/requests"]]},
+ {n:4,name:"Trusted Friend",min:1200,max:2499,icon:5,iris:0.3,msg:"You and {0} are really getting to know each other — your hearts grow closer with every moment!",
+  un:[["UI_Img_PlayerInfoCard_IconGiveGifts","Companion Mode Surprise IV","Gift them area-/weather-variant regular & Umbral Aniimo (max potential 9) caught in Companion Mode"],["UI_Img_Intimacy_TacitUnderstanding","Perfect Sync gesture","Interaction Gesture – Chemistry · unlock for 100 Voxel Coins"],["UI_Img_PlayerInfoCard_IconImoExchange","Aniimo Exchange II","Swap area-/weather-variant regular & Umbral Aniimo (max potential 9)"],["UI_Img_Intimacy_OnlineReminder","Login Reminder","Notification when they come online"],["UI_Img_Likability_Gain_ExplainDec5","Wild Surge II","Moderate Prismatic Energy boost"]]},
+ {n:5,name:"Best Friend",min:2500,max:4499,icon:6,iris:0.3,msg:"You and {0} have become inseparable and the best of friends!",
+  un:[["UI_Img_PlayerInfoCard_IconGiveGifts","Companion Mode Surprise V","Gift them area-/weather-variant regular & Umbral Aniimo (max potential 10); the shared Companion Mode report bonus gets a big boost"],["UI_Img_Intimacy_SupportFace","Face Cradle gesture","Interaction Gesture – Face Cupping · unlock for 100 Voxel Coins"],["UI_Img_Intimacy_HeartGesture","Finger Heart gesture","Unlock for 100 Voxel Coins"],["UI_Img_PlayerInfoCard_IconImoExchange","Aniimo Swap III","Swap area-/weather-variant regular & Umbral Aniimo (max potential 10)"]]},
+ {n:6,name:"Soulmate",min:4500,max:9999,icon:7,iris:0.4,msg:"You and {0} have become soulmates! This friendship runs deeper than the sea and wider than the sky—nothing can ever shake it!",
+  un:[["UI_Icon_PetBelong_Illusion","Aniimo Illusory","Daily interactions can now make you Illusory Friends"],["UI_Img_Intimacy_CustomTitle","Friend Prefix","Receive this friend's Designation Prefix cosmetic"],["UI_Img_Likability_Gain_ExplainDec5","Wild Surge III","Prismatic Energy grows significantly"]]}
+];
+const ACTS=[
+ {img:"HomeModule",name:"Visit their Home",each:20,cap:20,rate:1},
+ {img:"ChatModule",name:"Chat (Friend Chat message)",each:10,cap:20,rate:1},
+ {img:"InteractionModule",name:"Use an Interaction Gesture / Emote",each:20,cap:20,rate:1},
+ {img:"BossModule",name:"Defeat an Alpha or Omega as a team",each:20,cap:60,rate:2},
+ {img:"TeamModule",name:"Clear a multiplayer dungeon as a team",each:40,cap:40,rate:3},
+ {img:null,name:"PvP battle together",each:0,cap:null,rate:3},
+ {img:null,name:"Exchange (swap) Aniimo",each:0,cap:null,rate:2},
+ {img:null,name:"Gift an Aniimo during Companion Mode",each:0,cap:null,rate:2},
+ {img:null,name:"Team up / meet in world / start Companion Mode",each:0,cap:null,rate:0}
+];
+const fmt=n=>n.toLocaleString("en-US");
+// ladder
+document.getElementById("ladder").innerHTML=LEVELS.map(l=>{
+  const pct=Math.round((l.max+1)/10000*100);
+  return `<div class="card lvl"><div class="badge"><img class="bg" src="${A("UI_Img_Likability_Bg_"+l.icon)}" alt=""><img class="fg" src="${A("UI_Img_Likability_"+l.icon)}" alt="${l.name} badge"></div>
+  <div><h3>Lv ${l.n} · ${l.name} <span class="range">${fmt(l.min)} – ${fmt(l.max)}</span><small>${l.n<6?fmt(l.max+1-l.min)+" Affinity to next · ~"+(d=>d+" day"+(d>1?"s":""))(Math.ceil((l.max+1-l.min)/100))+" at cap":"Max level"}</small></h3>
+  <div class="bar"><i style="width:${pct}%"></i></div>
+  <ul class="unlocks">${l.un.map(u=>`<li title="${u[2]}"><span class="chipicon"><img src="${A(u[0])}" alt=""></span><span><b>${u[1]}</b>${u[2]?`<br><span style="color:var(--ink-2);font-size:13px">${u[2]}</span>`:""}</span></li>`).join("")}</ul>
+  <p class="quote">"${l.msg.replace("{0}","<b>friend</b>")}"</p></div></div>`}).join("");
+// activities
+document.getElementById("actTable").innerHTML=ACTS.map(a=>`<tr><td><div class="rowhead">${a.img?`<img class="thumb" src="${A("UI_Img_Likability_Explain_"+a.img)}" alt="">`:`<span class="thumb" style="display:inline-block;background:var(--surface-2)"></span>`}<span>${a.name}</span></div></td>
+<td class="num">${a.each?"+"+a.each:"–"}</td><td class="num">${a.cap??"–"}</td><td class="num">${a.cap&&a.each?a.cap/a.each:"–"}</td>
+<td class="num">${a.rate?`<span class="pill ${a.rate>=3?"hot":""}">${a.rate}%</span>`:"–"}</td></tr>`).join("");
+// raw
+document.getElementById("rawLv").innerHTML=LEVELS.map(l=>`<tr><td>${l.n}</td><td>${l.name}</td><td class="num">${l.min}–${l.max}</td><td class="num">${l.iris}</td></tr>`).join("");
+// planner
+const sel=document.getElementById("cTgt");
+sel.innerHTML=LEVELS.slice(1).map(l=>`<option value="${l.min}" ${l.n===6?"selected":""}>Lv ${l.n} ${l.name} (${fmt(l.min)})</option>`).join("");
+function calc(){
+  const cur=Math.max(0,+document.getElementById("cCur").value||0), tgt=+sel.value;
+  const day=Math.min(100,Math.max(0,+document.getElementById("cDay").value||0)), gw=Math.max(0,+document.getElementById("cGift").value||0);
+  const need=Math.max(0,tgt-cur), perDay=day+gw/7, out=document.getElementById("cOut");
+  if(!need){out.innerHTML="You're already there!";return}
+  if(!perDay){out.innerHTML="Add some daily Affinity to get an estimate.";return}
+  const days=Math.ceil(need/perDay);
+  out.innerHTML=`Need <b>${fmt(need)}</b> Affinity → about <b>${days} day${days>1?"s":""}</b> (${(days/7).toFixed(1)} weeks) at ${perDay.toFixed(1)}/day.`;
+}
+["cCur","cDay","cGift"].forEach(id=>document.getElementById(id).addEventListener("input",calc));sel.addEventListener("change",calc);calc();
+// illusory odds
+const ROLLS=[["Chat ×2 (1%)",1,2],["Home visit ×1 (1%)",1,1],["Emote ×1 (1%)",1,1],["Alpha/Omega kills ×3 (2%)",2,3],["Dungeon clear ×1 (3%)",3,1],["PvP battle ×1 (3%)",3,1],["Aniimo exchange ×1 (2%)",2,1],["Companion Mode Aniimo gift ×1 (2%)",2,1]];
+const box=document.getElementById("illusOdds");
+box.innerHTML=`<div style="font-size:14px;color:var(--ink-2)">Tick what you do with that friend each day to estimate your odds (assumes every listed interaction rolls independently):</div><div class="checks">${ROLLS.map((r,i)=>`<label><input type="checkbox" data-i="${i}" ${i<5?"checked":""}> ${r[0]}</label>`).join("")}</div><div class="result" id="oddsOut"></div>`;
+function odds(){
+  let miss=1; box.querySelectorAll("input:checked").forEach(c=>{const r=ROLLS[+c.dataset.i];miss*=Math.pow(1-r[1]/100,r[2])});
+  const p=1-miss, out=document.getElementById("oddsOut");
+  if(p<=0){out.innerHTML="Pick at least one interaction.";return}
+  const exp=1/p, d50=Math.ceil(Math.log(.5)/Math.log(miss)), d90=Math.ceil(Math.log(.1)/Math.log(miss));
+  out.innerHTML=`≈ <b>${(p*100).toFixed(1)}%</b> per day · about ${exp.toFixed(1)} days on average · 50% by day <b>${d50}</b>, 90% by day <b>${d90}</b>`;
+}
+box.addEventListener("change",odds);odds();
+// gallery
+const ASSETS="UI_Img_Likability_1 UI_Img_Likability_2 UI_Img_Likability_3 UI_Img_Likability_4 UI_Img_Likability_5 UI_Img_Likability_6 UI_Img_Likability_7 UI_Img_Likability_Bg_1 UI_Img_Likability_Bg_2 UI_Img_Likability_Bg_3 UI_Img_Likability_Bg_4 UI_Img_Likability_Bg_5 UI_Img_Likability_Bg_6 UI_Img_Likability_Bg_7 UI_Img_Likability_Bg_Dis UI_Img_PlayerInfoCard_Likability_1 UI_Img_PlayerInfoCard_Likability_2 UI_Img_PlayerInfoCard_Likability_3 UI_Img_PlayerInfoCard_Likability_4 UI_Img_PlayerInfoCard_Likability_5 UI_Img_PlayerInfoCard_Likability_6 UI_Img_PlayerInfoCard_Likability_7 UI_Img_Intimacy_FirstMeet UI_Img_Intimacy_PeaceGesture UI_Img_Intimacy_TacitUnderstanding UI_Img_Intimacy_SupportFace UI_Img_Intimacy_HeartGesture UI_Img_Intimacy_CustomTitle UI_Img_Intimacy_DualActionNoConsent UI_Img_Intimacy_TeamCrossNoConsent UI_Img_Intimacy_OnlineReminder UI_Img_PlayerInfoCard_IconGiveGifts UI_Img_PlayerInfoCard_IconImoExchange UI_Img_PlayerInfoCard_IconNormal UI_Icon_PetBelong_Illusion UI_Img_Filter_Rarity_Illusion ui_item_7000 ui_item_7001 ui_item_7002 UI_Img_Likability_Explain_HomeModule UI_Img_Likability_Explain_ChatModule UI_Img_Likability_Explain_InteractionModule UI_Img_Likability_Explain_BossModule UI_Img_Likability_Explain_TeamModule UI_Img_Likability_Gain_Give UI_Img_Likability_Gain_Interaction UI_Img_Likability_Gain_Intimacy UI_Img_Likability_Gain_Arrow UI_Img_Likability_Gain_Explain1 UI_Img_Likability_Gain_Explain2 UI_Img_Likability_Gain_Explain3 UI_Img_LikabilityUp_Ischange_Bg UI_Img_Pop_LikabilityUp_Deco1 UI_Img_Pop_LikabilityUp_Deco2 UI_Img_Pop_LikabilityUp_Deco4 UI_Img_Pop_LikabilityUp_Figure UI_Img_Pop_LikabilityUp_PanelBg UI_Img_Pop_LikabilityUp_PanelFrame".split(" ");
+const DARK=/Intimacy_|IconGiveGifts|IconImoExchange|IconNormal|Illusion|Deco2|Gain_Explain[23]$/;
+document.getElementById("gallery").innerHTML=ASSETS.map(a=>`<figure class="${DARK.test(a)?"dark":""}"><a href="${A(a)}" target="_blank" download="${a}.png"><img src="${A(a)}" alt="${a}" loading="lazy"></a><figcaption>${a.replace(/^UI_(Img_|Icon_)?/,"")}</figcaption></figure>`).join("");
+// theme
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement, dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme=dark?"light":"dark"; try{localStorage.setItem("fg-theme",r.dataset.theme)}catch(e){}
+});
+try{const t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}
+</script>
+</body>
+</html>
