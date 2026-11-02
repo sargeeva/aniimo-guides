@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aniimo Outings Guide</title>
+<meta name="description" content="How RV Park Aniimo Outings work in Aniimo: trip lengths, Signal Transmitter unlocks, the Mysterious Aniimo Egg, which Aniimo can't bring eggs back, and each Park's specialties.">
+<style>
+:root{
+  --bg:#f6f4fc; --surface:#ffffff; --surface-2:#efeaff; --ink:#24213a; --ink-2:#5c5878; --line:#ddd6f3;
+  --accent:#6e5ce6; --accent-2:#3f8de0; --chip:#4a3fa8; --warn-bg:#fff6e0; --warn-ink:#7a5300;
+  --good:#2f9e6e; --bad:#c2414b; --shadow:0 1px 2px rgba(40,30,90,.06),0 6px 20px rgba(40,30,90,.07);
+  --q3:#4184d3; --q4:#b767e1; --q5:#e1a347;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+    --accent:#9a8cff; --accent-2:#6fb1ff; --chip:#3a3270; --warn-bg:#3a2f12; --warn-ink:#f3d58c;
+    --good:#5fd3a0; --bad:#ff8a93; --shadow:none; --q3:#6fa8ef; --q4:#cd94f0; --q5:#f0bf6d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+  --accent:#9a8cff; --accent-2:#6fb1ff; --chip:#3a3270; --warn-bg:#3a2f12; --warn-ink:#f3d58c;
+  --good:#5fd3a0; --bad:#ff8a93; --shadow:none; --q3:#6fa8ef; --q4:#cd94f0; --q5:#f0bf6d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.hero{background:linear-gradient(135deg,#e86fa8 0%,#8a6ee6 55%,#3f8de0 100%);color:#fff;padding:40px 0 32px;position:relative;overflow:hidden}
+.hero .wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 6px;letter-spacing:-.01em}
+.hero p{margin:0;max-width:580px;opacity:.95}
+.hero .deco{flex:0 0 150px;width:150px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.3))}
+.themebtn{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 16px;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-2);padding:6px 12px;border-radius:999px;font-size:14px}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink)}
+section{padding:36px 0 8px;scroll-margin-top:52px}
+h2{font-size:26px;margin:0 0 6px}
+h3{font-size:18px;margin:20px 0 8px}
+.lede{color:var(--ink-2);margin:0 0 20px;max-width:760px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.facts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.fact{display:flex;gap:12px;align-items:center}
+.fact img{width:52px;height:52px;object-fit:contain;flex:none}
+.fact b{display:block;font-size:20px;line-height:1.15}
+.fact span{color:var(--ink-2);font-size:14px}
+.trips{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.trip{display:flex;flex-direction:column;gap:10px;border-top:5px solid var(--tc)}
+.trip .head{display:flex;gap:12px;align-items:center}
+.trip .ico{width:52px;height:52px;border-radius:14px;background:var(--tc);display:grid;place-items:center;flex:none}
+.trip .ico img{width:30px;height:30px;object-fit:contain}
+.trip h3{margin:0;font-size:20px}
+.trip .dur{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--tc)}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:14px}
+dl.kv dt{color:var(--ink-2)} dl.kv dd{margin:0}
+.cost{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.cost img{width:20px;height:20px;object-fit:contain}
+.q3{color:var(--q3);font-weight:700}.q4{color:var(--q4);font-weight:700}.q5{color:var(--q5);font-weight:700}
+.egg{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:start}
+.egg>img{width:150px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.18))}
+.rules{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.rules li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.rules li i{width:28px;height:28px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-style:normal;font-weight:800;color:var(--accent);font-size:14px}
+.pets{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.pet{text-align:center;font-size:14px;font-weight:600}
+.pet img{width:84px;height:84px;object-fit:contain;border-radius:18px;background:var(--surface-2);display:block;margin:0 auto 6px}
+.parks{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.park{padding:0;overflow:hidden}
+.park>img{width:100%;aspect-ratio:444/280;object-fit:cover;display:block}
+.park .body{padding:14px 16px 16px}
+.park h3{margin:0 0 10px}
+.spec{display:flex;gap:10px;flex-wrap:wrap}
+.spec div{flex:1 1 90px;text-align:center;font-size:13px;background:var(--surface-2);border-radius:12px;padding:8px 6px}
+.spec img{width:48px;height:48px;object-fit:contain;display:block;margin:0 auto 4px}
+.park h4{margin:14px 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+.park h4:first-of-type{margin-top:0}
+.park .sub{margin:8px 0 0;font-size:13px;color:var(--ink-2)}
+.note{background:var(--warn-bg);color:var(--warn-ink);border-radius:14px;padding:12px 16px;font-size:15px}
+.tip{background:var(--surface-2);border-radius:14px;padding:12px 16px;font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--ink-2);font-size:13px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
+@media (max-width:620px){.egg{grid-template-columns:1fr}.egg>img{width:110px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <button class="themebtn" id="themeBtn" type="button">Toggle theme</button>
+  <div class="wrap">
+    <div style="flex:1 1 420px">
+      <div style="font-size:14px;margin-bottom:10px"><a href="../" style="color:#fff;opacity:.92">← Aniimo Guides</a> · <a href="../friendship/" style="color:#fff;opacity:.92">Friendship</a> · <a href="../egg-heist/" style="color:#fff;opacity:.92">Egg Heist</a> · <a href="../night-parade/" style="color:#fff;opacity:.92">Night Parade</a> · <a href="../badges/" style="color:#fff;opacity:.92">Badges</a></div>
+      <h1>Aniimo Outings</h1>
+      <p>Send Aniimo from your <b>RV Park</b> on trips for specialties, Held Items and a chance at a <b>Mysterious Aniimo Egg</b> that can inherit their form and mutation, including <b>Prismana</b> and <b>Sparkling</b>.</p>
+    </div>
+    <img class="deco" src="assets/ui_item_560312.webp" alt="Mysterious Aniimo Egg">
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#tldr">Quick facts</a><a href="#trips">Trip types</a><a href="#egg">The egg</a><a href="#excluded">Can't bring eggs</a><a href="#rewards">Other rewards</a><a href="#parks">Parks</a><a href="#odds">About odds</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="tldr">
+  <h2>Quick facts</h2>
+  <p class="lede">Open <b>Aniimo Outings</b> from the Park Board at your RV Park, pick Aniimo staying at the Park, pick a trip length, and collect rewards when they return.</p>
+  <div class="card facts">
+    <div class="fact"><img src="assets/UI_Img_Home_CampManage_Camping.webp" alt="" style="background:var(--accent);border-radius:14px;padding:10px"><div><b>6 / 12 / 20 h</b><span>Hiking, Adventure, Camping</span></div></div>
+    <div class="fact"><img src="assets/ui_item_4040018.webp" alt=""><div><b>Up to 3 Aniimo</b><span>Park capacity grows with the Signal Transmitter</span></div></div>
+    <div class="fact"><img src="assets/ui_item_560312.webp" alt=""><div><b>Game text: at most 1 egg per trip</b><span>Per Aniimo or per outing is unconfirmed. Longer trips have a higher egg chance</span></div></div>
+    <div class="fact"><img src="assets/ui_item_999999.webp" alt=""><div><b>Held Items</b><span>Longer trips favour higher quality</span></div></div>
+  </div>
+  <div class="tip" style="margin-top:12px"><b>Two rules to know:</b> Aniimo staying at the Park <b>can't join combat or exploration parties</b>. And recalling a trip early <b>loses all of its rewards</b>.</div>
+</section>
+
+<section id="trips">
+  <h2>Trip types</h2>
+  <p class="lede">Each trip type unlocks with a level of the RV's <b>Signal Transmitter</b>. Each Transmitter level also lets the Park hold one more Aniimo.</p>
+  <div class="trips">
+    <div class="card trip" style="--tc:#3fae7a">
+      <div class="head"><div class="ico"><img src="assets/UI_Img_Home_CampManage_Hiking.webp" alt=""></div><div><h3>Hiking</h3><div class="dur">6 h</div></div></div>
+      <dl class="kv">
+        <dt>Transmitter</dt><dd>Level 1 (unlocked by default)</dd>
+        <dt>Requires</dt><dd>RV Level 6</dd>
+        <dt>Cost</dt><dd>Free</dd>
+        <dt>Park holds</dt><dd><b>1</b> Aniimo</dd>
+      </dl>
+    </div>
+    <div class="card trip" style="--tc:#3f8de0">
+      <div class="head"><div class="ico"><img src="assets/UI_Img_Home_CampManage_Explore.webp" alt=""></div><div><h3>Adventure</h3><div class="dur">12 h</div></div></div>
+      <dl class="kv">
+        <dt>Transmitter</dt><dd>Level 2</dd>
+        <dt>Requires</dt><dd>RV Level 11</dd>
+        <dt>Cost</dt><dd><span class="cost"><img src="assets/ui_item_1010.webp" alt="">5,500 Home Coin</span> + <span class="cost"><img src="assets/ui_item_4040074.webp" alt="">2 Modification Toolkits</span></dd>
+        <dt>Park holds</dt><dd><b>2</b> Aniimo</dd>
+      </dl>
+    </div>
+    <div class="card trip" style="--tc:#8a6ee6">
+      <div class="head"><div class="ico"><img src="assets/UI_Img_Home_CampManage_Camping.webp" alt=""></div><div><h3>Camping</h3><div class="dur">20 h</div></div></div>
+      <dl class="kv">
+        <dt>Transmitter</dt><dd>Level 3</dd>
+        <dt>Requires</dt><dd>RV Level 16</dd>
+        <dt>Cost</dt><dd><span class="cost"><img src="assets/ui_item_1010.webp" alt="">20,000 Home Coin</span> + <span class="cost"><img src="assets/ui_item_4040074.webp" alt="">2 Modification Toolkits</span></dd>
+        <dt>Park holds</dt><dd><b>3</b> Aniimo</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="egg">
+  <h2>The Mysterious Aniimo Egg</h2>
+  <p class="lede">This is why most players run Outings. An Aniimo that returns from a trip can bring back an egg tied to itself.</p>
+  <div class="card egg">
+    <img src="assets/ui_item_560312.webp" alt="Mysterious Aniimo Egg">
+    <ul class="rules">
+      <li><i>1</i><div><b>Game text: at most 1 egg per trip.</b> The in-game wording ("Aniimo bring back at most 1 Aniimo Egg per trip") doesn't say whether that's 1 per Aniimo or 1 for the whole outing, and a trip can send up to 3 Aniimo together. Not yet confirmed by player runs. The <b>longer</b> the trip, the <b>higher</b> the chance of an egg, so Camping (20 h) gives the best odds.</div></li>
+      <li><i>2</i><div><b>Same family.</b> The egg's Aniimo family is related to the Aniimo that went on the trip.</div></li>
+      <li><i>3</i><div><b>Can inherit form and mutation.</b> The egg has a chance to inherit the trip Aniimo's form and mutation, including the rare <b>Prismana Form</b> and <b>Sparkling mutation</b>.</div></li>
+      <li><i>4</i><div><b>Hatches in 5 hours</b> (300 minutes) in an <b>Outpost</b> or <b>Home Hatchinator</b>. One speed-up item can be used per egg, and it can be petted to speed it up within the usual daily limits. For comparison, a Mini Egg takes 2.5 h and a Dreamy Egg 24 h.</div></li>
+      <li><i>5</i><div><b>Legendary-quality item</b> (in-game id 4040120).</div></li>
+    </ul>
+  </div>
+  <div class="tip" style="margin-top:12px"><b>Farming tip:</b> send your <b>Prismana-form</b> or <b>Sparkling</b> Aniimo on <b>Camping</b> trips. Each one gives a chance at an egg that inherits the same form or mutation.</div>
+</section>
+
+<section id="excluded">
+  <h2>Aniimo that can't bring eggs back</h2>
+  <p class="lede">These Aniimo can still go on trips, but they'll never bring back an egg. The game asks "You cannot bring Aniimo Eggs back with you while … is on a trip. Proceed anyway?" before sending one.</p>
+  <div class="card">
+    <div class="pets">
+      <div class="pet"><img src="assets/UI_PetHead_10213.webp" alt="">Irisalis</div>
+      <div class="pet"><img src="assets/UI_PetHead_10233.webp" alt="">Somniwing</div>
+      <div class="pet"><img src="assets/UI_PetHead_10361.webp" alt="">Helion</div>
+      <div class="pet"><img src="assets/UI_PetHead_10363.webp" alt="">Soleon</div>
+      <div class="pet"><img src="assets/UI_PetHead_10371.webp" alt="">Lunara</div>
+      <div class="pet"><img src="assets/UI_PetHead_10373.webp" alt="">Fennelun</div>
+      <div class="pet"><img src="assets/UI_PetHead_10122.webp" alt="">Besauce</div>
+    </div>
+    <p style="color:var(--ink-2);font-size:14px;margin:12px 0 0">The same list (the game's breeding block list) also includes one more Aniimo id that isn't released yet. It's the same group that can't be bred.</p>
+  </div>
+</section>
+
+<section id="rewards">
+  <h2>Other rewards</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0;display:flex;gap:10px;align-items:center"><img src="assets/ui_item_999999.webp" alt="" style="width:40px">Random Held Item</h3>
+      <p style="margin:0 0 10px">Every trip brings back <b>Held Items of random quality</b>. Longer trips are more likely to bring back higher quality.</p>
+      <table>
+        <tr><th>Reward tier</th><th>Specialties</th><th>Held Items up to</th></tr>
+        <tr><td>Tier 1</td><td>a small amount</td><td class="q3">Rare</td></tr>
+        <tr><td>Tier 2</td><td>a moderate amount</td><td class="q4">Epic</td></tr>
+        <tr><td>Tier 3</td><td>a large amount</td><td class="q5">Legendary</td></tr>
+      </table>
+      <p style="color:var(--ink-2);font-size:13px;margin:10px 0 0">The three tiers almost certainly line up with Hiking, Adventure and Camping, though the game files don't state the pairing.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Regional specialties</h3>
+      <p style="margin:0">Each Park has three local specialties, one Rare, one Epic and one Legendary, which Aniimo bring back from trips. Which Park you're at decides which ones you get. See the list below.</p>
+    </div>
+  </div>
+</section>
+
+<section id="parks">
+  <h2>RV Parks: specialties and Held Items</h2>
+  <p class="lede">Item colours show quality: <span class="q3">Rare</span>, <span class="q4">Epic</span>, <span class="q5">Legendary</span>.</p>
+  <div class="parks" id="parkGrid"></div>
+</section>
+
+<section id="odds">
+  <h2>About odds</h2>
+  <div class="note">The exact chances (egg per trip, form or mutation inheritance, Held Item quality) <b>aren't in the game client</b>. The server rolls them, and the client's reward tables for Outings point to server-only data. Everything on this page comes from the client's item text and settings. Treat any percentage you see elsewhere as community testing, not datamined numbers.</div>
+</section>
+
+</main>
+<footer class="wrap">Fan-made reference compiled from game files (Oct 30, 2026 update). Aniimo and its assets belong to their respective owners.</footer>
+
+<script>
+const PARKS=[
+  {name:"Sea of Flowers",img:"UI_Img_Home_CampSwitch_PlotPic_1",items:[["Spiked Herb","ui_item_4010129",3],["Morning Star Bloom","ui_item_4010123",4],["Chromaflare Peony","ui_item_4010124",5]]},
+  {name:"Echoback Landing",img:"UI_Img_Home_CampSwitch_PlotPic_2",items:[["Pearl-Strung Blossom","ui_item_4010121",3],["Dreamtide Bloom","ui_item_4010128",4],["Stardust Agate","ui_item_4010122",5]]},
+  {name:"Nimbus Fields",img:"UI_Img_Home_CampSwitch_PlotPic_3",items:[["Turtleback Ore","ui_item_4010126",3],["Threadstar Plant","ui_item_4010131",4],["Sweetfern Nut","ui_item_4010127",5]]},
+  {name:"Driftwise Meadow",img:"UI_Img_Home_CampSwitch_PlotPic_4",items:[["Flufftail Grass","ui_item_4010125",3],["Tartball","ui_item_4010130",4],["Chroma Ore","ui_item_4010132",5]]},
+  {name:"Rosy Mirelands",img:"UI_Img_Home_CampSwitch_PlotPic_5",items:[["Greenleaf Algae","ui_item_SilkstrandAlgae",3],["Fallsplash Grass","ui_item_CascadeFern",4],["Jadeite Marrow","ui_item_StarclusterCrystal",5]]}
+];
+const grid=document.getElementById("parkGrid");
+for(const p of PARKS){
+  const c=document.createElement("div");c.className="card park";
+  // observed: optional player-reported Held Items, [name, icon, quality?]
+  const seen=p.observed&&p.observed.length
+    ? `<h4>Seen from trips <small style="text-transform:none;letter-spacing:0">(player-observed)</small></h4><div class="spec">${p.observed.map(([n,i,q])=>`<div><img src="assets/${i}.webp" alt=""><span${q?` class="q${q}"`:""}>${n}</span></div>`).join("")}</div>`
+    : "";
+  const held=`<div class="spec"><div><img src="assets/ui_item_999999.webp" alt=""><span>Random Held Item</span></div></div>${seen}`;
+  c.innerHTML=`<img src="assets/${p.img}.webp" alt="RV Park: ${p.name}"><div class="body"><h3>RV Park: ${p.name}</h3><h4>Specialties</h4><div class="spec">${p.items.map(([n,i,q])=>`<div><img src="assets/${i}.webp" alt=""><span class="q${q}">${n}</span></div>`).join("")}</div><h4>Held Items</h4>${held}</div>`;
+  grid.appendChild(c);
+}
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme=dark?"light":"dark";try{localStorage.setItem("fg-theme",r.dataset.theme)}catch(e){}
+});
+try{const t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}
+</script>
+</body>
+</html>
