@@ -166,7 +166,7 @@ footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
   <div class="card egg">
     <img src="assets/ui_item_560312.webp" alt="Mysterious Aniimo Egg">
     <ul class="rules">
-      <li><i>1</i><div><b>Game text: at most 1 egg per trip.</b> The in-game wording ("Aniimo bring back at most 1 Aniimo Egg per trip") doesn't say whether that's 1 per Aniimo or 1 for the whole outing, and a trip can send up to 3 Aniimo together. In 4 player-observed Rosy Mirelands trips (3 of them confirmed Camping) with 3 Aniimo each, <b>exactly 1 egg</b> came back every time, listed under a different Aniimo from run to run. A Hiking trip with 3 Aniimo returned none (see the <a href="#log">trip log</a>). That points to <b>1 per outing</b>, not 1 per Aniimo, but it isn't confirmed. The <b>longer</b> the trip, the <b>higher</b> the chance of an egg, so Camping (20 h) gives the best odds.</div></li>
+      <li><i>1</i><div><b>Game text: at most 1 egg per trip.</b> The in-game wording ("Aniimo bring back at most 1 Aniimo Egg per trip") doesn't say whether that's 1 per Aniimo or 1 for the whole outing, and a trip can send up to 3 Aniimo together. In 6 player-observed trips with 3 Aniimo each, <b>never more than 1 egg</b> came back. 5 runs returned exactly 1, listed under a different Aniimo from run to run, including one 6-hour Hiking trip. One Hiking trip returned none (see the <a href="#log">trip log</a>). That points to <b>1 per outing</b>, not 1 per Aniimo, but it isn't confirmed. The <b>longer</b> the trip, the <b>higher</b> the chance of an egg, so Camping (20 h) gives the best odds.</div></li>
       <li><i>2</i><div><b>Same family.</b> The egg's Aniimo family is related to the Aniimo that went on the trip.</div></li>
       <li><i>3</i><div><b>Can inherit form and mutation.</b> The egg has a chance to inherit the trip Aniimo's form and mutation, including the rare <b>Prismana Form</b> and mutations such as <b>Sparkling</b> and <b>Alpha</b>. Alpha counts as a mutation in the game's own terms, though the item text only names Prismana and Sparkling as examples.</div></li>
       <li><i>4</i><div><b>Hatches in 5 hours</b> (300 minutes) in an <b>Outpost</b> or <b>Home Hatchinator</b>. One speed-up item can be used per egg, and it can be petted to speed it up within the usual daily limits. For comparison, a Mini Egg takes 2.5 h and a Dreamy Egg 24 h.</div></li>
@@ -223,7 +223,7 @@ footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
 <section id="log">
   <h2>Trip log <span style="font-size:14px;font-weight:600;color:var(--ink-2)">player-observed</span></h2>
   <p class="lede">Real trip results sent in by players. The reward screen lists rewards per Aniimo, one row each. These are single runs, not odds.</p>
-  <div class="tip" style="margin-bottom:12px"><b>So far (5 runs):</b> every Aniimo brought back specialties plus exactly <b>1 Held Item</b>, drawn from what looks like a fixed set of 3 per Park. Quality followed trip length: <span class="q4">Epic</span> on Camping, <span class="q3">Rare</span> on Hiking, and Hiking brought back no <span class="q5">Legendary</span> specialties. Each Rosy Mirelands run returned exactly <b>1 egg</b> across the 3 Aniimo, and the Hiking run returned none.</div>
+  <div class="tip" style="margin-bottom:12px"><b>So far (6 runs):</b> every Aniimo brought back specialties plus exactly <b>1 Held Item</b>, drawn from what looks like a fixed set of 3 per Park. Quality followed trip length: <span class="q4">Epic</span> on Camping, <span class="q3">Rare</span> on Hiking, and Hiking brought back no <span class="q5">Legendary</span> specialties. Every run returned at most <b>1 egg</b> across the 3 Aniimo, and even a Hiking run can bring one back.</div>
   <div class="tablewrap"><table id="tripLog"><thead><tr><th>Run</th><th>Trip</th><th>Aniimo</th><th>Specialties<br><span class="q3">Rare</span> · <span class="q4">Epic</span> · <span class="q5">Legendary</span></th><th>Held Item</th><th>Eggs</th></tr></thead><tbody></tbody></table></div>
 </section>
 
@@ -240,7 +240,8 @@ const PARKS=[
   {name:"Sea of Flowers",img:"UI_Img_Home_CampSwitch_PlotPic_1",items:[["Spiked Herb","ui_item_4010129",3],["Morning Star Bloom","ui_item_4010123",4],["Chromaflare Peony","ui_item_4010124",5]],
    observed:[["Fission Needles","ui_item_553014",3],["Miraculous Fleece","ui_item_553016",3],["Ferocious Fang","ui_item_553001",3]]},
   {name:"Echoback Landing",img:"UI_Img_Home_CampSwitch_PlotPic_2",items:[["Pearl-Strung Blossom","ui_item_4010121",3],["Dreamtide Bloom","ui_item_4010128",4],["Stardust Agate","ui_item_4010122",5]]},
-  {name:"Nimbus Fields",img:"UI_Img_Home_CampSwitch_PlotPic_3",items:[["Turtleback Ore","ui_item_4010126",3],["Threadstar Plant","ui_item_4010131",4],["Sweetfern Nut","ui_item_4010127",5]]},
+  {name:"Nimbus Fields",img:"UI_Img_Home_CampSwitch_PlotPic_3",items:[["Turtleback Ore","ui_item_4010126",3],["Threadstar Plant","ui_item_4010131",4],["Sweetfern Nut","ui_item_4010127",5]],
+   observed:[["Marching Flask","ui_item_553017",3],["Avenging Gear","ui_item_553012",3],["Explosive Gloves","ui_item_553011",3]]},
   {name:"Driftwise Meadow",img:"UI_Img_Home_CampSwitch_PlotPic_4",items:[["Flufftail Grass","ui_item_4010125",3],["Tartball","ui_item_4010130",4],["Chroma Ore","ui_item_4010132",5]]},
   {name:"Rosy Mirelands",img:"UI_Img_Home_CampSwitch_PlotPic_5",items:[["Greenleaf Algae","ui_item_SilkstrandAlgae",3],["Fallsplash Grass","ui_item_CascadeFern",4],["Jadeite Marrow","ui_item_StarclusterCrystal",5]],
    observed:[["Breathbinder Sash","ui_item_553026",4],["Riftbreaker Goggles","ui_item_553027",4],["Omenbone Flute","ui_item_553028",4]]}
@@ -284,6 +285,11 @@ const TRIPS=[
     {spec:[7,1,0],held:[["Fission Needles","ui_item_553014",3,1]],eggs:0},
     {spec:[5,1,0],held:[["Miraculous Fleece","ui_item_553016",3,1]],eggs:0},
     {spec:[7,1,0],held:[["Ferocious Fang","ui_item_553001",3,1]],eggs:0}
+  ]},
+  {park:"Nimbus Fields",trip:"Hiking (6 h)",rows:[
+    {spec:[7,1,0],held:[["Marching Flask","ui_item_553017",3,1]],eggs:0},
+    {spec:[7,1,0],held:[["Avenging Gear","ui_item_553012",3,1]],eggs:0},
+    {spec:[6,1,0],held:[["Explosive Gloves","ui_item_553011",3,1]],eggs:1}
   ]}
 ];
 const tb=document.querySelector("#tripLog tbody");
