@@ -223,7 +223,7 @@ footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
 <section id="log">
   <h2>Trip log <span style="font-size:14px;font-weight:600;color:var(--ink-2)">player-observed</span></h2>
   <p class="lede">Real trip results sent in by players. The reward screen lists rewards per Aniimo, one row each. These are single runs, not odds.</p>
-  <div class="tip" style="margin-bottom:12px"><b>So far (7 runs):</b> every Aniimo brought back specialties plus exactly <b>1 Held Item</b>, drawn from what looks like a fixed set of 3 per Park. Quality followed trip length: <span class="q4">Epic</span> on Camping, <span class="q3">Rare</span> on Hiking, and Hiking brought back no <span class="q5">Legendary</span> specialties. Every run returned at most <b>1 egg</b> across the 3 Aniimo, and even a Hiking run can bring one back.</div>
+  <div class="tip" style="margin-bottom:12px"><b>So far (7 runs):</b> every Aniimo brought back specialties plus exactly <b>1 Held Item</b>, drawn from what looks like a fixed set of 3 per Park. Quality follows trip length. Held Items go up to <span class="q3">Rare</span> on Hiking, <span class="q4">Epic</span> on Adventure and <span class="q5">Legendary</span> on Camping, so the many Rare items in this log are from 6-hour Hiking runs. Hiking also brought back no <span class="q5">Legendary</span> specialties. Every run returned at most <b>1 egg</b> across the 3 Aniimo, and even a Hiking run can bring one back.</div>
   <div class="tablewrap"><table id="tripLog"><thead><tr><th>Run</th><th>Trip</th><th>Aniimo</th><th>Specialties<br><span class="q3">Rare</span> · <span class="q4">Epic</span> · <span class="q5">Legendary</span></th><th>Held Item</th><th>Eggs</th></tr></thead><tbody></tbody></table></div>
 </section>
 
@@ -252,7 +252,7 @@ for(const p of PARKS){
   const c=document.createElement("div");c.className="card park";
   // observed: optional player-reported Held Items, [name, icon, quality?]
   const seen=p.observed&&p.observed.length
-    ? `<h4>Seen from trips <small style="text-transform:none;letter-spacing:0">(player-observed)</small></h4><div class="spec">${p.observed.map(([n,i,q])=>`<div><img src="assets/${i}.webp" alt=""><span${q?` class="q${q}"`:""}>${n}</span></div>`).join("")}</div>`
+    ? `<h4>Seen from trips <small style="text-transform:none;letter-spacing:0">(player-observed)</small></h4><div class="spec">${p.observed.map(([n,i])=>`<div><img src="assets/${i}.webp" alt=""><span>${n}</span></div>`).join("")}</div><p class="sub">Quality depends on trip length, up to <span class="q3">Rare</span> on Hiking, <span class="q4">Epic</span> on Adventure and <span class="q5">Legendary</span> on Camping.</p>`
     : "";
   const held=`<div class="spec"><div><img src="assets/ui_item_999999.webp" alt=""><span>Random Held Item</span></div></div>${seen}`;
   c.innerHTML=`<img src="assets/${p.img}.webp" alt="RV Park: ${p.name}"><div class="body"><h3>RV Park: ${p.name}</h3><h4>Specialties</h4><div class="spec">${p.items.map(([n,i,q])=>`<div><img src="assets/${i}.webp" alt=""><span class="q${q}">${n}</span></div>`).join("")}</div><h4>Held Items</h4>${held}</div>`;
