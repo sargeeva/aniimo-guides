@@ -166,7 +166,7 @@ footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
   <div class="card egg">
     <img src="assets/ui_item_560312.webp" alt="Mysterious Aniimo Egg">
     <ul class="rules">
-      <li><i>1</i><div><b>Game text: at most 1 egg per trip.</b> The in-game wording ("Aniimo bring back at most 1 Aniimo Egg per trip") doesn't say whether that's 1 per Aniimo or 1 for the whole outing, and a trip can send up to 3 Aniimo together. In 8 player-observed trips with 3 Aniimo each, <b>never more than 1 egg</b> came back. 5 runs returned exactly 1, listed under a different Aniimo from run to run, including one 6-hour Hiking trip. Three Hiking trips returned none (see the <a href="#log">trip log</a>). That points to <b>1 per outing</b>, not 1 per Aniimo, but it isn't confirmed. The <b>longer</b> the trip, the <b>higher</b> the chance of an egg, so Camping (20 h) gives the best odds.</div></li>
+      <li><i>1</i><div><b>Game text: at most 1 egg per trip.</b> The in-game wording ("Aniimo bring back at most 1 Aniimo Egg per trip") doesn't say whether that's 1 per Aniimo or 1 for the whole outing, and a trip can send up to 3 Aniimo together. In 9 player-observed trips with 3 Aniimo each, <b>never more than 1 egg</b> came back. 6 runs returned exactly 1, listed under a different Aniimo from run to run: all 4 confirmed Camping trips, the trip whose type wasn't shown, and one 6-hour Hiking trip. Three Hiking trips returned none (see the <a href="#log">trip log</a>). That points to <b>1 per outing</b>, not 1 per Aniimo, but it isn't confirmed. The <b>longer</b> the trip, the <b>higher</b> the chance of an egg, so Camping (20 h) gives the best odds.</div></li>
       <li><i>2</i><div><b>Same family.</b> The egg's Aniimo family is related to the Aniimo that went on the trip.</div></li>
       <li><i>3</i><div><b>Can inherit form and mutation.</b> The egg has a chance to inherit the trip Aniimo's form and mutation, including the rare <b>Prismana Form</b> and mutations such as <b>Sparkling</b> and <b>Alpha</b>. Alpha counts as a mutation in the game's own terms, though the item text only names Prismana and Sparkling as examples.</div></li>
       <li><i>4</i><div><b>Hatches in 5 hours</b> (300 minutes) in an <b>Outpost</b> or <b>Home Hatchinator</b>. One speed-up item can be used per egg, and it can be petted to speed it up within the usual daily limits. For comparison, a Mini Egg takes 2.5 h and a Dreamy Egg 24 h.</div></li>
@@ -223,7 +223,7 @@ footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
 <section id="log">
   <h2>Trip log <span style="font-size:14px;font-weight:600;color:var(--ink-2)">player-observed</span></h2>
   <p class="lede">Real trip results sent in by players. The reward screen lists rewards per Aniimo, one row each. These are single runs, not odds.</p>
-  <div class="tip" style="margin-bottom:12px"><b>So far (8 runs):</b> every Aniimo brought back specialties plus exactly <b>1 Held Item</b>. Each Park has shown 3 different Held Items so far, and some items turn up at more than one Park (Miraculous Fleece, Avenging Gear). Quality follows trip length. Held Items go up to <span class="q3">Rare</span> on Hiking, <span class="q4">Epic</span> on Adventure and <span class="q5">Legendary</span> on Camping, so the many Rare items in this log are from 6-hour Hiking runs. Hiking mostly brings back <span class="q3">Rare</span> specialties plus 1 <span class="q4">Epic</span>, but one Hiking Aniimo also found a <span class="q5">Legendary</span> one. Every run returned at most <b>1 egg</b> across the 3 Aniimo, and even a Hiking run can bring one back.</div>
+  <div class="tip" style="margin-bottom:12px"><b>So far (9 runs):</b> every Aniimo brought back specialties plus exactly <b>1 Held Item</b>. Held Items aren't a fixed set of 3 per Park: Sea of Flowers has shown 6 different ones over 2 runs, and several items turn up at more than one Park. Quality follows trip length. Held Items go up to <span class="q3">Rare</span> on Hiking, <span class="q4">Epic</span> on Adventure and <span class="q5">Legendary</span> on Camping, so the many Rare items in this log are from 6-hour Hiking runs. A Sea of Flowers Camping run brought back a <span class="q5">Legendary</span> Gargantuan Horn. Hiking mostly brings back <span class="q3">Rare</span> specialties plus 1 <span class="q4">Epic</span>, but one Hiking Aniimo also found a <span class="q5">Legendary</span> one. Every run returned at most <b>1 egg</b> across the 3 Aniimo. Every Camping run returned one, and even a Hiking run can.</div>
   <div class="tablewrap"><table id="tripLog"><thead><tr><th>Run</th><th>Trip</th><th>Aniimo</th><th>Specialties<br><span class="q3">Rare</span> · <span class="q4">Epic</span> · <span class="q5">Legendary</span></th><th>Held Item</th><th>Eggs</th></tr></thead><tbody></tbody></table></div>
 </section>
 
@@ -238,7 +238,7 @@ footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
 <script>
 const PARKS=[
   {name:"Sea of Flowers",img:"UI_Img_Home_CampSwitch_PlotPic_1",items:[["Spiked Herb","ui_item_4010129",3],["Morning Star Bloom","ui_item_4010123",4],["Chromaflare Peony","ui_item_4010124",5]],
-   observed:[["Fission Needles","ui_item_553014",3],["Miraculous Fleece","ui_item_553016",3],["Ferocious Fang","ui_item_553001",3]]},
+   observed:[["Fission Needles","ui_item_553014",3],["Miraculous Fleece","ui_item_553016",3],["Ferocious Fang","ui_item_553001",3],["Explosive Gloves","ui_item_553011",4],["Auspicious Bell","ui_item_553015",4],["Gargantuan Horn","ui_item_553000",5]]},
   {name:"Echoback Landing",img:"UI_Img_Home_CampSwitch_PlotPic_2",items:[["Pearl-Strung Blossom","ui_item_4010121",3],["Dreamtide Bloom","ui_item_4010128",4],["Stardust Agate","ui_item_4010122",5]],
    observed:[["Heartseeker Pendant","ui_item_553004",3],["Spirited Feather","ui_item_553003",3],["Gargantuan Horn","ui_item_553000",3]]},
   {name:"Nimbus Fields",img:"UI_Img_Home_CampSwitch_PlotPic_3",items:[["Turtleback Ore","ui_item_4010126",3],["Threadstar Plant","ui_item_4010131",4],["Sweetfern Nut","ui_item_4010127",5]],
@@ -302,6 +302,11 @@ const TRIPS=[
     {spec:[5,1,0],held:[["Miraculous Fleece","ui_item_553016",3,1]],eggs:0},
     {spec:[7,1,0],held:[["Capacitous Battery","ui_item_553010",3,1]],eggs:0},
     {spec:[5,1,1],held:[["Avenging Gear","ui_item_553012",3,1]],eggs:0}
+  ]},
+  {park:"Sea of Flowers",trip:"Camping (20 h)",rows:[
+    {spec:[6,3,3],held:[["Explosive Gloves","ui_item_553011",4,1]],eggs:0},
+    {spec:[6,5,2],held:[["Auspicious Bell","ui_item_553015",4,1]],eggs:0},
+    {spec:[5,5,2],held:[["Gargantuan Horn","ui_item_553000",5,1]],eggs:1}
   ]}
 ];
 const tb=document.querySelector("#tripLog tbody");
