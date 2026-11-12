@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nighttime Gathering Guide</title>
+<meta name="description" content="How RV Park platform decorating scores Contribution in Aniimo's Nighttime Gathering (Magical Wonder Night), with optimized furniture setups and a planner.">
+<style>
+:root{
+  --bg:#f6f4fc; --surface:#ffffff; --surface-2:#efeaff; --ink:#24213a; --ink-2:#5c5878; --line:#ddd6f3;
+  --accent:#7a4fe0; --pump:#e8792b; --chip:#4a3fa8; --warn-bg:#fff6e0; --warn-ink:#7a5300;
+  --good:#2f9e6e; --bad:#c2414b; --shadow:0 1px 2px rgba(40,30,90,.06),0 6px 20px rgba(40,30,90,.07);
+  --q3:#4184d3; --q4:#b767e1; --q5:#e1a347;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+    --accent:#a98cff; --pump:#ff9b4f; --chip:#3a3270; --warn-bg:#3a2f12; --warn-ink:#f3d58c;
+    --good:#5fd3a0; --bad:#ff8a93; --shadow:none; --q3:#6fa8ef; --q4:#cd94f0; --q5:#f0bf6d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+  --accent:#a98cff; --pump:#ff9b4f; --chip:#3a3270; --warn-bg:#3a2f12; --warn-ink:#f3d58c;
+  --good:#5fd3a0; --bad:#ff8a93; --shadow:none; --q3:#6fa8ef; --q4:#cd94f0; --q5:#f0bf6d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.hero{background:linear-gradient(135deg,#2a1b4f 0%,#5a2f8f 50%,#e8792b 125%);color:#fff;padding:40px 0 32px;position:relative;overflow:hidden}
+.hero .wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 6px;letter-spacing:-.01em}
+.hero p{margin:0;max-width:600px;opacity:.95}
+.hero .deco{flex:0 0 140px;width:140px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+.themebtn{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 16px;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-2);padding:6px 12px;border-radius:999px;font-size:14px}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink)}
+section{padding:36px 0 8px;scroll-margin-top:52px}
+h2{font-size:26px;margin:0 0 6px}
+h3{font-size:18px;margin:20px 0 8px}
+.lede{color:var(--ink-2);margin:0 0 20px;max-width:780px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.facts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.fact b{display:block;font-size:24px;line-height:1.15;font-variant-numeric:tabular-nums}
+.fact span{color:var(--ink-2);font-size:14px}
+.ratio{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.ratio div{flex:1 1 220px;border-radius:14px;padding:14px 16px;background:var(--surface-2)}
+.ratio b{font-size:28px;display:block}
+.note{background:var(--warn-bg);color:var(--warn-ink);border-radius:14px;padding:12px 16px;font-size:15px}
+.tip{background:var(--surface-2);border-radius:14px;padding:12px 16px;font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--ink-2);font-size:13px;white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.it{display:flex;gap:10px;align-items:center}
+.it img{width:40px;height:40px;object-fit:contain;flex:none;border-radius:10px;background:var(--surface-2)}
+.q3{color:var(--q3)}.q4{color:var(--q4)}.q5{color:var(--q5)}
+.cur{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.cur img{width:18px;height:18px;object-fit:contain}
+.plans{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.plan h3{margin:0 0 4px}
+.plan .meta{color:var(--ink-2);font-size:14px;margin-bottom:10px}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.plan li{display:flex;gap:10px;align-items:center;font-size:14px}
+.plan li img{width:34px;height:34px;object-fit:contain;flex:none}
+.plan li b{margin-left:auto;font-variant-numeric:tabular-nums}
+.plan .btn{margin-top:12px}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--pump);color:#fff;vertical-align:middle}
+.btn{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:7px 14px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.meters{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:14px}
+.meter .lbl{display:flex;justify-content:space-between;font-size:14px}
+.meter .lbl b{font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .15s}
+.meter.over .bar i{background:var(--bad)}
+.meter.full .bar i{background:var(--good)}
+.planner-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.qty button{font:inherit;width:30px;height:30px;border:0;background:var(--surface-2);color:var(--ink);cursor:pointer}
+.qty input{width:44px;height:30px;border:0;text-align:center;background:var(--surface);color:var(--ink);font:inherit;font-variant-numeric:tabular-nums}
+.filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.filter button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <button class="themebtn" id="themeBtn" type="button">Toggle theme</button>
+  <div class="wrap">
+    <div style="flex:1 1 420px">
+      <div style="font-size:14px;margin-bottom:10px"><a href="../" style="color:#fff;opacity:.92">← Aniimo Guides</a> · <a href="../outings/" style="color:#fff;opacity:.92">Outings</a> · <a href="../night-parade/" style="color:#fff;opacity:.92">Night Parade</a> · <a href="../badges/" style="color:#fff;opacity:.92">Badges</a></div>
+      <h1>Nighttime Gathering</h1>
+      <p>Phase 2 of <b>Magical Wonder Night</b>. How decorating your RV Park <b>platform</b> earns Co-building Contribution, the setups that hit the <b>70,000</b> cap, and a planner to build your own.</p>
+    </div>
+    <img class="deco" src="assets/ICON_PUMPKIN.webp" alt="">
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#rules">How it scores</a><a href="#plans">Best setups</a><a href="#planner">Planner</a><a href="#season">Wonder Night items</a><a href="#shop">Regular items</a><a href="#rewards">Rewards</a><a href="#turnins">Turn-in quests</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="rules">
+  <h2>How platform decorating scores</h2>
+  <p class="lede">Your <b>Personal Contribution</b> is the Contribution from items you turn in at your current Park <b>plus</b> the Contribution from your platform decorations. Each piece of furniture on the platform turns its <b>Habitability</b> into Contribution.</p>
+  <div class="card">
+    <div class="ratio">
+      <div><span>Regular furniture</span><b>1 : 1</b><span style="color:var(--ink-2);font-size:14px">Habitability → Contribution</span></div>
+      <div style="background:linear-gradient(135deg,rgba(232,121,43,.18),rgba(122,79,224,.18))"><span>Wonder Night (season) furniture</span><b style="color:var(--pump)">1 : 3</b><span style="color:var(--ink-2);font-size:14px">Triple Contribution</span></div>
+    </div>
+  </div>
+  <div class="card facts" style="margin-top:12px">
+    <div class="fact"><b>70,000</b><span>Max Contribution from the platform</span></div>
+    <div class="fact"><b>100</b><span>Max items on the platform</span></div>
+    <div class="fact"><b>80,000</b><span>Platform load limit</span></div>
+    <div class="fact"><b>Overlap OK</b><span>Every placeable item can overlap, so floor space isn't the limit</span></div>
+  </div>
+  <div class="tip" style="margin-top:12px"><b>What this means:</b> to reach 70,000 with 100 items or fewer, your items need to average <b>700+ Contribution</b> each. Wonder Night pieces give up to <b>1,974</b>, so about 38 of them hit the cap. Regular furniture tops out around <b>1,250</b>, so a regular-only setup takes about 84 items.</div>
+  <div class="note" style="margin-top:12px"><b>Keep your platform Contribution when you move.</b> Contribution from turn-ins is cleared if you leave your Park, but platform Contribution and your overall personal total stay with you.</div>
+</section>
+
+<section id="plans">
+  <h2>Best setups</h2>
+  <p class="lede">Each of these reaches the 70,000 cap within the 100-item and 80,000-load limits. Tap "Load into planner" to tweak one.</p>
+  <div class="plans" id="plans"></div>
+  <div class="tip" style="margin-top:12px"><b>Jelly Bean value:</b> every Wonder Night item gives about <b>12 Contribution per Weird Jelly Bean</b>, from Sugar Puff (1,974 for 165) down to the small candies (183 for 15). The bean cost of hitting 70,000 is about the same whichever items you pick, so buy the <b>biggest</b> ones to stay under 100 items. Regular Wishstar furniture costs <b>exactly its Habitability</b> in Wishstars, so it's always 1 Wishstar per Contribution.</div>
+</section>
+
+<section id="planner">
+  <h2>Planner</h2>
+  <p class="lede">Set how many of each item you'll place. The bars show your Contribution against the cap and your item count and load against the platform limits.</p>
+  <div class="card">
+    <div class="meters">
+      <div class="meter" id="mC"><div class="lbl"><span>Contribution</span><b id="vC">0 / 70,000</b></div><div class="bar"><i></i></div></div>
+      <div class="meter" id="mN"><div class="lbl"><span>Items</span><b id="vN">0 / 100</b></div><div class="bar"><i></i></div></div>
+      <div class="meter" id="mL"><div class="lbl"><span>Load</span><b id="vL">0 / 80,000</b></div><div class="bar"><i></i></div></div>
+    </div>
+    <div class="planner-tools">
+      <span style="color:var(--ink-2);font-size:14px;align-self:center">Cost:</span>
+      <span class="cur"><img src="assets/ICON_BEAN.webp" alt=""><b id="vB">0</b> Weird Jelly Beans</span>
+      <span class="cur"><img src="assets/ICON_WISH.webp" alt=""><b id="vW">0</b> Wishstars</span>
+      <button class="btn" id="clearBtn" type="button" style="margin-left:auto">Clear</button>
+    </div>
+    <div class="filter" id="pfilter">
+      <button class="btn" type="button" data-f="all" aria-pressed="true">All</button>
+      <button class="btn" type="button" data-f="season" aria-pressed="false">Wonder Night</button>
+      <button class="btn" type="button" data-f="shop" aria-pressed="false">Wishstar shop</button>
+      <button class="btn" type="button" data-f="special" aria-pressed="false">Special</button>
+      <button class="btn" type="button" data-f="picked" aria-pressed="false">Placed only</button>
+    </div>
+    <div class="tablewrap"><table id="ptable">
+      <thead><tr><th>Item</th><th class="num">Contribution</th><th class="num">Load</th><th class="num">Max</th><th>Place</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </div>
+</section>
+
+<section id="season">
+  <h2>Wonder Night items (×3)</h2>
+  <p class="lede">All 28 season items, bought with <span class="cur"><img src="assets/ICON_BEAN.webp" alt="">Weird Jelly Beans</span>. Sorted by Contribution.</p>
+  <div class="tablewrap"><table id="seasonTable"><thead><tr><th>Item</th><th class="num">Habitability</th><th class="num">Contribution</th><th class="num">Price</th><th class="num">Load</th><th class="num">Max</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section id="shop">
+  <h2>Best regular items (×1)</h2>
+  <p class="lede">The highest-Habitability furniture you can buy with <span class="cur"><img src="assets/ICON_WISH.webp" alt="">Wishstars</span>. The price always equals the Habitability. Some need a minimum RV level.</p>
+  <div class="tablewrap"><table id="shopTable"><thead><tr><th>Item</th><th class="num">Contribution</th><th class="num">Load</th><th class="num">Max</th><th>Unlock</th></tr></thead><tbody></tbody></table></div>
+  <h3>Special furniture</h3>
+  <p class="lede" style="margin-bottom:12px">These three aren't sold in the Wishstar shop, but if you own them they're the strongest regular pieces. Max 1 each.</p>
+  <div class="tablewrap"><table id="specialTable"><thead><tr><th>Item</th><th class="num">Contribution</th><th class="num">Load</th></tr></thead><tbody></tbody></table></div>
+  <div class="note" style="margin-top:12px">Last season's <b>Harvest Moon</b> furniture is also season-exclusive, but the game text only says "season-exclusive furniture" gets 1:3. It most likely means the current season only, so the planner counts Harvest Moon items at 1:1.</div>
+</section>
+
+<section id="rewards">
+  <h2>Rewards</h2>
+  <p class="lede">Decorating your platform first gets you up to 70,000 Personal Contribution straight away, which unlocks the first milestones. Those give back Jelly Beans and blueprints for the best Wonder Night furniture.</p>
+  <div class="grid g2">
+    <div class="card"><h3 style="margin-top:0">Personal milestones</h3><div class="tablewrap" style="border:0"><table id="persTable"><thead><tr><th class="num">Personal</th><th>Reward</th></tr></thead><tbody></tbody></table></div></div>
+    <div class="card"><h3 style="margin-top:0">Park co-building stages</h3><p style="margin:0 0 8px;font-size:14px;color:var(--ink-2)">Needs both the Park total and your own Contribution at the current Park.</p><div class="tablewrap" style="border:0"><table id="stageTable"><thead><tr><th>Stage</th><th class="num">Park</th><th class="num">You</th><th>Reward</th></tr></thead><tbody></tbody></table></div></div>
+  </div>
+</section>
+
+<section id="turnins">
+  <h2>Turn-in quests</h2>
+  <p class="lede">The other source of Contribution: offerings for the Pumpkin Aeon at the center of the Park.</p>
+  <div class="card">
+    <ul style="margin:0;padding-left:20px;display:grid;gap:6px">
+      <li>You can hold <b>1</b> turn-in quest at a time. Each is worth <b>1,000–8,000</b> Contribution, depending on its quality.</li>
+      <li>Quests ask for event dishes and crops (Magic Pumpkin, Memory Lanternfruit dishes), Home materials (Rock, Clay, Shell, Ore…), or Home Coin / Wishstars.</li>
+      <li>You start with <b>5</b> acceptances, gain <b>+3</b> daily at 04:00, and can bank up to <b>10</b>. An unfinished quest auto-refreshes at 04:00 and still uses up its acceptance.</li>
+      <li>If you haven't accepted a quest, you can refresh the offers with Home Coin: 10,000, then 20,000, 30,000 … up to 100,000. They also refresh on a timer.</li>
+      <li>Turn-in Contribution is <b>cleared if you move Parks</b>. A Private RV Park with stable neighbours is safer.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+<footer class="wrap">Fan-made reference compiled from game files (Nov 12, 2026 update). Aniimo and its assets belong to their respective owners.</footer>
+
+<script>
+const DATA={"season":[{"id":"40900028","name":"Wonder Night - Sugar Puff","hab":658,"mult":3,"contrib":1974,"load":568,"max":10,"cur":4040125,"price":165,"icon":"ui_item_40900028","unlock":"","q":5},{"id":"40500031","name":"Wonder Night - Sparki Lights","hab":658,"mult":3,"contrib":1974,"load":1261,"max":5,"cur":4040125,"price":165,"icon":"ui_item_40500031","unlock":"","q":5},{"id":"40500029","name":"Wonder Night - Syrup Stove","hab":658,"mult":3,"contrib":1974,"load":3791,"max":5,"cur":4040125,"price":165,"icon":"ui_item_40500029","unlock":"","q":5},{"id":"40500028","name":"Wonder Night - Revelry","hab":658,"mult":3,"contrib":1974,"load":2638,"max":5,"cur":4040125,"price":165,"icon":"ui_item_40500028","unlock":"","q":5},{"id":"40500032","name":"Wonder Night - Light Glow","hab":548,"mult":3,"contrib":1644,"load":805,"max":5,"cur":4040125,"price":137,"icon":"ui_item_40500032","unlock":"","q":5},{"id":"40500030","name":"Wonder Night - Eerie Table","hab":548,"mult":3,"contrib":1644,"load":4193,"max":5,"cur":4040125,"price":137,"icon":"ui_item_40500030","unlock":"","q":5},{"id":"40500026","name":"Wonder Night - Pumpkin Carriage","hab":548,"mult":3,"contrib":1644,"load":2306,"max":5,"cur":4040125,"price":137,"icon":"ui_item_40500026","unlock":"","q":5},{"id":"40900027","name":"Wonder Night - Cotton Candy","hab":439,"mult":3,"contrib":1317,"load":124,"max":10,"cur":4040125,"price":110,"icon":"ui_item_40900027","unlock":"","q":5},{"id":"40500027","name":"Wonder Night - Welcome","hab":366,"mult":3,"contrib":1098,"load":121,"max":5,"cur":4040125,"price":92,"icon":"ui_item_40500027","unlock":"","q":5},{"id":"40600125","name":"Wonder Night - Verdant Gold","hab":244,"mult":3,"contrib":732,"load":3187,"max":10,"cur":4040125,"price":61,"icon":"ui_item_40600125","unlock":"","q":4},{"id":"40600109","name":"Wonder Night - Pumpkin Glow Screen","hab":219,"mult":3,"contrib":657,"load":744,"max":10,"cur":4040125,"price":55,"icon":"ui_item_40600109","unlock":"","q":5},{"id":"40600113","name":"Wonder Night - Ghostly Aroma","hab":183,"mult":3,"contrib":549,"load":2235,"max":10,"cur":4040125,"price":46,"icon":"ui_item_40600113","unlock":"","q":5},{"id":"40600119","name":"Wonder Night - Candy-Twister Octopus","hab":122,"mult":3,"contrib":366,"load":457,"max":10,"cur":4040125,"price":31,"icon":"ui_item_40600119","unlock":"","q":4},{"id":"40600114","name":"Wonder Night - Honey Tart","hab":122,"mult":3,"contrib":366,"load":3173,"max":10,"cur":4040125,"price":31,"icon":"ui_item_40600114","unlock":"","q":4},{"id":"40600112","name":"Wonder Night - Giggle Bowl","hab":122,"mult":3,"contrib":366,"load":648,"max":10,"cur":4040125,"price":31,"icon":"ui_item_40600112","unlock":"","q":4},{"id":"40600111","name":"Wonder Night - Menu","hab":122,"mult":3,"contrib":366,"load":762,"max":10,"cur":4040125,"price":31,"icon":"ui_item_40600111","unlock":"","q":4},{"id":"40600108","name":"Wonder Night - Celestis Pumpkin","hab":122,"mult":3,"contrib":366,"load":95,"max":10,"cur":4040125,"price":31,"icon":"ui_item_40600108","unlock":"","q":4},{"id":"40600107","name":"Wonder Night - Grinning Pumpkin","hab":122,"mult":3,"contrib":366,"load":96,"max":10,"cur":4040125,"price":31,"icon":"ui_item_40600107","unlock":"","q":4},{"id":"40600120","name":"Wonder Night - Twisty Candle","hab":73,"mult":3,"contrib":219,"load":67,"max":10,"cur":4040125,"price":18,"icon":"ui_item_40600120","unlock":"","q":3},{"id":"40600124","name":"Wonder Night - Lollipop","hab":61,"mult":3,"contrib":183,"load":164,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600124","unlock":"","q":3},{"id":"40600123","name":"Wonder Night - Rainbow Candy","hab":61,"mult":3,"contrib":183,"load":133,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600123","unlock":"","q":3},{"id":"40600122","name":"Wonder Night - Culich Candy","hab":61,"mult":3,"contrib":183,"load":174,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600122","unlock":"","q":3},{"id":"40600121","name":"Wonder Night - Mysterious Books","hab":61,"mult":3,"contrib":183,"load":36,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600121","unlock":"","q":3},{"id":"40600118","name":"Wonder Night - Sweet Filling","hab":61,"mult":3,"contrib":183,"load":171,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600118","unlock":"","q":3},{"id":"40600117","name":"Wonder Night - Macaron","hab":61,"mult":3,"contrib":183,"load":256,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600117","unlock":"","q":3},{"id":"40600116","name":"Wonder Night - Cake","hab":61,"mult":3,"contrib":183,"load":92,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600116","unlock":"","q":3},{"id":"40600115","name":"Wonder Night - Cookie","hab":61,"mult":3,"contrib":183,"load":244,"max":10,"cur":4040125,"price":15,"icon":"ui_item_40600115","unlock":"","q":3},{"id":"40600110","name":"Wonder Night - Honey Drink","hab":61,"mult":3,"contrib":183,"load":371,"max":20,"cur":4040125,"price":15,"icon":"ui_item_40600110","unlock":"","q":3}],"shop":[{"id":"50600003","name":"Mige Pool Bathtub","hab":1249,"mult":1,"contrib":1249,"load":113,"max":5,"cur":1011,"price":1249,"icon":"ui_item_50600003","unlock":"RV Lv. 18","q":5},{"id":"50600002","name":"Forest Whispers Wooden Bath","hab":1198,"mult":1,"contrib":1198,"load":300,"max":5,"cur":1011,"price":1198,"icon":"ui_item_50600002","unlock":"RV Lv. 17","q":5},{"id":"50300008","name":"Kid Fruit - Slumber","hab":900,"mult":1,"contrib":900,"load":653,"max":10,"cur":1011,"price":900,"icon":"ui_item_50300008","unlock":"","q":5},{"id":"40500035","name":"Grand Staircase","hab":864,"mult":1,"contrib":864,"load":352,"max":20,"cur":1011,"price":864,"icon":"ui_item_40500035","unlock":"","q":5},{"id":"41000005","name":"Leaf-Canopy Treehouse","hab":851,"mult":1,"contrib":851,"load":498,"max":10,"cur":1011,"price":851,"icon":"ui_item_41000005","unlock":"RV Lv. 21","q":5},{"id":"50500011","name":"Yummy Moments - Waffles","hab":720,"mult":1,"contrib":720,"load":354,"max":10,"cur":1011,"price":720,"icon":"ui_item_50500011","unlock":"","q":5},{"id":"50820003","name":"Crimson Night - Burning Candle","hab":675,"mult":1,"contrib":675,"load":1724,"max":10,"cur":1011,"price":675,"icon":"ui_item_50820003","unlock":"","q":5},{"id":"50800006","name":"Kid Fruit - Glowfun","hab":675,"mult":1,"contrib":675,"load":725,"max":10,"cur":1011,"price":675,"icon":"ui_item_50820004","unlock":"","q":5},{"id":"50800005","name":"Crimson Night - Hanging Candle","hab":675,"mult":1,"contrib":675,"load":2790,"max":10,"cur":1011,"price":675,"icon":"ui_item_50800005","unlock":"","q":5},{"id":"50220017","name":"Kid Fruit - Soft Core","hab":675,"mult":1,"contrib":675,"load":297,"max":10,"cur":1011,"price":675,"icon":"ui_item_50220017","unlock":"","q":5},{"id":"50300007","name":"Sweet Dreams Tent Bed - Large","hab":639,"mult":1,"contrib":639,"load":634,"max":10,"cur":1011,"price":639,"icon":"ui_item_50300007","unlock":"RV Lv. 17","q":5},{"id":"50220016","name":"Crimson Phantom - Long Sofa","hab":621,"mult":1,"contrib":621,"load":428,"max":10,"cur":1011,"price":621,"icon":"ui_item_50220016","unlock":"RV Lv. 22","q":5},{"id":"50220014","name":"Crimson Phantom - Velvet Sofa","hab":621,"mult":1,"contrib":621,"load":375,"max":10,"cur":1011,"price":621,"icon":"ui_item_50210007","unlock":"RV Lv. 22","q":5},{"id":"50500006","name":"Timber & Table - Baking Counter","hab":596,"mult":1,"contrib":596,"load":375,"max":5,"cur":1011,"price":596,"icon":"ui_item_50500006","unlock":"RV Lv. 11","q":5},{"id":"50700005","name":"Crimson Phantom - Curtains","hab":567,"mult":1,"contrib":567,"load":3425,"max":5,"cur":1011,"price":567,"icon":"ui_item_50700005","unlock":"RV Lv. 21","q":5},{"id":"41000003","name":"Windchime Swing Chair","hab":567,"mult":1,"contrib":567,"load":946,"max":5,"cur":1011,"price":567,"icon":"ui_item_41000003","unlock":"RV Lv. 12","q":5},{"id":"50100012","name":"Retro Kitchen Counter","hab":548,"mult":1,"contrib":548,"load":400,"max":5,"cur":1011,"price":548,"icon":"ui_item_50100012","unlock":"RV Lv. 15","q":5},{"id":"50220018","name":"Yummy Moments - Bread","hab":540,"mult":1,"contrib":540,"load":285,"max":10,"cur":1011,"price":540,"icon":"ui_item_50220018","unlock":"","q":5},{"id":"41000007","name":"Bluestone Washbasin","hab":518,"mult":1,"contrib":518,"load":394,"max":10,"cur":1011,"price":518,"icon":"ui_item_41000007","unlock":"RV Lv. 22","q":4},{"id":"50500005","name":"Woofy Stove","hab":510,"mult":1,"contrib":510,"load":380,"max":5,"cur":1011,"price":510,"icon":"ui_item_50500005","unlock":"RV Lv. 16","q":4},{"id":"41000002","name":"Starry Bed","hab":506,"mult":1,"contrib":506,"load":960,"max":5,"cur":1011,"price":506,"icon":"ui_item_41000002","unlock":"RV Lv. 10","q":5},{"id":"40500023","name":"Cool Summer - Pool","hab":506,"mult":1,"contrib":506,"load":328,"max":5,"cur":1011,"price":506,"icon":"ui_item_40500023","unlock":"","q":5},{"id":"50640006","name":"Drawer Washbasin - Maple","hab":488,"mult":1,"contrib":488,"load":254,"max":5,"cur":1011,"price":488,"icon":"ui_item_50640006","unlock":"RV Lv. 15","q":4},{"id":"50640005","name":"Cabinet Washbasin - Maple","hab":488,"mult":1,"contrib":488,"load":281,"max":5,"cur":1011,"price":488,"icon":"ui_item_50640005","unlock":"RV Lv. 15","q":4},{"id":"50640004","name":"Aniimo Washbasin - Mist Gray","hab":465,"mult":1,"contrib":465,"load":240,"max":5,"cur":1011,"price":465,"icon":"ui_item_50640004","unlock":"RV Lv. 14","q":4},{"id":"50640003","name":"Washbasin - Mist Gray","hab":465,"mult":1,"contrib":465,"load":210,"max":5,"cur":1011,"price":465,"icon":"ui_item_50640003","unlock":"RV Lv. 14","q":4},{"id":"50820004","name":"Kid Fruit - Apple Core Lamp","hab":450,"mult":1,"contrib":450,"load":386,"max":10,"cur":1011,"price":450,"icon":"ui_item_50800006","unlock":"","q":5},{"id":"50200014","name":"Yummy Moments - Pizza","hab":450,"mult":1,"contrib":450,"load":456,"max":10,"cur":1011,"price":450,"icon":"ui_item_50200014","unlock":"","q":5},{"id":"50640002","name":"Wooden Washbasin - Oak","hab":443,"mult":1,"contrib":443,"load":2456,"max":5,"cur":1011,"price":443,"icon":"ui_item_50640002","unlock":"RV Lv. 13","q":4},{"id":"40300004","name":"Cherry Tree","hab":416,"mult":1,"contrib":416,"load":558,"max":10,"cur":1011,"price":416,"icon":"ui_item_40300004","unlock":"RV Lv. 18","q":5}],"special":[{"id":"41000010","name":"Mirror","hab":3240,"mult":1,"contrib":3240,"load":7060,"max":1,"cur":null,"price":null,"icon":"ui_item_41000010","unlock":"","q":5},{"id":"41000008","name":"Crimson Night’s Dreamrest","hab":3038,"mult":1,"contrib":3038,"load":4814,"max":1,"cur":null,"price":null,"icon":"ui_item_41000008","unlock":"","q":5},{"id":"41000004","name":"Sunlit Grove","hab":2025,"mult":1,"contrib":2025,"load":9545,"max":1,"cur":null,"price":null,"icon":"ui_item_41000004","unlock":"","q":5},{"id":"41100009","name":"Harvest Moon - Radiant Moon","hab":548,"mult":1,"contrib":548,"load":41,"max":5,"cur":null,"price":55,"icon":"ui_item_41100009","unlock":"","q":5},{"id":"40700022","name":"Harvest Moon - Starfall","hab":548,"mult":1,"contrib":548,"load":989,"max":5,"cur":null,"price":55,"icon":"ui_item_40700022","unlock":"","q":5},{"id":"40700025","name":"Harvest Moon - Osmanthus Rain","hab":439,"mult":1,"contrib":439,"load":100,"max":5,"cur":null,"price":44,"icon":"ui_item_40700025","unlock":"","q":5},{"id":"40700024","name":"Harvest Moon: Flicker","hab":439,"mult":1,"contrib":439,"load":100,"max":5,"cur":null,"price":44,"icon":"ui_item_40700024","unlock":"","q":5},{"id":"40500013","name":"Harvest Moon - Market Stall","hab":366,"mult":1,"contrib":366,"load":81,"max":20,"cur":null,"price":37,"icon":"ui_item_40500013","unlock":"","q":5},{"id":"40300022","name":"Harvest Moon - Laurel","hab":366,"mult":1,"contrib":366,"load":338,"max":5,"cur":null,"price":37,"icon":"ui_item_40300022","unlock":"","q":5},{"id":"40900020","name":"Harvest Moon - Tall Stool","hab":293,"mult":1,"contrib":293,"load":318,"max":10,"cur":null,"price":29,"icon":"ui_item_40900020","unlock":"","q":4},{"id":"40900019","name":"Harvest Moon - Low Stool","hab":293,"mult":1,"contrib":293,"load":792,"max":10,"cur":null,"price":29,"icon":"ui_item_40900019","unlock":"","q":4},{"id":"40900018","name":"Harvest Moon - Round Table","hab":244,"mult":1,"contrib":244,"load":56,"max":10,"cur":null,"price":24,"icon":"ui_item_40900018","unlock":"","q":4},{"id":"40500012","name":"Harvest Moon - Osmanthus Charm","hab":244,"mult":1,"contrib":244,"load":61,"max":20,"cur":null,"price":24,"icon":"ui_item_40500012","unlock":"","q":4},{"id":"41100011","name":"Harvest Moon - Golden Wheat","hab":183,"mult":1,"contrib":183,"load":522,"max":10,"cur":null,"price":18,"icon":"ui_item_41100011","unlock":"","q":4},{"id":"41100012","name":"Harvest Moon - Moon Rabbit","hab":146,"mult":1,"contrib":146,"load":99,"max":10,"cur":null,"price":15,"icon":"ui_item_41100012","unlock":"","q":4}],"plans":[{"name":"Max with Wonder Night items","tag":"Fewest items","desc":"Only season furniture. Reaches the cap with the fewest pieces.","items":[["40900028",10],["40500031",5],["40500028",5],["40500029",5],["40500032",5],["40500026",5],["40500030",3]]},{"name":"Budget mix","tag":"~3,000 beans","desc":"Spend about 3,000 Jelly Beans on the biggest season pieces, then fill with Wishstar furniture.","items":[["40900028",10],["40500031",5],["40500028",3],["50600003",5],["50600002",5],["50300008",10],["40500035",16]]},{"name":"No event items","tag":"Wishstars only","desc":"Only regular furniture from the Wishstar shop. Costs Wishstars equal to its Habitability.","items":[["50600003",5],["50600002",5],["50300008",10],["40500035",20],["41000005",10],["50500011",10],["50220017",10],["50800006",10],["50820003",4]]},{"name":"Regular + special pieces","tag":"If you own them","desc":"Uses the Mirror, Crimson Night’s Dreamrest and Sunlit Grove, then Wishstar furniture.","items":[["41000010",1],["41000008",1],["41000004",1],["50600003",5],["50600002",5],["50300008",10],["40500035",20],["41000005",10],["50500011",10],["50220017",10],["50800006",2]]}],"personal":[[20000,"1,000 Weird Jelly Beans + 100,000 Home Coin"],[40000,"2,000 Weird Jelly Beans + 150,000 Home Coin"],[60000,"Blueprint: Wonder Night - Light Glow + 200,000 Home Coin"],[80000,"3,000 Weird Jelly Beans + 250,000 Home Coin"],[100000,"Blueprint: Wonder Night - Syrup Stove + 300,000 Home Coin"],[130000,"3,000 Weird Jelly Beans + 400,000 Home Coin"],[160000,"Blueprint: Wonder Night - Sugar Puff + 600,000 Home Coin"],[190000,"3,000 Weird Jelly Beans + 800,000 Home Coin"],[220000,"Batshadow Pumpkin + 1,000,000 Home Coin"],[250000,"1,000 Weird Jelly Beans + 2,000,000 Home Coin, and the same every 50,000 up to 600,000"]],"stages":[["Stage 1",120000,30000,"50 Glimmer, Strange Mask, 2,000 Weird Jelly Beans"],["Stage 2",240000,60000,"50 Glimmer, Blueprint: Cotton Candy, 2,000 Weird Jelly Beans"],["Stage 3",360000,90000,"50 Glimmer, Blueprint: Sparki Lights, 2,000 Weird Jelly Beans"],["Stage 4",520000,130000,"50 Glimmer, Blueprint: Pumpkin Carriage Ride, 2,000 Weird Jelly Beans"],["Stage 5",680000,170000,"100 Glimmer, Record - Night Jaunt, 2,000 Weird Jelly Beans"]]};
+const CAP=70000,MAXN=100,MAXL=80000;
+const fmt=n=>n.toLocaleString("en-US");
+const all=[...DATA.season.map(x=>({...x,cat:"season"})),...DATA.shop.map(x=>({...x,cat:"shop"})),...DATA.special.map(x=>({...x,cat:"special"}))];
+const byId=Object.fromEntries(all.map(x=>[x.id,x]));
+const qty={};
+const img=x=>`<img src="assets/${x.icon}.webp" alt="" loading="lazy">`;
+const curIcon=c=>c==4040125?'<img src="assets/ICON_BEAN.webp" alt="">':'<img src="assets/ICON_WISH.webp" alt="">';
+function itemCell(x){return `<div class="it">${img(x)}<span class="q${x.q||3}">${x.name}</span></div>`}
+// static tables
+document.querySelector("#seasonTable tbody").innerHTML=DATA.season.map(x=>`<tr><td>${itemCell(x)}</td><td class="num">${fmt(x.hab)}</td><td class="num"><b>${fmt(x.contrib)}</b></td><td class="num"><span class="cur">${curIcon(x.cur)}${fmt(x.price)}</span></td><td class="num">${fmt(x.load)}</td><td class="num">${x.max}</td></tr>`).join("");
+document.querySelector("#shopTable tbody").innerHTML=DATA.shop.slice(0,30).map(x=>`<tr><td>${itemCell(x)}</td><td class="num"><b>${fmt(x.contrib)}</b></td><td class="num">${fmt(x.load)}</td><td class="num">${x.max}</td><td>${x.unlock||"–"}</td></tr>`).join("");
+document.querySelector("#specialTable tbody").innerHTML=DATA.special.slice(0,3).map(x=>`<tr><td>${itemCell(x)}</td><td class="num"><b>${fmt(x.contrib)}</b></td><td class="num">${fmt(x.load)}</td></tr>`).join("");
+document.querySelector("#persTable tbody").innerHTML=DATA.personal.map(r=>`<tr><td class="num">${fmt(r[0])}</td><td>${r[1]}</td></tr>`).join("");
+document.querySelector("#stageTable tbody").innerHTML=DATA.stages.map(r=>`<tr><td>${r[0]}</td><td class="num">${fmt(r[1])}</td><td class="num">${fmt(r[2])}</td><td>${r[3]}</td></tr>`).join("");
+// plans
+const plansEl=document.getElementById("plans");
+DATA.plans.forEach((p,i)=>{
+  let c=0,n=0,l=0,b=0,w=0;
+  p.items.forEach(([id,q])=>{const x=byId[id];c+=x.contrib*q;n+=q;l+=x.load*q;if(x.cur==4040125)b+=x.price*q;else if(x.cur==1011)w+=x.price*q;});
+  const el=document.createElement("div");el.className="card plan";
+  el.innerHTML=`<h3>${p.name} ${p.tag?`<span class="tag">${p.tag}</span>`:""}</h3><div class="meta">${p.desc}<br><b>${fmt(Math.min(c,CAP))}</b> Contribution · ${n} items · load ${fmt(l)}${b?` · <span class="cur">${curIcon(4040125)}${fmt(b)}</span>`:""}${w?` · <span class="cur">${curIcon(1011)}${fmt(w)}</span>`:""}</div><ul>${p.items.map(([id,q])=>{const x=byId[id];return `<li>${img(x)}<span>${x.name}</span><b>×${q}</b></li>`}).join("")}</ul><button class="btn primary" type="button">Load into planner</button>`;
+  el.querySelector("button").addEventListener("click",()=>{for(const k in qty)delete qty[k];p.items.forEach(([id,q])=>qty[id]=q);setFilter("picked");render();document.getElementById("planner").scrollIntoView();});
+  plansEl.appendChild(el);
+});
+// planner
+let filt="all";
+const tbody=document.querySelector("#ptable tbody");
+function setFilter(f){filt=f;document.querySelectorAll("#pfilter button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));drawRows();}
+document.querySelectorAll("#pfilter button").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.f)));
+function drawRows(){
+  const list=all.filter(x=>filt==="all"||(filt==="picked"?qty[x.id]>0:x.cat===filt));
+  tbody.innerHTML=list.map(x=>`<tr data-id="${x.id}"><td>${itemCell(x)}</td><td class="num">${fmt(x.contrib)}${x.mult===3?' <span style="color:var(--pump);font-weight:700">×3</span>':''}</td><td class="num">${fmt(x.load)}</td><td class="num">${x.max}</td><td><span class="qty"><button type="button" data-d="-1" aria-label="Fewer">−</button><input inputmode="numeric" value="${qty[x.id]||0}" aria-label="Quantity of ${x.name}"><button type="button" data-d="1" aria-label="More">+</button></span></td></tr>`).join("")||'<tr><td colspan="5" style="color:var(--ink-2)">Nothing placed yet.</td></tr>';
+}
+tbody.addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;const id=b.closest("tr").dataset.id;const x=byId[id];qty[id]=Math.max(0,Math.min(x.max,(qty[id]||0)+ +b.dataset.d));b.parentNode.querySelector("input").value=qty[id];render(false);});
+tbody.addEventListener("change",e=>{if(e.target.tagName!=="INPUT")return;const id=e.target.closest("tr").dataset.id;const x=byId[id];qty[id]=Math.max(0,Math.min(x.max,parseInt(e.target.value)||0));e.target.value=qty[id];render(false);});
+document.getElementById("clearBtn").addEventListener("click",()=>{for(const k in qty)delete qty[k];render();});
+function meter(id,v,max,label,capped){const m=document.getElementById(id);m.querySelector("i").style.width=Math.min(100,v/max*100)+"%";m.classList.toggle("over",!capped&&v>max);m.classList.toggle("full",capped&&v>=max);}
+function render(redraw=true){
+  let c=0,n=0,l=0,b=0,w=0;
+  for(const id in qty){const q=qty[id];if(!q)continue;const x=byId[id];c+=x.contrib*q;n+=q;l+=x.load*q;if(x.cur==4040125)b+=x.price*q;else if(x.cur==1011)w+=x.price*q;}
+  document.getElementById("vC").textContent=`${fmt(Math.min(c,CAP))} / 70,000${c>CAP?` (${fmt(c-CAP)} wasted)`:""}`;
+  document.getElementById("vN").textContent=`${n} / 100`;document.getElementById("vL").textContent=`${fmt(l)} / 80,000`;
+  document.getElementById("vB").textContent=fmt(b);document.getElementById("vW").textContent=fmt(w);
+  meter("mC",c,CAP,"",true);meter("mN",n,MAXN);meter("mL",l,MAXL);
+  if(redraw)drawRows();
+}
+render();
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme=dark?"light":"dark";try{localStorage.setItem("fg-theme",r.dataset.theme)}catch(e){}
+});
+try{const t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}
+</script>
+</body>
+</html>
