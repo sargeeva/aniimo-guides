@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aniimo Affinity Guide</title>
+<meta name="description" content="How Aniimo Affinity works in Aniimo: the 4 Affinity levels and what they unlock, every way to earn it, the daily and weekly limits, and how long it takes to max.">
+<style>
+:root{
+  --bg:#f6f4fc; --surface:#ffffff; --surface-2:#efeaff; --ink:#24213a; --ink-2:#5c5878; --line:#ddd6f3;
+  --accent:#e0538a; --accent-2:#6e5ce6; --warn-bg:#fff6e0; --warn-ink:#7a5300;
+  --good:#2f9e6e; --shadow:0 1px 2px rgba(40,30,90,.06),0 6px 20px rgba(40,30,90,.07);
+  --pool:#6e5ce6; --solo:#e0538a; --free:#2f9e6e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+    --accent:#ff7fae; --accent-2:#9a8cff; --warn-bg:#3a2f12; --warn-ink:#f3d58c; --good:#5fd3a0; --shadow:none;
+    --pool:#9a8cff; --solo:#ff7fae; --free:#5fd3a0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15131f; --surface:#1e1b2c; --surface-2:#282440; --ink:#ece9fb; --ink-2:#aaa5c8; --line:#363152;
+  --accent:#ff7fae; --accent-2:#9a8cff; --warn-bg:#3a2f12; --warn-ink:#f3d58c; --good:#5fd3a0; --shadow:none;
+  --pool:#9a8cff; --solo:#ff7fae; --free:#5fd3a0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent-2)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.hero{background:linear-gradient(135deg,#e0538a 0%,#a35ad8 55%,#6e5ce6 100%);color:#fff;padding:40px 0 32px;position:relative;overflow:hidden}
+.hero .wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 6px;letter-spacing:-.01em}
+.hero p{margin:0;max-width:600px;opacity:.95}
+.hero .deco{flex:0 0 120px;width:120px;height:120px}
+.themebtn{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding:8px 16px;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-2);padding:6px 12px;border-radius:999px;font-size:14px}
+nav.toc a:hover{background:var(--surface-2);color:var(--ink)}
+section{padding:36px 0 8px;scroll-margin-top:52px}
+h2{font-size:26px;margin:0 0 6px}
+h3{font-size:18px;margin:20px 0 8px}
+.lede{color:var(--ink-2);margin:0 0 20px;max-width:780px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+.facts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.fact b{display:block;font-size:26px;line-height:1.15;font-variant-numeric:tabular-nums}
+.fact span{color:var(--ink-2);font-size:14px}
+.levels{display:grid;gap:12px}
+.lvl{display:grid;grid-template-columns:72px 1fr;gap:16px;align-items:center}
+.heart{width:72px;height:72px;position:relative;display:grid;place-items:center}
+.heart svg{position:absolute;inset:0;width:100%;height:100%}
+.heart b{position:relative;color:#fff;font-size:20px;margin-top:-4px}
+.lvl h3{margin:0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.lvl h3 small{font-weight:600;color:var(--accent);font-size:14px;font-variant-numeric:tabular-nums}
+.lvl p{margin:4px 0 0;color:var(--ink-2)}
+.track{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-top:14px;position:relative}
+.track i{position:absolute;top:0;bottom:0;width:2px;background:var(--ink-2);opacity:.5}
+.track .fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:100%}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-2);margin-top:4px;position:relative;height:16px}
+.ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--ink-2);font-size:13px;white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;color:#fff;white-space:nowrap}
+.pill.pool{background:var(--pool)}.pill.solo{background:var(--solo)}.pill.free{background:var(--free)}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 12px;font-size:14px;color:var(--ink-2);align-items:center}
+.note{background:var(--warn-bg);color:var(--warn-ink);border-radius:14px;padding:12px 16px;font-size:15px}
+.tip{background:var(--surface-2);border-radius:14px;padding:12px 16px;font-size:15px}
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:grid;place-items:center}
+.calc{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+.field{display:grid;gap:6px;margin-bottom:12px}
+.field label{font-weight:600;font-size:14px}
+.field input[type=number]{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);width:100%;font-variant-numeric:tabular-nums}
+.field .row{display:flex;gap:8px;flex-wrap:wrap}
+.check{display:flex;gap:8px;align-items:center;font-size:14px}
+.out{display:grid;gap:10px}
+.out div{background:var(--surface-2);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.out b{font-size:20px;font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:5px 12px;cursor:pointer}
+.chips button:hover{border-color:var(--accent)}
+footer{color:var(--ink-2);font-size:13px;padding:30px 0 50px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <button class="themebtn" id="themeBtn" type="button">Toggle theme</button>
+  <div class="wrap">
+    <div style="flex:1 1 420px">
+      <div style="font-size:14px;margin-bottom:10px"><a href="../" style="color:#fff;opacity:.92">← Aniimo Guides</a> · <a href="../friendship/" style="color:#fff;opacity:.92">Friendship</a> · <a href="../outings/" style="color:#fff;opacity:.92">Outings</a> · <a href="../badges/" style="color:#fff;opacity:.92">Badges</a></div>
+      <h1>Aniimo Affinity</h1>
+      <p>Your bond with each individual Aniimo: the <b>4 Affinity levels</b> and what they unlock, every way to earn it, the <b>daily and weekly limits</b>, and how fast you can max one out.</p>
+    </div>
+    <svg class="deco" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 88 C20 66 6 50 6 32 C6 18 17 8 30 8 C39 8 46 13 50 20 C54 13 61 8 70 8 C83 8 94 18 94 32 C94 50 80 66 50 88Z" fill="rgba(255,255,255,.9)"/><path d="M50 74 C31 59 21 49 21 37 C21 29 27 23 34 23 C40 23 45 27 50 34 C55 27 60 23 66 23 C73 23 79 29 79 37 C79 49 69 59 50 74Z" fill="#e0538a"/></svg>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#tldr">Quick facts</a><a href="#levels">Levels</a><a href="#sources">How to earn it</a><a href="#limits">Limits</a><a href="#routine">Daily routine</a><a href="#calc">Calculator</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="tldr">
+  <h2>Quick facts</h2>
+  <p class="lede">Aniimo Affinity is tracked <b>per Aniimo</b>. Every Aniimo you own has its own Affinity and its own daily and weekly limits. It's separate from <a href="../friendship/">Friend Affinity</a> with other players.</p>
+  <div class="card facts">
+    <div class="fact"><b>4 levels</b><span>Max at 1,200 Affinity</span></div>
+    <div class="fact"><b>90 / day</b><span>Most you can earn per Aniimo, plus Resonance bonuses</span></div>
+    <div class="fact"><b>630 / week</b><span>Weekly ceiling per Aniimo</span></div>
+    <div class="fact"><b>14 days</b><span>Fastest time from 0 to max, without Resonance</span></div>
+  </div>
+</section>
+
+<section id="levels">
+  <h2>Affinity levels</h2>
+  <p class="lede">Levels unlock at total Affinity thresholds. The buffs apply to <b>that specific Aniimo</b>.</p>
+  <div class="card">
+    <div class="levels">
+      <div class="lvl"><div class="heart"><svg viewBox="0 0 100 100"><path d="M50 90 C20 68 6 52 6 33 C6 19 17 9 30 9 C39 9 46 14 50 21 C54 14 61 9 70 9 C83 9 94 19 94 33 C94 52 80 68 50 90Z" fill="#c9a6d8"/></svg><b>1</b></div><div><h3>Affinity Lv. 1 <small>0 Affinity</small></h3><p>Starting level: "Become allies with Aniimo!"</p></div></div>
+      <div class="lvl"><div class="heart"><svg viewBox="0 0 100 100"><path d="M50 90 C20 68 6 52 6 33 C6 19 17 9 30 9 C39 9 46 14 50 21 C54 14 61 9 70 9 C83 9 94 19 94 33 C94 52 80 68 50 90Z" fill="#e88ab5"/></svg><b>2</b></div><div><h3>Affinity Lv. 2 <small>100 Affinity</small></h3><p>Unlocks <b>renaming</b> this Aniimo.</p></div></div>
+      <div class="lvl"><div class="heart"><svg viewBox="0 0 100 100"><path d="M50 90 C20 68 6 52 6 33 C6 19 17 9 30 9 C39 9 46 14 50 21 C54 14 61 9 70 9 C83 9 94 19 94 33 C94 52 80 68 50 90Z" fill="#e0538a"/></svg><b>3</b></div><div><h3>Affinity Lv. 3 <small>500 Affinity</small></h3><p>Your character's <b>healing skill restores 25% more HP</b> to this Aniimo.</p></div></div>
+      <div class="lvl"><div class="heart"><svg viewBox="0 0 100 100"><path d="M50 90 C20 68 6 52 6 33 C6 19 17 9 30 9 C39 9 46 14 50 21 C54 14 61 9 70 9 C83 9 94 19 94 33 C94 52 80 68 50 90Z" fill="#a33a6f"/></svg><b>4</b></div><div><h3>Affinity Lv. 4 · MAX <small>1,200 Affinity</small></h3><p>Your character's <b>Swoleshroom</b> gives this Aniimo <b>25% more Damage Amp</b>.</p></div></div>
+    </div>
+    <div class="track"><div class="fill"></div><i style="left:8.33%"></i><i style="left:41.67%"></i></div>
+    <div class="ticks"><span style="left:0;transform:none">0</span><span style="left:8.33%">100</span><span style="left:41.67%">500</span><span style="right:0;left:auto;transform:none">1,200</span></div>
+  </div>
+</section>
+
+<section id="sources">
+  <h2>How to earn Affinity</h2>
+  <p class="lede">Each source gives Affinity to the Aniimo involved. Most share one daily pool, but petting and Resonance are separate.</p>
+  <div class="legend"><span><span class="pill solo">Own limit</span> its own cap</span><span><span class="pill pool">Shared pool</span> counts toward the 60/day shared cap</span><span><span class="pill free">No limit</span> uncapped</span></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Source</th><th class="num">Affinity</th><th class="num">Own daily cap</th><th class="num">Own weekly cap</th><th>Limit type</th></tr></thead>
+    <tbody>
+      <tr><td><b>Pet</b> it in your Home</td><td class="num">30 per pet</td><td class="num">30</td><td class="num">210</td><td><span class="pill solo">Own limit</span></td></tr>
+      <tr><td><b>Aniimo in Home</b> (just being there)</td><td class="num">0.005 / sec<br><small style="color:var(--ink-2)">18 per hour</small></td><td class="num">20<br><small style="color:var(--ink-2)">≈ 67 min</small></td><td class="num">140</td><td><span class="pill pool">Shared pool</span></td></tr>
+      <tr><td><b>Aniimo in Party</b> (in your active party)</td><td class="num">0.005 / sec<br><small style="color:var(--ink-2)">18 per hour</small></td><td class="num">10<br><small style="color:var(--ink-2)">≈ 33 min</small></td><td class="num">70</td><td><span class="pill pool">Shared pool</span></td></tr>
+      <tr><td><b>Defeat Alphas</b></td><td class="num">10 each</td><td class="num">–</td><td class="num">–</td><td><span class="pill pool">Shared pool</span></td></tr>
+      <tr><td><b>Pathfinder Challenge</b></td><td class="num">10 each</td><td class="num">–</td><td class="num">–</td><td><span class="pill pool">Shared pool</span></td></tr>
+      <tr><td><b>Operation: Egg Heist</b></td><td class="num">5 each</td><td class="num">–</td><td class="num">–</td><td><span class="pill pool">Shared pool</span></td></tr>
+      <tr><td><b>Defeat Aniimo</b> (any wild Aniimo)</td><td class="num">1 each</td><td class="num">–</td><td class="num">–</td><td><span class="pill pool">Shared pool</span></td></tr>
+      <tr><td><b>Resonance Star-Up</b></td><td class="num">10 each</td><td class="num">–</td><td class="num">–</td><td><span class="pill free">No limit</span></td></tr>
+      <tr><td><b>Resonance &amp; Ascension</b></td><td class="num">20 each</td><td class="num">–</td><td class="num">–</td><td><span class="pill free">No limit</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="limits">
+  <h2>The limits, explained</h2>
+  <div class="card">
+    <ul style="margin:0;padding-left:20px;display:grid;gap:8px">
+      <li><b>Shared pool: 60 per day, 420 per week (per Aniimo).</b> Home time, Party time, Alphas, Pathfinder Challenges, Egg Heist and defeating Aniimo all add up toward this one cap. Home and Party also have their own smaller caps inside it (20 and 10 per day).</li>
+      <li><b>Petting is separate:</b> 30 per pet, at most 30 per day (once a day) and 210 per week. It doesn't touch the shared pool.</li>
+      <li><b>Resonance has no cap.</b> Each Resonance Star-Up gives +10 and each Resonance &amp; Ascension gives +20, on top of everything else.</li>
+      <li><b>So the daily maximum is 90</b> (30 from petting + 60 from the shared pool), plus any Resonance bonuses. The weekly caps (210 + 420 = 630) are exactly 7 days of that, so playing every day never hits a weekly wall early.</li>
+    </ul>
+  </div>
+  <div class="tip" style="margin-top:12px"><b>What each level takes at the max rate (90/day):</b> Lv. 2 on day <b>2</b>, Lv. 3 on day <b>6</b>, and Lv. 4 (max) on day <b>14</b>. Resonance bonuses shave days off.</div>
+  <div class="note" style="margin-top:12px">The game shows "…Affinity gained today/this week through [source] has reached the limit" when you hit a cap. If you only use some sources, you'll fill the pool more slowly. For example, Home and Party time alone give at most 30/day toward the 60 pool.</div>
+</section>
+
+<section id="routine">
+  <h2>Fastest daily routine (per Aniimo)</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><div><b>Pet it in your Home once</b>: +30 (fills its petting cap for the day).</div></li>
+      <li><div><b>Leave it in your Home about 67 minutes</b> (+20) <b>or keep it in your party about 33 minutes</b> (+10). Doing both gives +30 toward the pool.</div></li>
+      <li><div><b>Fill the rest of the 60 pool with combat</b>: Alphas and Pathfinder Challenges give 10 each, Egg Heist 5, and wild Aniimo 1 each.</div></li>
+      <li><div><b>Resonance bonuses</b> (+10 / +20) are a free extra if you're upgrading that Aniimo anyway.</div></li>
+    </ol>
+  </div>
+  <div class="tip" style="margin-top:12px"><b>Several Aniimo at once:</b> because limits are per Aniimo, everyone in your Home earns Home time at the same time, and everyone in your party earns Party time and combat Affinity. Rotating Aniimo through your party and Home levels many in parallel.</div>
+</section>
+
+<section id="calc">
+  <h2>Calculator</h2>
+  <p class="lede">How long until an Aniimo reaches the next level and max, based on how much you earn each day.</p>
+  <div class="card calc">
+    <div>
+      <div class="field"><label for="cur">Current Affinity</label><input type="number" id="cur" min="0" max="1200" value="0"></div>
+      <div class="field"><label>What you'll do each day</label>
+        <label class="check"><input type="checkbox" id="pet" checked> Pet once (+30)</label>
+        <label class="check"><input type="checkbox" id="home" checked> Home time (+20)</label>
+        <label class="check"><input type="checkbox" id="party" checked> Party time (+10)</label>
+      </div>
+      <div class="field"><label for="combat">Combat Affinity per day (Alphas, challenges, Egg Heist, wild Aniimo)</label><input type="number" id="combat" min="0" max="60" value="30"></div>
+      <div class="chips"><button type="button" data-p="max">Max (90/day)</button><button type="button" data-p="passive">Pet + idle only</button><button type="button" data-p="pet">Pet only</button></div>
+    </div>
+    <div class="out">
+      <div><span>Earned per day</span><b id="oDay">90</b></div>
+      <div><span>Current level</span><b id="oLvl">Lv. 1</b></div>
+      <div><span>Days to next level</span><b id="oNext">2</b></div>
+      <div><span>Days to max (1,200)</span><b id="oMax">14</b></div>
+      <small style="color:var(--ink-2)">The shared pool caps Home + Party + combat at 60/day. Resonance bonuses aren't included.</small>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="wrap">Fan-made reference compiled from game files (Nov 12, 2026 update). Aniimo and its assets belong to their respective owners.</footer>
+
+<script>
+const LV=[0,100,500,1200];
+const $=id=>document.getElementById(id);
+function calc(){
+  const cur=Math.max(0,Math.min(1200,+$("cur").value||0));
+  const pool=Math.min(60,($("home").checked?20:0)+($("party").checked?10:0)+Math.max(0,Math.min(60,+$("combat").value||0)));
+  const day=($("pet").checked?30:0)+pool;
+  $("oDay").textContent=day;
+  let lvl=1;for(let i=0;i<LV.length;i++)if(cur>=LV[i])lvl=i+1;
+  $("oLvl").textContent=lvl>=4?"Lv. 4 (MAX)":"Lv. "+lvl;
+  const days=t=>t<=cur?0:(day?Math.ceil((t-cur)/day):"–");
+  $("oNext").textContent=lvl>=4?"–":days(LV[lvl]);
+  $("oMax").textContent=days(1200);
+}
+["cur","pet","home","party","combat"].forEach(id=>$(id).addEventListener("input",calc));
+document.querySelectorAll(".chips button").forEach(b=>b.addEventListener("click",()=>{
+  const p=b.dataset.p;$("pet").checked=true;
+  if(p==="max"){$("home").checked=true;$("party").checked=true;$("combat").value=30;}
+  if(p==="passive"){$("home").checked=true;$("party").checked=true;$("combat").value=0;}
+  if(p==="pet"){$("home").checked=false;$("party").checked=false;$("combat").value=0;}
+  calc();
+}));
+calc();
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme=dark?"light":"dark";try{localStorage.setItem("fg-theme",r.dataset.theme)}catch(e){}
+});
+try{const t=localStorage.getItem("fg-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}
+</script>
+</body>
+</html>
