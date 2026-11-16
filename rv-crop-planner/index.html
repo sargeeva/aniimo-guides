@@ -153,6 +153,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
     <select id="sort" aria-label="Sort order">
       <option value="profit">Net profit per hour</option>
       <option value="energy">Energy per hour (food)</option>
+      <option value="bowl">Longest-lasting full bowls (food)</option>
       <option value="price">Sell price</option>
       <option value="rv">RV level needed</option>
       <option value="name">Name A–Z</option>
@@ -165,7 +166,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
   <div class="tip">
     <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup.</div>
     <div><b>Profit per hour</b> = items made per hour × Home Store base price. <b>Net profit per hour</b> is that minus the seeds you buy. The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
-    <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking it in the sort menu shows only foods, best first. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
+    <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking it in the sort menu shows only foods, best first. <b>Longest-lasting full bowls</b> sorts foods by how long all 3 full bowls of that food keep your Aniimo fed. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
     <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (60–105 workload per minute). Crops with a temperature need are assumed to be in the right climate. Quick Formulas and powered mode aren't used.</div>
     <div><b>Limited-time recipes:</b> season and collab recipes show an end date and drop off this page by themselves once it passes, using the end time in the game data (the Halloween season and Captain Spud collab recipes end Dec 9, 2026 at 23:59 UTC). The Harvest Moon Festival recipes (Moondew Radish, Waxing Moon Pepper and the Umbral dishes) are already gone.</div>
     <div><b>RV level</b> is the highest requirement anywhere in the chain: the facility levels ("Reach RV Level X") and, for premium recipes, the RV module level that unlocks them. Placement limits per RV level come from the game data (e.g. Farmland 4 at RV 1 up to 42 at RV 22).</div>
@@ -283,20 +284,20 @@ function render(){
   const q = state.q.trim().toLowerCase();
   let rows = DATA.sell.map(String).filter(id => !expired(id)).map(id => I[id]).filter(e => state.kind==="all" || (state.kind==="plant" ? isRaw(e) : !isRaw(e)));
   const pool = rows;
-  const foodMode = state.sort === "energy";
+  const foodMode = state.sort === "energy" || state.sort === "bowl", bowlMode = state.sort === "bowl";
   if (foodMode) rows = rows.filter(e => e.energy);
   if (!state.showLocked) rows = rows.filter(canMake);
   if (q) rows = rows.filter(e => e.name.toLowerCase().includes(q) || [...perUnit(e.id).keys()].some(r => I[r].name.toLowerCase().includes(q)));
   const P = new Map(rows.map(e => [e.id, plan(e.id, state.rv, wpm())]));
   const pr = e => P.get(e.id).ok ? P.get(e.id).profit : -1;
   const en = e => P.get(e.id).ok && e.energy ? P.get(e.id).perHour*e.energy : -1;
-  const cmp = {profit:(a,b)=>pr(b)-pr(a), energy:(a,b)=>en(b)-en(a), price:(a,b)=>b.price-a.price, rv:(a,b)=>(a.rv-b.rv)||(pr(b)-pr(a)), name:(a,b)=>a.name.localeCompare(b.name)}[state.sort];
+  const cmp = {profit:(a,b)=>pr(b)-pr(a), energy:(a,b)=>en(b)-en(a), bowl:(a,b)=>(b.energy-a.energy)||(en(b)-en(a)), price:(a,b)=>b.price-a.price, rv:(a,b)=>(a.rv-b.rv)||(pr(b)-pr(a)), name:(a,b)=>a.name.localeCompare(b.name)}[state.sort];
   rows.sort(cmp);
   const pool2 = foodMode ? pool.filter(e => e.energy) : pool;
   $("#tally").innerHTML = `<b>${pool2.filter(canMake).length}</b> of ${pool2.length} ${foodMode?"foods ":""}available at RV ${state.rv}`;
   $("#list").innerHTML = rows.length ? rows.map(e => {
     const ok = canMake(e), open = state.open.has(String(e.id)), p = P.get(e.id);
-    return `<div class="row${ok?"":" locked"}"><button class="sum" aria-expanded="${open}" data-toggle="${e.id}">${icon(e.id)}<div class="nm">${esc(e.name)}<div class="meta">${isFinite(chainEnd(e.id))?`<span class="ends">Limited time · ends ${new Date(chainEnd(e.id)*1000).toLocaleDateString(undefined,{month:"short",day:"numeric"})}</span> · `:""}${esc(e.fac)} Lv ${e.facLv} · sells for ${fmt(e.price)}${e.energy?` · ${fmt(e.energy)} energy each`:""}${p.ok?` · ${fmt1(p.perHour)} per hour`:""}</div></div><div class="right">${!p.ok?`<span class="note">Not enough space</span>`:foodMode?`<span class="energy">${fmt(p.perHour*e.energy)}<small>energy/h</small></span><span class="note">${fmt(p.profit)} net/h · full bowls last ${bowlLasts(e, petsAt(state.rv))}</span>`:`<span class="profit">${coin(fmt(p.profit))}<small>net/h</small></span>${e.energy?`<span class="note">${fmt(p.perHour*e.energy)} energy/h</span>`:""}`}<span class="badge ${ok?"ok":"no"}">${ok?`RV ${e.rv}`:`Locked · needs RV ${e.rv}`}</span></div><div class="plants">${p.ok?setupChips(p):""}</div></button>${open?`<div class="detail">${detail(e)}</div>`:""}</div>`;
+    return `<div class="row${ok?"":" locked"}"><button class="sum" aria-expanded="${open}" data-toggle="${e.id}">${icon(e.id)}<div class="nm">${esc(e.name)}<div class="meta">${isFinite(chainEnd(e.id))?`<span class="ends">Limited time · ends ${new Date(chainEnd(e.id)*1000).toLocaleDateString(undefined,{month:"short",day:"numeric"})}</span> · `:""}${esc(e.fac)} Lv ${e.facLv} · sells for ${fmt(e.price)}${e.energy?` · ${fmt(e.energy)} energy each`:""}${p.ok?` · ${fmt1(p.perHour)} per hour`:""}</div></div><div class="right">${!p.ok?`<span class="note">Not enough space</span>`:bowlMode?`<span class="energy">${bowlLasts(e, petsAt(state.rv))}<small>full bowls</small></span><span class="note">${fmt(e.energy)} energy each · ${fmt(p.perHour*e.energy)} energy/h</span>`:foodMode?`<span class="energy">${fmt(p.perHour*e.energy)}<small>energy/h</small></span><span class="note">${fmt(p.profit)} net/h · full bowls last ${bowlLasts(e, petsAt(state.rv))}</span>`:`<span class="profit">${coin(fmt(p.profit))}<small>net/h</small></span>${e.energy?`<span class="note">${fmt(p.perHour*e.energy)} energy/h</span>`:""}`}<span class="badge ${ok?"ok":"no"}">${ok?`RV ${e.rv}`:`Locked · needs RV ${e.rv}`}</span></div><div class="plants">${p.ok?setupChips(p):""}</div></button>${open?`<div class="detail">${detail(e)}</div>`:""}</div>`;
   }).join("") : `<div class="empty">Nothing you can make matches at RV ${state.rv}. Clear the search, raise your RV level or turn on “Show locked too”.</div>`;
 }
 
