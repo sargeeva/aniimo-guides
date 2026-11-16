@@ -141,28 +141,28 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
   </div>
   <div class="filters">
     <input class="search" id="q" type="search" placeholder="Search a product, crop or tree">
-    <select id="work" aria-label="Aniimo work level">
-      <option value="1">Aniimo work Lv 1 (60/min)</option>
-      <option value="2">Aniimo work Lv 2 (75/min)</option>
-      <option value="3">Aniimo work Lv 3 (90/min)</option>
-      <option value="4">Aniimo work Lv 4 (105/min)</option>
+    <select id="work" aria-label="Aniimo work level" title="Aniimo Home work level: Lv 1 = 60, Lv 2 = 75, Lv 3 = 90, Lv 4 = 105 workload per minute">
+      <option value="1">Work Lv 1</option>
+      <option value="2">Work Lv 2</option>
+      <option value="3">Work Lv 3</option>
+      <option value="4">Work Lv 4</option>
     </select>
-    <label class="res" for="resPlots">Reserved plots <select id="resPlots" aria-label="Farmland plots reserved for other things"><option value="0">0 reserved</option></select></label>
-    <label class="res" for="resTrees">Reserved trees <select id="resTrees" aria-label="Woodland trees reserved for other things"><option value="0">0 reserved</option></select></label>
+    <label class="res" for="resPlots">Plots kept free <select id="resPlots" aria-label="Farmland plots reserved for other things"><option value="0">0 reserved</option></select></label>
+    <label class="res" for="resTrees">Trees kept free <select id="resTrees" aria-label="Woodland trees reserved for other things"><option value="0">0 reserved</option></select></label>
     <button class="chip" id="fLock" type="button" aria-pressed="false">Show locked too</button>
     <select id="kind" aria-label="Product type">
-      <option value="craft">Crafted goods</option>
-      <option value="all">Crafted + raw crops</option>
-      <option value="plant">Raw crops only</option>
+      <option value="craft">Crafted</option>
+      <option value="all">All items</option>
+      <option value="plant">Raw crops</option>
     </select>
     <select id="sort" aria-label="Sort order">
-      <option value="profit">Net profit per hour</option>
-      <option value="plot">Net profit per plot per hour</option>
-      <option value="energy">Energy per hour (food)</option>
-      <option value="bowl">Longest-lasting full bowls (food)</option>
-      <option value="price">Sell price</option>
-      <option value="rv">RV level needed</option>
-      <option value="name">Name A–Z</option>
+      <option value="profit">Sort: Net profit</option>
+      <option value="plot">Sort: Profit per plot</option>
+      <option value="energy">Sort: Energy</option>
+      <option value="bowl">Sort: Bowl time</option>
+      <option value="price">Sort: Sell price</option>
+      <option value="rv">Sort: RV level</option>
+      <option value="name">Sort: Name</option>
     </select>
   </div>
 </div></div>
@@ -170,10 +170,10 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
 <main class="wrap">
   <div class="list" id="list"></div>
   <div class="tip">
-    <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup. Use <b>Reserved plots</b> and <b>Reserved trees</b> to keep Farmland and Woodland free for other things; every setup and profit figure then uses only what's left.</div>
-    <div><b>Profit per hour</b> = items made per hour × Home Store base price. <b>Net profit per hour</b> is that minus the seeds you buy. <b>Net profit per plot per hour</b> divides it by the Farmland plots and Woodland trees the setup uses, so you can see which item makes the most from each bit of farm space (wells, mines and stations aren't counted as plots). The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
-    <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking it in the sort menu shows only foods, best first. <b>Longest-lasting full bowls</b> sorts foods by how long all 3 full bowls of that food keep your Aniimo fed. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
-    <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (60–105 workload per minute). Crops with a temperature need are assumed to be in the right climate. Quick Formulas and powered mode aren't used.</div>
+    <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup. Use <b>Plots kept free</b> and <b>Trees kept free</b> to keep Farmland and Woodland free for other things; every setup and profit figure then uses only what's left.</div>
+    <div><b>Profit per hour</b> = items made per hour × Home Store base price. <b>Net profit per hour</b> is that minus the seeds you buy. <b>Profit per plot</b> (net profit per plot per hour) divides it by the Farmland plots and Woodland trees the setup uses, so you can see which item makes the most from each bit of farm space (wells, mines and stations aren't counted as plots). The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
+    <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking <b>Energy</b> in the sort menu shows only foods, best first. <b>Bowl time</b> sorts foods by how long all 3 full bowls of that food keep your Aniimo fed. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
+    <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (Work Lv 1–4: 60, 75, 90 or 105 workload per minute). Crops with a temperature need are assumed to be in the right climate. Quick Formulas and powered mode aren't used.</div>
     <div><b>Limited-time recipes:</b> season and collab recipes show an end date and drop off this page by themselves once it passes, using the end time in the game data (the Halloween season and Captain Spud collab recipes end Dec 9, 2026 at 23:59 UTC). The Harvest Moon Festival recipes (Moondew Radish, Waxing Moon Pepper and the Umbral dishes) are already gone.</div>
     <div><b>RV level</b> is the highest requirement anywhere in the chain: the facility levels ("Reach RV Level X") and, for premium recipes, the RV module level that unlocks them. Placement limits per RV level come from the game data (e.g. Farmland 4 at RV 1 up to 42 at RV 22).</div>
   </div>
@@ -318,7 +318,7 @@ function render(){
   $("#tally").innerHTML = `<b>${pool2.filter(canMake).length}</b> of ${pool2.length} ${foodMode?"foods ":""}available at RV ${state.rv}`;
   $("#list").innerHTML = rows.length ? rows.map(e => {
     const ok = canMake(e), open = state.open.has(String(e.id)), p = P.get(e.id);
-    return `<div class="row${ok?"":" locked"}"><button class="sum" aria-expanded="${open}" data-toggle="${e.id}">${icon(e.id)}<div class="nm">${esc(e.name)}<div class="meta">${isFinite(chainEnd(e.id))?`<span class="ends">Limited time · ends ${new Date(chainEnd(e.id)*1000).toLocaleDateString(undefined,{month:"short",day:"numeric"})}</span> · `:""}${esc(e.fac)} Lv ${e.facLv} · sells for ${fmt(e.price)}${e.energy?` · ${fmt(e.energy)} energy each`:""}${p.ok?` · ${fmt1(p.perHour)} per hour`:""}</div></div><div class="right">${!p.ok?`<span class="note">Not enough space</span>`:bowlMode?`<span class="energy">${bowlLasts(e, petsAt(state.rv))}<small>full bowls</small></span><span class="note">${fmt(p.perHour*e.energy)} energy/h</span><span class="netline">${coin(fmt(p.profit))}<small>net/h</small></span>`:foodMode?`<span class="energy">${fmt(p.perHour*e.energy)}<small>energy/h</small></span><span class="note">Full bowls last ${bowlLasts(e, petsAt(state.rv))}</span><span class="netline">${coin(fmt(p.profit))}<small>net/h</small></span>`:plotMode?`<span class="profit">${coin(fmt(p.perPlot))}<small>per plot/h</small></span><span class="note">${fmt(p.profit)} net/h · ${p.plots} ${p.plots===1?"plot":"plots"} &amp; trees</span>`:`<span class="profit">${coin(fmt(p.profit))}<small>net/h</small></span>${e.energy?`<span class="note">${fmt(p.perHour*e.energy)} energy/h</span>`:""}`}<span class="badge ${ok?"ok":"no"}">${ok?`RV ${e.rv}`:`Locked · needs RV ${e.rv}`}</span></div><div class="plants">${p.ok?setupChips(p):""}</div></button>${open?`<div class="detail">${detail(e)}</div>`:""}</div>`;
+    return `<div class="row${ok?"":" locked"}"><button class="sum" aria-expanded="${open}" data-toggle="${e.id}">${icon(e.id)}<div class="nm">${esc(e.name)}<div class="meta">${isFinite(chainEnd(e.id))?`<span class="ends">Limited time · ends ${new Date(chainEnd(e.id)*1000).toLocaleDateString(undefined,{month:"short",day:"numeric"})}</span> · `:""}${esc(e.fac)} Lv ${e.facLv} · sells for ${fmt(e.price)}${e.energy?` · ${fmt(e.energy)} energy each`:""}${p.ok?` · ${fmt1(p.perHour)} per hour`:""}</div></div><div class="right">${!p.ok?`<span class="note">Not enough space</span>`:bowlMode?`<span class="energy">${bowlLasts(e, petsAt(state.rv))}<small>full bowls</small></span><span class="note">${fmt(p.perHour*e.energy)} energy/h</span><span class="netline">${coin(fmt(p.profit))}<small>net/h</small></span>`:foodMode?`<span class="energy">${fmt(p.perHour*e.energy)}<small>energy/h</small></span><span class="note">Full bowls last ${bowlLasts(e, petsAt(state.rv))}</span><span class="netline">${coin(fmt(p.profit))}<small>net/h</small></span>`:plotMode?`<span class="profit">${coin(fmt(p.perPlot))}<small>per plot/h</small></span><span class="netline">${coin(fmt(p.profit))}<small>net/h</small></span><span class="note">${p.plots} ${p.plots===1?"plot":"plots"} used</span>`:`<span class="profit">${coin(fmt(p.profit))}<small>net/h</small></span>${e.energy?`<span class="note">${fmt(p.perHour*e.energy)} energy/h</span>`:""}`}<span class="badge ${ok?"ok":"no"}">${ok?`RV ${e.rv}`:`Locked · needs RV ${e.rv}`}</span></div><div class="plants">${p.ok?setupChips(p):""}</div></button>${open?`<div class="detail">${detail(e)}</div>`:""}</div>`;
   }).join("") : `<div class="empty">Nothing you can make matches at RV ${state.rv}. Clear the search, raise your RV level or turn on “Show locked too”.</div>`;
 }
 
