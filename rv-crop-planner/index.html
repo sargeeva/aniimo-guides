@@ -105,6 +105,7 @@ td.n,th.n{text-align:right}
 .fact.food b{color:var(--water)}
 .bowl{background:var(--water-bg);border-radius:14px;padding:10px 14px;font-size:14px}
 .bowl b{color:var(--water)}
+.res{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--ink-2)}
 .netline{font-weight:700;font-size:14px;color:var(--leaf);display:inline-flex;align-items:center;gap:2px}
 .netline small{font-size:12px;color:var(--ink-2);font-weight:600;margin-left:2px}
 .ends{color:var(--bad);font-weight:700}
@@ -146,6 +147,8 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
       <option value="3">Aniimo work Lv 3 (90/min)</option>
       <option value="4">Aniimo work Lv 4 (105/min)</option>
     </select>
+    <label class="res" for="resPlots">Reserved plots <select id="resPlots" aria-label="Farmland plots reserved for other things"><option value="0">0 reserved</option></select></label>
+    <label class="res" for="resTrees">Reserved trees <select id="resTrees" aria-label="Woodland trees reserved for other things"><option value="0">0 reserved</option></select></label>
     <button class="chip" id="fLock" type="button" aria-pressed="false">Show locked too</button>
     <select id="kind" aria-label="Product type">
       <option value="craft">Crafted goods</option>
@@ -166,7 +169,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
 <main class="wrap">
   <div class="list" id="list"></div>
   <div class="tip">
-    <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup.</div>
+    <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup. Use <b>Reserved plots</b> and <b>Reserved trees</b> to keep Farmland and Woodland free for other things; every setup and profit figure then uses only what's left.</div>
     <div><b>Profit per hour</b> = items made per hour × Home Store base price. <b>Net profit per hour</b> is that minus the seeds you buy. The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
     <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking it in the sort menu shows only foods, best first. <b>Longest-lasting full bowls</b> sorts foods by how long all 3 full bowls of that food keep your Aniimo fed. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
     <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (60–105 workload per minute). Crops with a temperature need are assumed to be in the right climate. Quick Formulas and powered mode aren't used.</div>
@@ -199,9 +202,17 @@ const icon = (id, sm) => { const src = ICONS[id]; const n = I[id] ? I[id].name :
 const coin = n => `<span class="price">${COIN?`<img src="${COIN}" alt="Home Coins">`:""}${n}</span>`;
 const unitName = (e, n) => { const f = e.fac; const w = f==="Farmland" ? "plot" : f==="Woodland" ? "tree" : f.toLowerCase(); return `${n} ${w}${n===1||/s$/.test(w)?"":"s"}`; };
 
-let state = { rv:12, work:1, showLocked:false, kind:"craft", sort:"profit", q:"", open:new Set(), rate:{} };
-try { const s = JSON.parse(localStorage.getItem("rvplanner2")||"{}"); for (const k of ["rv","work","kind","sort"]) if (s[k]) state[k] = s[k]; } catch(e){}
-const save = () => { try { localStorage.setItem("rvplanner2", JSON.stringify({rv:state.rv,work:state.work,kind:state.kind,sort:state.sort})); } catch(e){} };
+let state = { rv:12, work:1, resPlots:0, resTrees:0, showLocked:false, kind:"craft", sort:"profit", q:"", open:new Set(), rate:{} };
+try { const s = JSON.parse(localStorage.getItem("rvplanner2")||"{}"); for (const k of ["rv","work","resPlots","resTrees","kind","sort"]) if (s[k]) state[k] = s[k]; } catch(e){}
+const save = () => { try { localStorage.setItem("rvplanner2", JSON.stringify({rv:state.rv,work:state.work,resPlots:state.resPlots,resTrees:state.resTrees,kind:state.kind,sort:state.sort})); } catch(e){} };
+// Plots and trees set aside for other things come off the space each setup can use
+const RESERVE = { Farmland: () => state.resPlots, Woodland: () => state.resTrees };
+const placeLimit = (fac, rv) => Math.max(0, ((LIM[fac]||[])[rv-1] ?? 0) - (RESERVE[fac] ? RESERVE[fac]() : 0));
+function fillReserve(id, fac, val){
+  const max = (LIM[fac]||[])[state.rv-1] ?? 0, sel = $(id), v = Math.min(val, max);
+  sel.innerHTML = Array.from({length:max+1}, (_,n) => `<option value="${n}">${n} reserved</option>`).join("");
+  sel.value = v; return v;
+}
 
 // Units of each item needed per 1 finished product (exact, no rounding: steady-state rates)
 function perUnit(id){
@@ -228,7 +239,7 @@ function plan(id, rv, wpm, fixedRate){
     if (e.kind === "plant" && e.seed){ if (e.seedCost) seedPer += runs*e.seedCost; else unknownSeed = true; }
   }
   const pools = {};
-  for (const x of nodes){ (pools[x.e.fac] ||= {nodes:[], lim:(LIM[x.e.fac]||[])[rv-1] ?? 0}).nodes.push(x); }
+  for (const x of nodes){ (pools[x.e.fac] ||= {nodes:[], lim:placeLimit(x.e.fac, rv)}).nodes.push(x); }
   const need = (R, p) => p.nodes.reduce((s,x) => s + (x.whole ? Math.ceil(R*x.u - 1e-9) : R*x.u), 0);
   const fits = R => Object.values(pools).every(p => need(R,p) <= p.lim + 1e-9);
   let R;
@@ -274,7 +285,7 @@ function detail(e){
     plants.map(x => { const per = x.e.out*3600/x.secs, made = x.count*per, needed = p.perHour*x.n; return `<tr><td><span class="cell">${icon(x.e.id,1)}<span>${esc(x.e.name)}${x.e.period?` <span class="note">(${x.e.period===2?'collab recipe':'season recipe'}${PEND[x.e.period]?`, ends ${endDate(x.e.period)}`:''})</span>`:''}${x.e.gate?` <span class="note">(${esc(x.e.gate)})</span>`:''}${x.e.seed?`<div class="note">${esc(x.e.seed)}${x.e.seedCost?` · ${x.e.seedCost} each`:""}</div>`:""}${x.e.by&&x.e.by.length?`<div class="note">Also gives ${x.e.by.map(([n,k])=>`${esc(n)} ×${k}`).join(", ")}</div>`:""}</span></span></td><td class="n big">${unitName(x.e, x.count)}</td><td class="n">${x.e.out}</td><td class="n">${fmt1(needed)}</td><td class="n">${fmt1(made)}</td><td>${esc(x.e.fac)} Lv ${x.e.facLv}</td><td class="n">${dur(x.secs)}${x.e.time?"":` <span class="note">work</span>`}</td><td>${lockT(x)}</td></tr>`; }).join("") + `</tbody></table></div></div>`;
   if (stations.length) h += `<div><h3>Crafting stations</h3><div class="tbl"><table><thead><tr><th>Step</th><th>Station</th><th class="n">Runs / h</th><th class="n">Time per run</th><th class="n">Station time used</th><th>Unlock</th></tr></thead><tbody>` +
     stations.map(x => `<tr><td><span class="cell">${icon(x.e.id,1)}${esc(x.e.name)}</span></td><td>${esc(x.e.fac)} Lv ${x.e.facLv}</td><td class="n">${fmt1(p.perHour*x.runs)}</td><td class="n">${dur(x.secs)}</td><td class="n big">${Math.round(x.count*100)}%</td><td>${lockT(x)}</td></tr>`).join("") + `</tbody></table></div><div class="note">100% means one station kept busy nonstop. Stations of the same type share their time between steps.</div></div>`;
-  h += `<div><h3>Space used at RV ${state.rv}</h3><div class="plants" style="grid-column:auto">` + Object.entries(p.pools).map(([f,pl]) => `<span class="pchip${pl.used>pl.lim+1e-9?" miss":""}">${esc(f)} <b>${fmt1(pl.used)}</b> / ${pl.lim}</span>`).join("") + `</div></div>`;
+  h += `<div><h3>Space used at RV ${state.rv}</h3><div class="plants" style="grid-column:auto">` + Object.entries(p.pools).map(([f,pl]) => `<span class="pchip${pl.used>pl.lim+1e-9?" miss":""}">${esc(f)} <b>${fmt1(pl.used)}</b> / ${pl.lim}${RESERVE[f] && RESERVE[f]() ? ` <span class="note">(+${RESERVE[f]()} reserved)</span>` : ""}</span>`).join("") + `</div></div>`;
   if (p.outside.length) h += `<div><h3>Bring from outside</h3><div class="plants" style="grid-column:auto">` + p.outside.map(o => `<span class="pchip">${icon(o.e.id,1)}${esc(o.e.name)} ×${fmt1(o.n*p.perHour)} / h</span>`).join("") + `</div><div class="note">Not grown in your Home: gather these in the world or get them from events. Their cost isn't in the profit.</div></div>`;
   const one = [...p.q].filter(([i]) => I[i].kind !== "craft" && i !== String(e.id));
   if (one.length) h += `<div class="note"><b>For one ${esc(e.name)}:</b> ${one.map(([i,n]) => `${esc(I[i].name)} ×${fmt1(n)}`).join(" · ")}</div>`;
@@ -283,6 +294,8 @@ function detail(e){
 
 function render(){
   $("#rvOut").textContent = state.rv; $("#rv").value = state.rv; $("#work").value = state.work;
+  state.resPlots = fillReserve("#resPlots", "Farmland", state.resPlots);
+  state.resTrees = fillReserve("#resTrees", "Woodland", state.resTrees);
   const q = state.q.trim().toLowerCase();
   let rows = DATA.sell.map(String).filter(id => !expired(id)).map(id => I[id]).filter(e => state.kind==="all" || (state.kind==="plant" ? isRaw(e) : !isRaw(e)));
   const pool = rows;
@@ -307,6 +320,8 @@ $("#rv").addEventListener("input", e => { state.rv = +e.target.value; save(); re
 $("#rvMinus").addEventListener("click", () => { state.rv = Math.max(1, state.rv-1); save(); render(); });
 $("#rvPlus").addEventListener("click", () => { state.rv = Math.min(22, state.rv+1); save(); render(); });
 $("#work").addEventListener("change", e => { state.work = +e.target.value; save(); render(); });
+$("#resPlots").addEventListener("change", e => { state.resPlots = +e.target.value; save(); render(); });
+$("#resTrees").addEventListener("change", e => { state.resTrees = +e.target.value; save(); render(); });
 $("#q").addEventListener("input", e => { state.q = e.target.value; render(); });
 $("#kind").addEventListener("change", e => { state.kind = e.target.value; save(); render(); });
 $("#sort").addEventListener("change", e => { state.sort = e.target.value; save(); render(); });
