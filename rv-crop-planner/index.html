@@ -115,7 +115,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
     <div style="flex:1 1 420px">
       <div style="font-size:14px;margin-bottom:10px"><a href="../" style="color:#fff;opacity:.92">← Aniimo Guides</a> · <a href="../nighttime-gathering/" style="color:#fff;opacity:.92">Nighttime Gathering</a> · <a href="../outings/" style="color:#fff;opacity:.92">Outings</a></div>
       <h1>RV Crop Planner</h1>
-      <p>The best <b>nonstop farm setup</b> for every Home Store item that needs crops or trees: how many plots, trees and wells of each ingredient keep it running with nothing left waiting, and the <b>profit per hour</b> it earns at your RV level.</p>
+      <p>The best <b>nonstop farm setup</b> for every Home Store item that needs crops or trees: how many plots, trees and wells of each ingredient keep it running with nothing left waiting, and the <b>net profit per hour</b> it earns at your RV level.</p>
     </div>
     <img class="deco" src="assets/ui_item_4001005.webp" alt="">
   </div>
@@ -145,7 +145,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
       <option value="plant">Raw crops only</option>
     </select>
     <select id="sort" aria-label="Sort order">
-      <option value="profit">Profit per hour</option>
+      <option value="profit">Net profit per hour</option>
       <option value="price">Sell price</option>
       <option value="rv">RV level needed</option>
       <option value="name">Name A–Z</option>
@@ -157,7 +157,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
   <div class="list" id="list"></div>
   <div class="tip">
     <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup.</div>
-    <div><b>Profit per hour</b> = items made per hour × Home Store base price, minus the seeds you buy. The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
+    <div><b>Profit per hour</b> = items made per hour × Home Store base price. <b>Net profit per hour</b> is that minus the seeds you buy. The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
     <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (60–105 workload per minute). Crops with a temperature need are assumed to be in the right climate. Quick Formulas and powered mode aren't used.</div>
     <div><b>RV level</b> is the highest requirement anywhere in the chain: the facility levels ("Reach RV Level X") and, for premium recipes, the RV module level that unlocks them. Placement limits per RV level come from the game data (e.g. Farmland 4 at RV 1 up to 42 at RV 22).</div>
   </div>
@@ -246,7 +246,7 @@ function detail(e){
   const plants = p.nodes.filter(x=>x.whole), stations = p.nodes.filter(x=>!x.whole);
   const lockT = x => (x.e.rv||0) > state.rv ? `<span class="lockt">RV ${x.e.rv}</span>` : `RV ${x.e.rv}`;
   let h = `<div class="qty"><span class="seg" role="group" aria-label="Setup size"><button class="chip" data-mode="${e.id}" data-v="max" aria-pressed="${!fixed}">Fill my farm</button><button class="chip" data-mode="${e.id}" data-v="rate" aria-pressed="${!!fixed}">Set a rate</button></span>${fixed?`<label for="r${e.id}">Make</label><input id="r${e.id}" type="number" min="0.1" step="0.5" value="${fixed}" data-rate="${e.id}"><span class="note">per hour</span>`:`<span class="note">The biggest balanced setup your RV ${state.rv} space allows, with every ingredient made on the spot.</span>`}</div>`;
-  h += `<div class="facts"><div class="fact"><b>${fmt1(p.perHour)}</b><span>${esc(e.name)} per hour</span></div><div class="fact"><b>${coin(fmt(p.revenue))}</b><span>Revenue per hour</span></div><div class="fact"><b>${coin(fmt(p.seeds))}</b><span>Seeds per hour${p.unknownSeed?" (some seeds aren't sold)":""}</span></div><div class="fact good"><b>${coin(fmt(p.profit))}</b><span>Profit per hour</span></div></div>`;
+  h += `<div class="facts"><div class="fact"><b>${fmt1(p.perHour)}</b><span>${esc(e.name)} per hour</span></div><div class="fact"><b>${coin(fmt(p.revenue))}</b><span>Profit per hour</span></div><div class="fact"><b>${coin(fmt(p.seeds))}</b><span>Seeds per hour${p.unknownSeed?" (some seeds aren't sold)":""}</span></div><div class="fact good"><b>${coin(fmt(p.profit))}</b><span>Net profit per hour</span></div></div>`;
   if (p.over.length) h += `<div class="warnbox">At this rate you'd need more ${p.over.map(esc).join(", ")} than RV ${state.rv} lets you place.</div>`;
   h += `<div><h3>What to plant and place</h3><div class="tbl"><table><thead><tr><th>Ingredient</th><th class="n">Plant / place</th><th class="n">Each makes</th><th class="n">Needed / h</th><th class="n">Made / h</th><th>Where</th><th class="n">Cycle</th><th>Unlock</th></tr></thead><tbody>` +
     plants.map(x => { const per = x.e.out*3600/x.secs, made = x.count*per, needed = p.perHour*x.n; return `<tr><td><span class="cell">${icon(x.e.id,1)}<span>${esc(x.e.name)}${x.e.night?' <span class="note">(night only)</span>':''}${x.e.gate?` <span class="note">(${esc(x.e.gate)})</span>`:''}${x.e.seed?`<div class="note">${esc(x.e.seed)}${x.e.seedCost?` · ${x.e.seedCost} each`:""}</div>`:""}${x.e.by&&x.e.by.length?`<div class="note">Also gives ${x.e.by.map(([n,k])=>`${esc(n)} ×${k}`).join(", ")}</div>`:""}</span></span></td><td class="n big">${unitName(x.e, x.count)}</td><td class="n">${x.e.out}</td><td class="n">${fmt1(needed)}</td><td class="n">${fmt1(made)}</td><td>${esc(x.e.fac)} Lv ${x.e.facLv}</td><td class="n">${dur(x.secs)}${x.e.time?"":` <span class="note">work</span>`}</td><td>${lockT(x)}</td></tr>`; }).join("") + `</tbody></table></div></div>`;
@@ -273,7 +273,7 @@ function render(){
   $("#tally").innerHTML = `<b>${pool.filter(canMake).length}</b> of ${pool.length} available at RV ${state.rv}`;
   $("#list").innerHTML = rows.length ? rows.map(e => {
     const ok = canMake(e), open = state.open.has(String(e.id)), p = P.get(e.id);
-    return `<div class="row${ok?"":" locked"}"><button class="sum" aria-expanded="${open}" data-toggle="${e.id}">${icon(e.id)}<div class="nm">${esc(e.name)}<div class="meta">${esc(e.fac)} Lv ${e.facLv} · sells for ${fmt(e.price)}${p.ok?` · ${fmt1(p.perHour)} per hour`:""}</div></div><div class="right">${p.ok?`<span class="profit">${coin(fmt(p.profit))}<small>/h</small></span>`:`<span class="note">Not enough space</span>`}<span class="badge ${ok?"ok":"no"}">${ok?`RV ${e.rv}`:`Locked · needs RV ${e.rv}`}</span></div><div class="plants">${p.ok?setupChips(p):""}</div></button>${open?`<div class="detail">${detail(e)}</div>`:""}</div>`;
+    return `<div class="row${ok?"":" locked"}"><button class="sum" aria-expanded="${open}" data-toggle="${e.id}">${icon(e.id)}<div class="nm">${esc(e.name)}<div class="meta">${esc(e.fac)} Lv ${e.facLv} · sells for ${fmt(e.price)}${p.ok?` · ${fmt1(p.perHour)} per hour`:""}</div></div><div class="right">${p.ok?`<span class="profit">${coin(fmt(p.profit))}<small>net/h</small></span>`:`<span class="note">Not enough space</span>`}<span class="badge ${ok?"ok":"no"}">${ok?`RV ${e.rv}`:`Locked · needs RV ${e.rv}`}</span></div><div class="plants">${p.ok?setupChips(p):""}</div></button>${open?`<div class="detail">${detail(e)}</div>`:""}</div>`;
   }).join("") : `<div class="empty">Nothing you can make matches at RV ${state.rv}. Clear the search, raise your RV level or turn on “Show locked too”.</div>`;
 }
 
