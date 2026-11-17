@@ -110,6 +110,15 @@ td.n,th.n{text-align:right}
 .hyb{background:var(--surface);border:2px solid var(--accent);border-radius:16px;box-shadow:var(--shadow);padding:16px;display:grid;gap:14px;margin-bottom:14px}
 .hyb h3{margin:0}
 .hybchk input{accent-color:var(--accent);width:16px;height:16px}
+.uses{font-size:13px;line-height:1.35;min-width:180px}
+.gear{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:6px 12px;cursor:pointer}
+.gear:hover,.gear[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+.settings{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));background:var(--surface-2);border-radius:14px;padding:14px}
+.set{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:14px}
+.set label,.set .lbl{font-weight:700}
+.set .note{flex-basis:100%}
+.chk{display:inline-flex;align-items:center;gap:6px}
+.chk input{accent-color:var(--accent);width:16px;height:16px}
 .netline{font-weight:700;font-size:14px;color:var(--leaf);display:inline-flex;align-items:center;gap:2px}
 .netline small{font-size:12px;color:var(--ink-2);font-weight:600;margin-left:2px}
 .ends{color:var(--bad);font-weight:700}
@@ -145,15 +154,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
   </div>
   <div class="filters">
     <input class="search" id="q" type="search" placeholder="Search a product, crop or tree">
-    <select id="work" aria-label="Aniimo work level" title="Aniimo Home work level: Lv 1 = 60, Lv 2 = 75, Lv 3 = 90, Lv 4 = 105 workload per minute">
-      <option value="1">Work Lv 1</option>
-      <option value="2">Work Lv 2</option>
-      <option value="3">Work Lv 3</option>
-      <option value="4">Work Lv 4</option>
-    </select>
-    <label class="res" for="resPlots">Plots kept free <select id="resPlots" aria-label="Farmland plots reserved for other things"><option value="0">0 reserved</option></select></label>
-    <label class="res" for="resTrees">Trees kept free <select id="resTrees" aria-label="Woodland trees reserved for other things"><option value="0">0 reserved</option></select></label>
-    <button class="chip" id="fQuick" type="button" aria-pressed="true" title="Use Quick Formulas and Resource Detector boosts once your RV level unlocks them">Quick Formulas</button>
+    <button class="gear" id="gear" type="button" aria-expanded="false" aria-controls="settings" title="Settings"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg><span>Settings</span></button>
     <label class="res hybchk" for="fHybrid"><input type="checkbox" id="fHybrid" checked> Hybrid setups</label>
     <button class="chip" id="fLock" type="button" aria-pressed="false">Show locked too</button>
     <select id="kind" aria-label="Product type">
@@ -172,16 +173,45 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
       <option value="name">Sort: Name</option>
     </select>
   </div>
+  <div class="settings" id="settings" hidden>
+    <div class="set">
+      <label for="work">Aniimo work level</label>
+      <select id="work" aria-label="Aniimo work level">
+        <option value="1">Work Lv 1 · 60 per min</option>
+        <option value="2">Work Lv 2 · 75 per min</option>
+        <option value="3">Work Lv 3 · 90 per min</option>
+        <option value="4">Work Lv 4 · 105 per min</option>
+      </select>
+      <span class="note">How fast your Aniimo work stations, wells, mines and beds.</span>
+    </div>
+    <div class="set">
+      <label class="chk" for="fWell"><input type="checkbox" id="fWell"> Assume perfect trait for Wells</label>
+      <span class="note">Every Aniimo at a Well has the Faithful trait: +20% work efficiency, so wells run 20% faster.</span>
+    </div>
+    <div class="set">
+      <span class="lbl">Quick Formulas</span>
+      <button class="chip" id="fQuick" type="button" aria-pressed="true">Use when unlocked</button>
+      <span class="note">Ecological Module and Resource Detector boosts, from the RV level that unlocks them.</span>
+    </div>
+    <div class="set">
+      <label for="resPlots">Plots kept free</label>
+      <select id="resPlots" aria-label="Farmland plots kept free for other things"><option value="0">0 reserved</option></select>
+      <label for="resTrees">Trees kept free</label>
+      <select id="resTrees" aria-label="Woodland trees kept free for other things"><option value="0">0 reserved</option></select>
+      <span class="note">Space you're using for something else.</span>
+    </div>
+  </div>
 </div></div>
 
 <main class="wrap">
   <div id="hybrid"></div>
   <div class="list" id="list"></div>
   <div class="tip">
-    <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup. Use <b>Plots kept free</b> and <b>Trees kept free</b> to keep Farmland and Woodland free for other things; every setup and profit figure then uses only what's left.</div>
+    <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup. In <b>Settings</b>, use <b>Plots kept free</b> and <b>Trees kept free</b> to keep Farmland and Woodland free for other things; every setup and profit figure then uses only what's left.</div>
     <div><b>Profit per hour</b> = items made per hour × Home Store base price. <b>Net profit per hour</b> is that minus the seeds you buy. <b>Profit per plot</b> (net profit per plot per hour) divides it by the Farmland plots and Woodland trees the setup uses, so you can see which item makes the most from each bit of farm space (wells, mines and stations aren't counted as plots). The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
     <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking <b>Energy</b> in the sort menu shows only foods, best first. <b>Bowl time</b> sorts foods by how long all 3 full bowls of that food keep your Aniimo fed. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
-    <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (Work Lv 1–4: 60, 75, 90 or 105 workload per minute). Crops with a temperature need are assumed to be in the right climate. <b>Quick Formulas</b> (Ecological Module, for crops and trees) and <b>Resource Detector</b> boosts (wells, sandcastle and Aniimo beds) are used automatically from the RV level that unlocks their module level, whenever they give more per hour; they show a "Quick" tag. Turn off the Quick Formulas button to plan without them. Powered mode isn't used.</div>
+    <div><b>Settings</b> (the gear button): Aniimo work level, <b>Assume perfect trait for Wells</b> (the Faithful trait gives +20% work efficiency at the Well, Joy Wheel Loom and Starfall Hammock; this option applies it to every Well), Quick Formulas, and plots or trees kept free.</div>
+    <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (Work Lv 1–4: 60, 75, 90 or 105 workload per minute). Crops with a temperature need are assumed to be in the right climate. <b>Quick Formulas</b> (Ecological Module, for crops and trees) and <b>Resource Detector</b> boosts (wells, sandcastle and Aniimo beds) are used automatically from the RV level that unlocks their module level, whenever they give more per hour; they show a "Quick" tag. Turn them off in <b>Settings</b> to plan without them. Powered mode isn't used.</div>
     <div><b>Hybrid setups:</b> tick the box to see the best <b>mix</b> of products to run at the same time at your RV level. They share your Farmland, Woodland, Wells, Aniimo beds and stations, and the mix is picked for the most net profit per hour (or energy per hour when sorting by Energy or Bowl time). It's worked out as a linear program and then rounded to whole plots, trees and wells. It's on by default and always considers everything your Home can make at your RV level (crafted goods, raw crops, and mine and well goods like Silver Ore), whatever the type filter shows. Products that need ingredients from outside your Home are left out.</div>
     <div><b>Limited-time recipes:</b> season and collab recipes show an end date and drop off this page by themselves once it passes, using the end time in the game data (the Halloween season and Captain Spud collab recipes end Dec 9, 2026 at 23:59 UTC). The Harvest Moon Festival recipes (Moondew Radish, Waxing Moon Pepper and the Umbral dishes) are already gone.</div>
     <div><b>RV level</b> is the highest requirement anywhere in the chain: the facility levels ("Reach RV Level X") and, for premium recipes, the RV module level that unlocks them. Placement limits per RV level come from the game data (e.g. Farmland 4 at RV 1 up to 42 at RV 22).</div>
@@ -212,9 +242,11 @@ const icon = (id, sm) => { const src = ICONS[id]; const n = I[id] ? I[id].name :
 const coin = n => `<span class="price">${COIN?`<img src="${COIN}" alt="Home Coins">`:""}${n}</span>`;
 const unitName = (e, n) => { const f = e.fac; const w = f==="Farmland" ? "plot" : f==="Woodland" ? "tree" : f.toLowerCase(); return `${n} ${w}${n===1||/s$/.test(w)?"":"s"}`; };
 
-let state = { rv:12, work:1, resPlots:0, resTrees:0, showLocked:false, quick:true, hybrid:true, kind:"craft", sort:"profit", q:"", open:new Set(), rate:{} };
-try { const s = JSON.parse(localStorage.getItem("rvplanner2")||"{}"); for (const k of ["rv","work","resPlots","resTrees","kind","sort"]) if (s[k]) state[k] = s[k]; if (s.quick === false) state.quick = false; if (s.hybrid === false) state.hybrid = false; } catch(e){}
-const save = () => { try { localStorage.setItem("rvplanner2", JSON.stringify({rv:state.rv,work:state.work,resPlots:state.resPlots,resTrees:state.resTrees,quick:state.quick,hybrid:state.hybrid,kind:state.kind,sort:state.sort})); } catch(e){} };
+let state = { rv:12, work:1, resPlots:0, resTrees:0, showLocked:false, quick:true, hybrid:true, wellTrait:false, kind:"craft", sort:"profit", q:"", open:new Set(), rate:{} };
+try { const s = JSON.parse(localStorage.getItem("rvplanner2")||"{}"); for (const k of ["rv","work","resPlots","resTrees","kind","sort"]) if (s[k]) state[k] = s[k]; if (s.quick === false) state.quick = false; if (s.hybrid === false) state.hybrid = false; if (s.wellTrait) state.wellTrait = true; } catch(e){}
+const save = () => { try { localStorage.setItem("rvplanner2", JSON.stringify({rv:state.rv,work:state.work,resPlots:state.resPlots,resTrees:state.resTrees,quick:state.quick,hybrid:state.hybrid,wellTrait:state.wellTrait,kind:state.kind,sort:state.sort})); } catch(e){} };
+// Faithful (personality F) trait: +20% work efficiency at the Well, Joy Wheel Loom and Starfall Hammock
+const traitBoost = e => state.wellTrait && e.fac === "Well" ? 1.2 : 1;
 // Plots and trees set aside for other things come off the space each setup can use
 const RESERVE = { Farmland: () => state.resPlots, Woodland: () => state.resTrees };
 const placeLimit = (fac, rv) => Math.max(0, ((LIM[fac]||[])[rv-1] ?? 0) - (RESERVE[fac] ? RESERVE[fac]() : 0));
@@ -244,8 +276,8 @@ function plan(id, rv, wpm, fixedRate){
     const e = I[i];
     if (e.kind === "other"){ outside.push({e, n}); continue; }
     // Use the Quick version of a crop or resource when it's unlocked at this RV level and yields more per hour
-    const cyc = v => v.time ? v.time : (v.work||0) / wps;
-    let out = e.out, secs = e.kind !== "craft" && e.time ? e.time : (e.work||0) / wps, quick = false;
+    const ws = wps * traitBoost(e), cyc = v => v.time ? v.time : (v.work||0) / ws;
+    let out = e.out, secs = e.kind !== "craft" && e.time ? e.time : (e.work||0) / ws, quick = false;
     if (state.quick && e.quick && e.quick.rv <= rv && e.quick.out/cyc(e.quick) > out/secs){ out = e.quick.out; secs = cyc(e.quick); quick = true; }
     const runs = n / out;
     nodes.push({e, n, runs, out, quick, u: runs*secs, secs, whole: e.kind !== "craft"});
@@ -309,8 +341,8 @@ function hybrid(ids, rv, wpm, goal){
     for (const [i,n] of q){
       const x = I[i];
       if (x.kind === "other"){ outside = true; break; }
-      const cyc = v => v.time ? v.time : (v.work||0) / wps;
-      let out = x.out, secs = x.kind !== "craft" && x.time ? x.time : (x.work||0) / wps, quick = false;
+      const ws = wps * traitBoost(x), cyc = v => v.time ? v.time : (v.work||0) / ws;
+      let out = x.out, secs = x.kind !== "craft" && x.time ? x.time : (x.work||0) / ws, quick = false;
       if (state.quick && x.quick && x.quick.rv <= rv && x.quick.out/cyc(x.quick) > out/secs){ out = x.quick.out; secs = cyc(x.quick); quick = true; }
       use.set(i, {u: n/out*secs, out, secs, quick});
       if (x.kind === "plant" && x.seed && x.seedCost) seedPer += n/out*x.seedCost;
@@ -350,7 +382,7 @@ function hybrid(ids, rv, wpm, goal){
     counts.set(best.c, counts.get(best.c)+1); cur = best.t;
   }
   const items = new Map(), used = {};
-  sub.forEach((p,k) => { const R = cur.x[k]; if (R <= 1e-12) return; for (const [i,v] of p.use){ const it = items.get(i) || {e:I[i], tot:0, quick:v.quick, out:v.out, secs:v.secs, whole:isWhole(i)}; it.tot += R*v.u; items.set(i, it); } });
+  sub.forEach((p,k) => { const R = cur.x[k]; if (R <= 1e-12) return; for (const [i,v] of p.use){ const it = items.get(i) || {e:I[i], tot:0, quick:v.quick, out:v.out, secs:v.secs, whole:isWhole(i), uses:[]}; it.tot += R*v.u; it.uses.push({e:p.e, perHour: R*3600*v.u/v.secs*v.out}); items.set(i, it); } });
   for (const it of items.values()){ it.count = it.whole ? counts.get(String(it.e.id)) ?? Math.ceil(it.tot - 1e-9) : it.tot; used[it.e.fac] = (used[it.e.fac]||0) + it.count; }
   const out = sub.map((p,k) => { const perHour = cur.x[k]*3600; return {e:p.e, perHour, net: perHour*(p.e.price - p.seedPer), revenue: perHour*p.e.price, seeds: perHour*p.seedPer, energy: perHour*(p.e.energy||0)}; }).filter(p => p.perHour > 1e-6).sort((a,b) => b.net - a.net);
   const sum = k => out.reduce((s,p)=>s+p[k],0);
@@ -368,7 +400,7 @@ function hybridPanel(ids, bestSingle, goal){
     <div class="note">The mix of products that together make the most ${goal==="energy"?"energy":"net profit"} per hour from your space${state.resPlots||state.resTrees?" (after the plots and trees you're keeping free)":""}. Products that need ingredients from outside your Home are left out.</div>
     <div class="facts"><div class="fact good"><b>${coin(fmt(h.net))}</b><span>Net profit per hour</span></div><div class="fact"><b>${coin(fmt(h.revenue))}</b><span>Profit per hour</span></div><div class="fact"><b>${coin(fmt(h.seeds))}</b><span>Seeds per hour</span></div>${h.energy?`<div class="fact food"><b>${fmt(h.energy)}</b><span>Energy per hour</span></div>`:""}<div class="fact"><b>${gain>0?"+":""}${goal==="energy"?fmt(gain):coin(fmt(gain))}</b><span>vs best single item</span></div></div>
     <div><h3>Make</h3><div class="tbl"><table><thead><tr><th>Product</th><th class="n">Per hour</th><th class="n">Net / h</th>${h.energy?`<th class="n">Energy / h</th>`:""}</tr></thead><tbody>${h.products.map(p => `<tr><td><span class="cell">${icon(p.e.id,1)}${esc(p.e.name)}</span></td><td class="n big">${fmt1(p.perHour)}</td><td class="n">${fmt(p.net)}</td>${h.energy?`<td class="n">${p.energy?fmt(p.energy):"–"}</td>`:""}</tr>`).join("")}</tbody></table></div></div>
-    <div><h3>Plant and place</h3><div class="tbl"><table><thead><tr><th>Ingredient</th><th class="n">Plant / place</th><th class="n">Each makes</th><th>Where</th><th class="n">Cycle</th></tr></thead><tbody>${whole.map(it => `<tr><td><span class="cell">${icon(it.e.id,1)}${esc(it.e.name)}</span></td><td class="n big">${unitName(it.e, it.count)}</td><td class="n">${it.out}${it.quick?`<div class="quick">Quick</div>`:""}</td><td>${esc(it.e.fac)} Lv ${it.e.facLv}</td><td class="n">${dur(it.secs)}</td></tr>`).join("")}</tbody></table></div></div>
+    <div><h3>Plant and place</h3><div class="tbl"><table><thead><tr><th>Ingredient</th><th class="n">Plant / place</th><th class="n">Each makes</th><th class="n">Made / h</th><th>Used for</th><th>Where</th><th class="n">Cycle</th></tr></thead><tbody>${whole.map(it => { const made = it.count*it.out*3600/it.secs, need = it.uses.reduce((s,u)=>s+u.perHour,0); return `<tr><td><span class="cell">${icon(it.e.id,1)}${esc(it.e.name)}</span></td><td class="n big">${unitName(it.e, it.count)}</td><td class="n">${it.out}${it.quick?`<div class="quick">Quick</div>`:""}</td><td class="n">${fmt1(made)}</td><td class="uses">${it.uses.sort((a,b)=>b.perHour-a.perHour).map(u => `${esc(u.e.name)} ${fmt1(u.perHour)}`).join("<br>")}${it.uses.length>1?`<div class="note">Total ${fmt1(need)} / h</div>`:""}</td><td>${esc(it.e.fac)} Lv ${it.e.facLv}</td><td class="n">${dur(it.secs)}</td></tr>`; }).join("")}</tbody></table></div></div>
     <div><h3>Space used at RV ${state.rv}</h3><div class="plants" style="grid-column:auto">${Object.entries(h.used).map(([f,v]) => `<span class="pchip">${esc(f)} <b>${fmt1(v)}</b> / ${h.lim[f]}</span>`).join("")}</div><div class="note">Crafting stations share their time between all the products. Every crafting step is grown or made on the spot.</div></div>
   </div>`;
 }
@@ -403,7 +435,7 @@ function detail(e){
 }
 
 function render(){
-  $("#fQuick").setAttribute("aria-pressed", state.quick); $("#fHybrid").checked = state.hybrid; $("#rvOut").textContent = state.rv; $("#rv").value = state.rv; $("#work").value = state.work;
+  $("#fQuick").setAttribute("aria-pressed", state.quick); $("#fHybrid").checked = state.hybrid; $("#fWell").checked = state.wellTrait; $("#rvOut").textContent = state.rv; $("#rv").value = state.rv; $("#work").value = state.work;
   state.resPlots = fillReserve("#resPlots", "Farmland", state.resPlots);
   state.resTrees = fillReserve("#resTrees", "Woodland", state.resTrees);
   const q = state.q.trim().toLowerCase();
@@ -448,6 +480,8 @@ $("#kind").addEventListener("change", e => { state.kind = e.target.value; save()
 $("#sort").addEventListener("change", e => { state.sort = e.target.value; save(); render(); });
 $("#fQuick").addEventListener("click", e => { state.quick = !state.quick; save(); render(); });
 $("#fHybrid").addEventListener("change", e => { state.hybrid = e.target.checked; save(); render(); });
+$("#fWell").addEventListener("change", e => { state.wellTrait = e.target.checked; save(); render(); });
+$("#gear").addEventListener("click", () => { const p = $("#settings"), open = p.hidden; p.hidden = !open; $("#gear").setAttribute("aria-expanded", open); });
 $("#fLock").addEventListener("click", e => { state.showLocked = !state.showLocked; e.currentTarget.setAttribute("aria-pressed", state.showLocked); render(); });
 $("#list").addEventListener("click", e => {
   const m = e.target.closest("[data-mode]");
