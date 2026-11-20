@@ -196,6 +196,10 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
       <span class="note">Leave out products the hybrid mix would make less than 1 of per hour, and re-plan the mix without them. Costs a little net profit.</span>
     </div>
     <div class="set">
+      <label class="chk" for="fOwn"><input type="checkbox" id="fOwn"> Own station for each recipe in hybrid setups</label>
+      <span class="note">Every crafting step gets a station of its own, so you never switch recipes. Never more steps on a station type than you have stations. Costs some net profit.</span>
+    </div>
+    <div class="set">
       <span class="lbl">Quick Formulas</span>
       <button class="chip" id="fQuick" type="button" aria-pressed="true">Use when unlocked</button>
       <span class="note">Ecological Module and Resource Detector boosts, from the RV level that unlocks them.</span>
@@ -217,9 +221,9 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
     <div><b>Fill my farm:</b> each item's setup is the biggest balanced one that fits the Farmland, Woodland, Wells, Mines and stations your RV level lets you place, with the whole farm on that one item. Every ingredient is grown or made on the spot, so nothing runs out and nothing piles up. Switch to <b>Set a rate</b> inside an item to size a smaller setup. In <b>Settings</b>, use <b>Plots kept free</b> and <b>Trees kept free</b> to keep Farmland and Woodland free for other things; every setup and profit figure then uses only what's left.</div>
     <div><b>Profit per hour</b> = items made per hour × Home Store base price. <b>Net profit per hour</b> is that minus the seeds you buy. <b>Profit per plot</b> (net profit per plot per hour) divides it by the Farmland plots and Woodland trees the setup uses, so you can see which item makes the most from each bit of farm space (wells, mines and stations aren't counted as plots). The store also picks a few items each day at ×3, ×5 or ×10, which isn't included. Byproducts (like the extra wood from trees) aren't counted either.</div>
     <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking <b>Energy</b> in the sort menu shows only foods, best first. <b>Bowl time</b> sorts foods by how long all 3 full bowls of that food keep your Aniimo fed. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
-    <div><b>Settings</b> (the gear button): Aniimo work level, <b>Assume perfect trait for Wells</b> (the Faithful trait gives +20% work efficiency at the Well, Joy Wheel Loom and Starfall Hammock; this option applies it to every Well), <b>Skip fraction recipes in hybrid setups</b>, Quick Formulas, and plots or trees kept free.</div>
+    <div><b>Settings</b> (the gear button): Aniimo work level, <b>Assume perfect trait for Wells</b> (the Faithful trait gives +20% work efficiency at the Well, Joy Wheel Loom and Starfall Hammock; this option applies it to every Well), <b>Skip fraction recipes in hybrid setups</b>, <b>Own station for each recipe in hybrid setups</b>, Quick Formulas, and plots or trees kept free.</div>
     <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (Work Lv 1–4: 60, 75, 90 or 105 workload per minute). Crops with a temperature need are assumed to be in the right climate. <b>Quick Formulas</b> (Ecological Module, for crops and trees) and <b>Resource Detector</b> boosts (wells, sandcastle and Aniimo beds) are used automatically from the RV level that unlocks their module level, whenever they give more per hour; they show a "Quick" tag. Turn them off in <b>Settings</b> to plan without them. Powered mode isn't used.</div>
-    <div><b>Hybrid setups:</b> tick the box to see the best <b>mix</b> of products to run at the same time at your RV level. They share your Farmland, Woodland, Wells, Aniimo beds and stations, and the mix is picked for the most net profit per hour (or energy per hour when sorting by Energy or Bowl time). It's worked out as a linear program, then rounded to whole plots, trees, wells and mines: the planner tops up the leftover space one unit at a time, then keeps trying to move single units from one crop, tree or well to another (including ones the first answer didn't use) until no move makes more. It's on by default and always considers everything your Home can make at your RV level (crafted goods, raw crops, and mine and well goods like Silver Ore), whatever the type filter shows. Products that need ingredients from outside your Home are left out. Some products in the mix may run at less than 1 per hour (like Coconut Cooler 0.8); tick <b>Skip fraction recipes in hybrid setups</b> in Settings to leave those out. The mix is then re-planned without them, so their space goes to the other products instead of sitting empty, for slightly less net profit.</div>
+    <div><b>Hybrid setups:</b> tick the box to see the best <b>mix</b> of products to run at the same time at your RV level. They share your Farmland, Woodland, Wells, Aniimo beds and stations, and the mix is picked for the most net profit per hour (or energy per hour when sorting by Energy or Bowl time). It's worked out as a linear program, then rounded to whole plots, trees, wells and mines: the planner tops up the leftover space one unit at a time, then keeps trying to move single units from one crop, tree or well to another (including ones the first answer didn't use) until no move makes more. It's on by default and always considers everything your Home can make at your RV level (crafted goods, raw crops, and mine and well goods like Silver Ore), whatever the type filter shows. Products that need ingredients from outside your Home are left out. Some products in the mix may run at less than 1 per hour (like Coconut Cooler 0.8); tick <b>Skip fraction recipes in hybrid setups</b> in Settings to leave those out. The mix is then re-planned without them, so their space goes to the other products instead of sitting empty, for slightly less net profit. The <b>Crafting stations</b> table lists every crafting step, including in-between ones. By default a station type splits its time between several steps (you switch recipes between batches); tick <b>Own station for each recipe in hybrid setups</b> to give every step whole stations of its own, never more steps than you have stations, so nothing needs switching.</div>
     <div><b>Limited-time recipes:</b> season and collab recipes show an end date and drop off this page by themselves once it passes, using the end time in the game data (the Halloween season and Captain Spud collab recipes end Dec 9, 2026 at 23:59 UTC). The Harvest Moon Festival recipes (Moondew Radish, Waxing Moon Pepper and the Umbral dishes) are already gone.</div>
     <div><b>RV level</b> is the highest requirement anywhere in the chain: the facility levels ("Reach RV Level X") and, for premium recipes, the RV module level that unlocks them. Placement limits per RV level come from the game data (e.g. Farmland 4 at RV 1 up to 42 at RV 22).</div>
   </div>
@@ -249,9 +253,9 @@ const icon = (id, sm) => { const src = ICONS[id]; const n = I[id] ? I[id].name :
 const coin = n => `<span class="price">${COIN?`<img src="${COIN}" alt="Home Coins">`:""}${n}</span>`;
 const unitName = (e, n) => { const f = e.fac; const w = f==="Farmland" ? "plot" : f==="Woodland" ? "tree" : f.toLowerCase(); return `${n} ${w}${n===1||/s$/.test(w)?"":"s"}`; };
 
-let state = { rv:12, work:1, resPlots:0, resTrees:0, showLocked:false, quick:true, hybrid:true, wellTrait:false, noFrac:false, kind:"craft", sort:"profit", q:"", open:new Set(), rate:{} };
-try { const s = JSON.parse(localStorage.getItem("rvplanner2")||"{}"); for (const k of ["rv","work","resPlots","resTrees","kind","sort"]) if (s[k]) state[k] = s[k]; if (s.quick === false) state.quick = false; if (s.hybrid === false) state.hybrid = false; if (s.wellTrait) state.wellTrait = true; if (s.noFrac) state.noFrac = true; } catch(e){}
-const save = () => { try { localStorage.setItem("rvplanner2", JSON.stringify({rv:state.rv,work:state.work,resPlots:state.resPlots,resTrees:state.resTrees,quick:state.quick,hybrid:state.hybrid,wellTrait:state.wellTrait,noFrac:state.noFrac,kind:state.kind,sort:state.sort})); } catch(e){} };
+let state = { rv:12, work:1, resPlots:0, resTrees:0, showLocked:false, quick:true, hybrid:true, wellTrait:false, noFrac:false, ownStation:false, kind:"craft", sort:"profit", q:"", open:new Set(), rate:{} };
+try { const s = JSON.parse(localStorage.getItem("rvplanner2")||"{}"); for (const k of ["rv","work","resPlots","resTrees","kind","sort"]) if (s[k]) state[k] = s[k]; if (s.quick === false) state.quick = false; if (s.hybrid === false) state.hybrid = false; if (s.wellTrait) state.wellTrait = true; if (s.noFrac) state.noFrac = true; if (s.ownStation) state.ownStation = true; } catch(e){}
+const save = () => { try { localStorage.setItem("rvplanner2", JSON.stringify({rv:state.rv,work:state.work,resPlots:state.resPlots,resTrees:state.resTrees,quick:state.quick,hybrid:state.hybrid,wellTrait:state.wellTrait,noFrac:state.noFrac,ownStation:state.ownStation,kind:state.kind,sort:state.sort})); } catch(e){} };
 // Faithful (personality F) trait: +20% work efficiency at the Well, Joy Wheel Loom and Starfall Hammock
 const traitBoost = e => state.wellTrait && e.fac === "Well" ? 1.2 : 1;
 // Plots and trees set aside for other things come off the space each setup can use
@@ -397,7 +401,9 @@ function hybridSolve(ids, rv, wpm, goal, seed, mode = "full"){
   // ingredient raises the total the most, then try moving single units between ingredients (any plot, tree,
   // well, mine or bed, even ones the LP didn't use) until no move helps. Each test re-solves the product mix
   // with those counts fixed.
-  const isWhole = i => I[i].kind !== "craft";
+  // Whole units: plots, trees, wells, mines and beds; with "Own station for each recipe", crafting steps too
+  // (each step gets whole stations of its own instead of sharing station time).
+  const isWhole = i => I[i].kind !== "craft" || state.ownStation;
   const tot = new Map();
   prods.forEach((p,k) => { if (x[k] > 1e-9) for (const [i,v] of p.use) if (isWhole(i)) tot.set(i, (tot.get(i)||0) + x[k]*v.u); });
   const cand = [...new Set(prods.flatMap(p => [...p.use.keys()].filter(isWhole)))];
@@ -409,11 +415,29 @@ function hybridSolve(ids, rv, wpm, goal, seed, mode = "full"){
   // Shadow prices bound every move: the LP's value is concave in the counts, so one more unit of d and one
   // less of c can raise the total by at most y[d] - y[c]. Moves that can't beat the best found are skipped.
   const memo = new Map(), bvec = () => [...cand.map(c => counts.get(c)), ...craftFacs.map(f => lim[f])];
+  // Each solve only includes products whose whole ingredients all have at least one unit (the rest can't
+  // run), which keeps the LP small. For an ingredient at 0 units, y[d] is the most one unit of it could add:
+  // the best reduced value of a product it alone is missing, per unit of d. That keeps the duals feasible, so
+  // the move bounds below stay valid.
+  const prodWhole = sub.map(p => [...p.use.keys()].filter(isWhole).map(i => cand.indexOf(i)));
   const solveFixed = () => {
     const key = cand.map(c => counts.get(c)).join(",");
     let r = memo.get(key); if (r) return r;
-    const sol = simplex(rowsA, bvec(), sub.map(p => p.value));
-    const xs = sol || sub.map(() => 0), y = new Map(cand.map((c,ri) => [c, sol ? sol.y[ri] : 0]));
+    const has = cand.map(c => counts.get(c) > 0);
+    const ks = sub.map((_,k) => k).filter(k => prodWhole[k].every(ri => has[ri]));
+    const rowIdx = [...cand.map((_,ri) => ri).filter(ri => has[ri]), ...craftFacs.map((_,j) => cand.length + j)];
+    const bAll = bvec();
+    const sol = ks.length ? simplex(rowIdx.map(ri => ks.map(k => rowsA[ri][k])), rowIdx.map(ri => bAll[ri]), ks.map(k => sub[k].value)) : [];
+    const xs = sub.map(() => 0), yr = new Float64Array(rowsA.length);
+    if (sol){ ks.forEach((k,j) => xs[k] = sol[j]); if (sol.y) rowIdx.forEach((ri,j) => yr[ri] = sol.y[j]); }
+    for (let k=0; k<sub.length; k++){
+      const miss = prodWhole[k].filter(ri => !has[ri]);
+      if (miss.length !== 1) continue;
+      const d = miss[0]; let rc = sub[k].value;
+      for (const ri of rowIdx) rc -= yr[ri] * rowsA[ri][k];
+      if (rc > 0) yr[d] = Math.max(yr[d], rc / rowsA[d][k]);
+    }
+    const y = new Map(cand.map((c,ri) => [c, yr[ri]]));
     r = {x: xs, obj: xs.reduce((s,v,k)=>s+v*sub[k].value, 0), y}; memo.set(key, r); return r;
   };
   let cur = solveFixed();
@@ -434,7 +458,7 @@ function hybridSolve(ids, rv, wpm, goal, seed, mode = "full"){
   } };
   // first pass only tops up ingredients the LP used (the plain greedy rounding); swaps can bring in others
   fill(seed ? null : new Set(tot.keys()));
-  for (let pass=0; pass<(mode === "fill" ? 0 : 200); pass++){
+  const polish = () => { for (let pass=0; pass<200; pass++){
     const ys = cur.y, moves = [], minGain = Math.max(EPS, cur.obj * 1e-4); // skip moves worth under 0.01%
     for (const c of cand){
       if (!counts.get(c)) continue;
@@ -453,10 +477,44 @@ function hybridSolve(ids, rv, wpm, goal, seed, mode = "full"){
     }
     if (!best) break;
     bump(best.c, -1); bump(best.d, 1); cur = best.t; fill();
+  } };
+  if (mode !== "fill") polish();
+  // With own stations, a product often needs several new stations at once, which single-unit moves can't
+  // reach. Second start: round every count the LP used UP, then take away the unit that costs least until
+  // everything fits, then top up and polish. Keep whichever start ends better.
+  if (mode !== "fill" && !seed && state.ownStation){
+    const keep = {counts: new Map(counts), cur};
+    for (const c of cand){ bump(c, Math.ceil((tot.get(c)||0) - 1e-6) - counts.get(c)); }
+    cur = solveFixed();
+    for (let step=0; step<500; step++){
+      const over = new Set(Object.keys(used0).filter(f => used0[f] > lim[f] + 1e-9));
+      if (!over.size) break;
+      const cs = cand.filter(c => over.has(I[c].fac) && counts.get(c) > 0).sort((a,b) => cur.y.get(a) - cur.y.get(b));
+      let best = null;
+      for (const c of cs){
+        if (best && cur.obj - cur.y.get(c) <= best.t.obj + EPS) break; // can't lose less than its shadow price
+        bump(c, -1); const t = solveFixed(); bump(c, 1);
+        if (!best || t.obj > best.t.obj) best = {c, t};
+      }
+      bump(best.c, -1); cur = best.t;
+    }
+    fill(); polish();
+    if (keep.cur.obj > cur.obj + EPS){ for (const c of cand) bump(c, keep.counts.get(c) - counts.get(c)); cur = keep.cur; }
   }
+  // Own stations leave a bumpier search space: 40 restarts that knock out 2-5 random units, then top up and
+  // polish again, keeping any improvement. Fixed seed, so the same settings always give the same plan.
+  if (state.ownStation && mode !== "fill" && !seed){ let rs = 12345; const rnd = () => (rs = (rs*1103515245+12345) % 2147483648) / 2147483648;
+    for (let it=0; it<40; it++){ const keep = {counts: new Map(counts), cur}; const kick = 2 + Math.floor(rnd()*4);
+      for (let j=0;j<kick;j++){ const on = cand.filter(c => counts.get(c) > 0); if (!on.length) break; bump(on[Math.floor(rnd()*on.length)], -1); }
+      cur = solveFixed(); fill(); polish();
+      if (keep.cur.obj > cur.obj + EPS){ for (const c of cand) bump(c, keep.counts.get(c) - counts.get(c)); cur = keep.cur; } } }
   const items = new Map(), used = {};
-  sub.forEach((p,k) => { const R = cur.x[k]; if (R <= 1e-12) return; for (const [i,v] of p.use){ const it = items.get(i) || {e:I[i], tot:0, quick:v.quick, out:v.out, secs:v.secs, whole:isWhole(i), uses:[]}; it.tot += R*v.u; it.uses.push({e:p.e, perHour: R*3600*v.u/v.secs*v.out}); items.set(i, it); } });
-  for (const it of items.values()){ it.count = it.whole ? counts.get(String(it.e.id)) ?? Math.ceil(it.tot - 1e-9) : it.tot; used[it.e.fac] = (used[it.e.fac]||0) + it.count; }
+  sub.forEach((p,k) => { const R = cur.x[k]; if (R <= 1e-12) return; for (const [i,v] of p.use){ const it = items.get(i) || {e:I[i], tot:0, quick:v.quick, out:v.out, secs:v.secs, whole:I[i].kind !== "craft", uses:[]}; it.tot += R*v.u; it.uses.push({e:p.e, perHour: R*3600*v.u/v.secs*v.out}); items.set(i, it); } });
+  for (const it of items.values()){
+    it.count = it.whole ? counts.get(String(it.e.id)) ?? Math.ceil(it.tot - 1e-9) : it.tot;
+    if (!it.whole && state.ownStation) it.stations = counts.get(String(it.e.id)) ?? Math.ceil(it.tot - 1e-9);
+    used[it.e.fac] = (used[it.e.fac]||0) + (it.stations ?? it.count);
+  }
   const out = sub.map((p,k) => { const perHour = cur.x[k]*3600; return {e:p.e, perHour, net: perHour*(p.e.price - p.seedPer), revenue: perHour*p.e.price, seeds: perHour*p.seedPer, energy: perHour*(p.e.energy||0)}; }).filter(p => p.perHour > 1e-6).sort((a,b) => b.net - a.net);
   const sum = k => out.reduce((s,p)=>s+p[k],0);
   return {mode, obj: cur.obj, lp: x.reduce((s,v,k)=>s+v*prods[k].value, 0), counts, products: out, items: [...items.values()].filter(it => it.count > 1e-9), used, lim, net: sum("net"), revenue: sum("revenue"), seeds: sum("seeds"), energy: sum("energy")};
@@ -479,7 +537,7 @@ function hybridPanel(ids, bestSingle, goal){
     <div class="facts"><div class="fact good"><b>${coin(fmt(h.net))}</b><span>Net profit per hour</span></div><div class="fact"><b>${coin(fmt(h.revenue))}</b><span>Profit per hour</span></div><div class="fact"><b>${coin(fmt(h.seeds))}</b><span>Seeds per hour</span></div>${h.energy?`<div class="fact food"><b>${fmt(h.energy)}</b><span>Energy per hour</span></div>`:""}<div class="fact"><b>${gain>0?"+":""}${goal==="energy"?fmt(gain):coin(fmt(gain))}</b><span>vs best single item</span></div></div>
     <div><h3>Make</h3><div class="tbl"><table><thead><tr><th>Product</th><th class="n">Per hour</th><th class="n">Net / h</th>${h.energy?`<th class="n">Energy / h</th>`:""}</tr></thead><tbody>${groupBy(h.products, p => p.e.fac, g => goal==="energy" ? -sumOf(g,"energy") : -sumOf(g,"net")).map(([f,g]) => `<tr class="grp"><td>${esc(f)}</td><td class="n"></td><td class="n">${fmt(sumOf(g,"net"))}</td>${h.energy?`<td class="n">${sumOf(g,"energy")?fmt(sumOf(g,"energy")):""}</td>`:""}</tr>` + g.map(p => `<tr><td><span class="cell">${icon(p.e.id,1)}${esc(p.e.name)}</span></td><td class="n big">${fmt1(p.perHour)}</td><td class="n">${fmt(p.net)}</td>${h.energy?`<td class="n">${p.energy?fmt(p.energy):"–"}</td>`:""}</tr>`).join("")).join("")}</tbody></table></div></div>
     <div><h3>Plant and place</h3><div class="tbl"><table><thead><tr><th>Ingredient</th><th class="n">Plant / place</th><th class="n">Each makes</th><th class="n">Made / h</th><th>Used for</th><th>Where</th><th class="n">Cycle</th></tr></thead><tbody>${groupBy(whole, it => it.e.fac, g => PLACE_ORDER.indexOf(g[0].e.fac) + 1 || 99).map(([f,g]) => `<tr class="grp"><td colspan="7">${esc(f)} <span class="note">${fmt1(h.used[f])} / ${h.lim[f]} used</span></td></tr>` + g.map(it => { const made = it.count*it.out*3600/it.secs, need = it.uses.reduce((s,u)=>s+u.perHour,0); return `<tr><td><span class="cell">${icon(it.e.id,1)}${esc(it.e.name)}</span></td><td class="n big">${unitName(it.e, it.count)}</td><td class="n">${it.out}${it.quick?`<div class="quick">Quick</div>`:""}</td><td class="n">${fmt1(made)}</td><td class="uses">${it.uses.sort((a,b)=>b.perHour-a.perHour).map(u => `${esc(u.e.name)} ${fmt1(u.perHour)}`).join("<br>")}${it.uses.length>1?`<div class="note">Total ${fmt1(need)} / h</div>`:""}</td><td>${esc(it.e.fac)} Lv ${it.e.facLv}</td><td class="n">${dur(it.secs)}</td></tr>`; }).join("")).join("")}</tbody></table></div></div>
-    <div><h3>Crafting stations</h3><div class="tbl"><table><thead><tr><th>Step</th><th class="n">Runs / h</th><th class="n">Made / h</th><th class="n">Time per run</th><th class="n">Station time used</th><th>Used for</th></tr></thead><tbody>${groupBy(shared.sort((a,b) => b.count - a.count), it => it.e.fac, g => -sumOf(g,"count")).map(([f,g]) => `<tr class="grp"><td colspan="6">${esc(f)} <span class="note">${Math.round(sumOf(g,"count")*100)}% of one station busy · ${h.lim[f]} placed</span></td></tr>` + g.map(it => { const runs = it.count*3600/it.secs; return `<tr><td><span class="cell">${icon(it.e.id,1)}${esc(it.e.name)}</span></td><td class="n">${fmt1(runs)}</td><td class="n">${fmt1(runs*it.out)}</td><td class="n">${dur(it.secs)}</td><td class="n big">${Math.round(it.count*100)}%</td><td class="uses">${it.uses.sort((a,b)=>b.perHour-a.perHour).map(u => u.e.id === it.e.id ? `Sell ${fmt1(u.perHour)}` : `${esc(u.e.name)} ${fmt1(u.perHour)}`).join("<br>")}</td></tr>`; }).join("")).join("")}</tbody></table></div><div class="note">Every crafting step, including in-between ones like Lotion for Pearl Face Cream. 100% means one station kept busy nonstop; a station type can split its time between several steps, so switch recipes as needed.</div></div>
+    <div><h3>Crafting stations</h3><div class="tbl"><table><thead><tr><th>Step</th><th class="n">Runs / h</th><th class="n">Made / h</th><th class="n">Time per run</th><th class="n">Station time used</th><th>Used for</th></tr></thead><tbody>${groupBy(shared.sort((a,b) => b.count - a.count), it => it.e.fac, g => -sumOf(g,"count")).map(([f,g]) => `<tr class="grp"><td colspan="6">${esc(f)} <span class="note">${state.ownStation ? `${sumOf(g,"stations")} of ${h.lim[f]} stations used` : `${Math.round(sumOf(g,"count")*100)}% of one station busy · ${h.lim[f]} placed`}</span></td></tr>` + g.map(it => { const runs = it.count*3600/it.secs; return `<tr><td><span class="cell">${icon(it.e.id,1)}${esc(it.e.name)}</span></td><td class="n">${fmt1(runs)}</td><td class="n">${fmt1(runs*it.out)}</td><td class="n">${dur(it.secs)}</td><td class="n big" style="white-space:nowrap">${it.stations ? `${it.stations} station${it.stations>1?"s":""} · ${Math.round(it.count/it.stations*100)}% busy` : `${Math.round(it.count*100)}%`}</td><td class="uses">${it.uses.sort((a,b)=>b.perHour-a.perHour).map(u => u.e.id === it.e.id ? `Sell ${fmt1(u.perHour)}` : `${esc(u.e.name)} ${fmt1(u.perHour)}`).join("<br>")}</td></tr>`; }).join("")).join("")}</tbody></table></div><div class="note">Every crafting step, including in-between ones like Lotion for Pearl Face Cream. ${state.ownStation ? "Each step has station(s) of its own, so you never switch recipes; a station may sit idle part of the time." : "100% means one station kept busy nonstop; a station type can split its time between several steps, so switch recipes as needed. Tick <b>Own station for each recipe</b> in Settings to plan without switching."}</div></div>
     <div><h3>Space used at RV ${state.rv}</h3><div class="plants" style="grid-column:auto">${Object.entries(h.used).map(([f,v]) => `<span class="pchip">${esc(f)} <b>${fmt1(v)}</b> / ${h.lim[f]}</span>`).join("")}</div><div class="note">Crafting stations share their time between all the products. Every crafting step is grown or made on the spot.</div></div>
   </div>`;
 }
@@ -514,7 +572,7 @@ function detail(e){
 }
 
 function render(){
-  $("#fQuick").setAttribute("aria-pressed", state.quick); $("#fHybrid").checked = state.hybrid; $("#fWell").checked = state.wellTrait; $("#fFrac").checked = state.noFrac; $("#rvOut").textContent = state.rv; $("#rv").value = state.rv; $("#work").value = state.work;
+  $("#fQuick").setAttribute("aria-pressed", state.quick); $("#fHybrid").checked = state.hybrid; $("#fWell").checked = state.wellTrait; $("#fFrac").checked = state.noFrac; $("#fOwn").checked = state.ownStation; $("#rvOut").textContent = state.rv; $("#rv").value = state.rv; $("#work").value = state.work;
   state.resPlots = fillReserve("#resPlots", "Farmland", state.resPlots);
   state.resTrees = fillReserve("#resTrees", "Woodland", state.resTrees);
   const q = state.q.trim().toLowerCase();
@@ -561,6 +619,7 @@ $("#fQuick").addEventListener("click", e => { state.quick = !state.quick; save()
 $("#fHybrid").addEventListener("change", e => { state.hybrid = e.target.checked; save(); render(); });
 $("#fWell").addEventListener("change", e => { state.wellTrait = e.target.checked; save(); render(); });
 $("#fFrac").addEventListener("change", e => { state.noFrac = e.target.checked; save(); render(); });
+$("#fOwn").addEventListener("change", e => { state.ownStation = e.target.checked; save(); render(); });
 $("#gear").addEventListener("click", () => { const p = $("#settings"), open = p.hidden; p.hidden = !open; $("#gear").setAttribute("aria-expanded", open); });
 $("#fLock").addEventListener("click", e => { state.showLocked = !state.showLocked; e.currentTarget.setAttribute("aria-pressed", state.showLocked); render(); });
 $("#list").addEventListener("click", e => {
