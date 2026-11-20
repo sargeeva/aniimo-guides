@@ -217,7 +217,7 @@ footer{color:var(--ink-2);font-size:13px;padding:24px 0 50px}
     <div><b>Energy per hour</b> is for feeding your Aniimo: items made per hour × the energy each food gives (the same number the game shows under "Provides Energy"). Picking <b>Energy</b> in the sort menu shows only foods, best first. <b>Bowl time</b> sorts foods by how long all 3 full bowls of that food keep your Aniimo fed. <b>Full bowl</b> times use the game's numbers: your Home has 3 food bowls that hold 99 each (297 food), and every Aniimo eats 10 Energy per minute, so the bowls run out faster the more Aniimo you place (8 at RV 2 up to 47 at RV 22).</div>
     <div><b>Settings</b> (the gear button): Aniimo work level, <b>Assume perfect trait for Wells</b> (the Faithful trait gives +20% work efficiency at the Well, Joy Wheel Loom and Starfall Hammock; this option applies it to every Well), <b>Skip fraction recipes in hybrid setups</b>, Quick Formulas, and plots or trees kept free.</div>
     <div><b>Timing:</b> crops and trees use their grow time. Crafting stations, Wells, Mines and Aniimo beds run on workload, so they depend on your Aniimo's Home work level (Work Lv 1–4: 60, 75, 90 or 105 workload per minute). Crops with a temperature need are assumed to be in the right climate. <b>Quick Formulas</b> (Ecological Module, for crops and trees) and <b>Resource Detector</b> boosts (wells, sandcastle and Aniimo beds) are used automatically from the RV level that unlocks their module level, whenever they give more per hour; they show a "Quick" tag. Turn them off in <b>Settings</b> to plan without them. Powered mode isn't used.</div>
-    <div><b>Hybrid setups:</b> tick the box to see the best <b>mix</b> of products to run at the same time at your RV level. They share your Farmland, Woodland, Wells, Aniimo beds and stations, and the mix is picked for the most net profit per hour (or energy per hour when sorting by Energy or Bowl time). It's worked out as a linear program and then rounded to whole plots, trees and wells. It's on by default and always considers everything your Home can make at your RV level (crafted goods, raw crops, and mine and well goods like Silver Ore), whatever the type filter shows. Products that need ingredients from outside your Home are left out. Some products in the mix may run at less than 1 per hour (like Coconut Cooler 0.8); tick <b>Skip fraction recipes in hybrid setups</b> in Settings to leave those out. The mix is then re-planned without them, so their space goes to the other products instead of sitting empty, for slightly less net profit.</div>
+    <div><b>Hybrid setups:</b> tick the box to see the best <b>mix</b> of products to run at the same time at your RV level. They share your Farmland, Woodland, Wells, Aniimo beds and stations, and the mix is picked for the most net profit per hour (or energy per hour when sorting by Energy or Bowl time). It's worked out as a linear program, then rounded to whole plots, trees, wells and mines: the planner tops up the leftover space one unit at a time, then keeps trying to move single units from one crop, tree or well to another (including ones the first answer didn't use) until no move makes more. It's on by default and always considers everything your Home can make at your RV level (crafted goods, raw crops, and mine and well goods like Silver Ore), whatever the type filter shows. Products that need ingredients from outside your Home are left out. Some products in the mix may run at less than 1 per hour (like Coconut Cooler 0.8); tick <b>Skip fraction recipes in hybrid setups</b> in Settings to leave those out. The mix is then re-planned without them, so their space goes to the other products instead of sitting empty, for slightly less net profit.</div>
     <div><b>Limited-time recipes:</b> season and collab recipes show an end date and drop off this page by themselves once it passes, using the end time in the game data (the Halloween season and Captain Spud collab recipes end Dec 9, 2026 at 23:59 UTC). The Harvest Moon Festival recipes (Moondew Radish, Waxing Moon Pepper and the Umbral dishes) are already gone.</div>
     <div><b>RV level</b> is the highest requirement anywhere in the chain: the facility levels ("Reach RV Level X") and, for premium recipes, the RV module level that unlocks them. Placement limits per RV level come from the game data (e.g. Farmland 4 at RV 1 up to 42 at RV 22).</div>
   </div>
@@ -328,35 +328,46 @@ function simplex(A, b, c){
     let row = -1, best = Infinity;
     for (let i=0;i<m;i++){ const a = T[i][col]; if (a > 1e-12){ const r = T[i][W-1]/a; if (r < best - 1e-12 || (Math.abs(r-best) <= 1e-12 && basis[i] < basis[row])){ best = r; row = i; } } }
     if (row < 0) return null; // unbounded
-    const pr = T[row], pv = pr[col]; for (let j=0;j<W;j++) pr[j] /= pv;
-    for (let i=0;i<m;i++) if (i !== row){ const f = T[i][col]; if (f) for (let j=0;j<W;j++) T[i][j] -= f*pr[j]; }
-    const f = z[col]; for (let j=0;j<W;j++) z[j] -= f*pr[j];
+    const pr = T[row], pv = pr[col], nz = [];
+    for (let j=0;j<W;j++) if (pr[j] !== 0){ pr[j] /= pv; nz.push(j); }
+    for (let i=0;i<m;i++) if (i !== row){ const Ti = T[i], f = Ti[col]; if (f) for (const j of nz) Ti[j] -= f*pr[j]; }
+    const f = z[col]; if (f) for (const j of nz) z[j] -= f*pr[j];
     basis[row] = col;
   }
   const x = new Array(n).fill(0); basis.forEach((bj,i) => { if (bj < n) x[bj] = T[i][W-1]; });
+  x.y = Array.from({length:m}, (_,i) => z[n+i]); // shadow prices (dual values) of the constraints
   return x;
 }
 
 // Hybrid setup: the mix of products that shares your plots, trees, wells, beds and stations for the most
-// net profit (or energy) per hour. Solved as a linear program, then rounded to whole plots/trees/wells.
+// net profit (or energy) per hour. Solved as a linear program, then rounded to whole plots/trees/wells
+// (greedy top-up plus a single-unit swap search, see hybridSolve).
 function hybrid(ids, rv, wpm, goal){
-  // "Skip fraction recipes": drop every product that would make less than 1 per hour and re-solve the whole
-  // mix without them, until every product left makes at least 1 per hour.
-  let h = hybridSolve(ids, rv, wpm, goal), dropped = 0;
-  if (!state.noFrac) return h;
-  const left = new Set(ids.map(String));
-  for (let round=0; h && round<50; round++){
-    const frac = h.products.filter(p => p.perHour < 1 - 1e-6);
-    if (!frac.length) break;
-    for (const p of frac) left.delete(String(p.e.id));
-    dropped += frac.length;
-    h = hybridSolve(ids.filter(id => left.has(String(id))), rv, wpm, goal);
-  }
-  if (h) h.dropped = dropped;
-  return h;
+  const first = hybridSolve(ids, rv, wpm, goal);
+  if (!first) return null;
+  // Fraction-free mix: round with the plain greedy step, drop every product making less than 1 per hour,
+  // re-solve without them and repeat; then polish that mix with the swap search, keeping it fraction-free.
+  const isClean = h => h && !h.products.some(p => p.perHour < 1 - 1e-6);
+  const fracFree = () => {
+    const left = new Set(ids.map(String)), subIds = () => ids.filter(id => left.has(String(id)));
+    let h = isClean(first) ? first : hybridSolve(ids, rv, wpm, goal, null, "fill"), dropped = 0;
+    for (let round=0; h && !isClean(h) && round<80; round++){
+      for (const p of h.products) if (p.perHour < 1 - 1e-6){ left.delete(String(p.e.id)); dropped++; }
+      h = hybridSolve(subIds(), rv, wpm, goal, null, "fill");
+    }
+    if (!isClean(h)) return null;
+    if (h.mode === "fill"){ const g = hybridSolve(subIds(), rv, wpm, goal, h.counts); if (isClean(g) && g.obj > h.obj + 1e-7) h = g; }
+    h.dropped = dropped; return h;
+  };
+  if (state.noFrac) return fracFree() || first;
+  // The fraction-free mix is a second starting point for the full mix: polish it with every product allowed
+  // and keep whichever is better (whole-unit rounding can settle in different spots).
+  if (isClean(first)) return first;
+  const c = fracFree(), g = c && hybridSolve(ids, rv, wpm, goal, c.counts);
+  return g && g.obj > first.obj + 1e-7 ? g : first;
 }
 
-function hybridSolve(ids, rv, wpm, goal){
+function hybridSolve(ids, rv, wpm, goal, seed, mode = "full"){
   const wps = wpm/60, prods = [];
   for (const id of ids){
     const e = I[id], q = perUnit(id), use = new Map(); let seedPer = 0, outside = false;
@@ -379,36 +390,74 @@ function hybridSolve(ids, rv, wpm, goal){
   const A = facs.map(f => prods.map(p => [...p.use].reduce((s,[i,v]) => s + (I[i].fac===f ? v.u : 0), 0)));
   const x = simplex(A, facs.map(f => lim[f]), prods.map(p => p.value));
   if (!x) return null;
-  // Whole units: round each plot/tree/well/bed count down, re-solve with those counts fixed, then hand out
-  // the leftover units one at a time to whichever ingredient raises the total the most.
+  if (mode === "lp") return {mode, products: prods.map((p,k) => ({e: p.e, perHour: x[k]*3600})).filter(p => p.perHour > 1e-6)};
+  // Whole units: start from the LP's counts rounded down, hand out leftover units one at a time to whichever
+  // ingredient raises the total the most, then try moving single units between ingredients (any plot, tree,
+  // well, mine or bed, even ones the LP didn't use) until no move helps. Each test re-solves the product mix
+  // with those counts fixed.
   const isWhole = i => I[i].kind !== "craft";
   const tot = new Map();
   prods.forEach((p,k) => { if (x[k] > 1e-9) for (const [i,v] of p.use) if (isWhole(i)) tot.set(i, (tot.get(i)||0) + x[k]*v.u); });
-  const cand = [...tot.keys()], candSet = new Set(cand);
-  const sub = prods.filter(p => [...p.use.keys()].every(i => !isWhole(i) || candSet.has(i)));
+  const cand = [...new Set(prods.flatMap(p => [...p.use.keys()].filter(isWhole)))];
+  const sub = prods;
   const craftFacs = [...new Set(sub.flatMap(p => [...p.use.keys()].filter(i => !isWhole(i)).map(i => I[i].fac)))];
   const rowsA = [...cand.map(c => sub.map(p => p.use.has(c) ? p.use.get(c).u : 0)),
                  ...craftFacs.map(f => sub.map(p => [...p.use].reduce((s,[i,v]) => s + (!isWhole(i) && I[i].fac===f ? v.u : 0), 0)))];
-  const counts = new Map(cand.map(c => [c, Math.floor(tot.get(c) + 1e-6)]));
-  const solveFixed = () => { const r = simplex(rowsA, [...cand.map(c => counts.get(c)), ...craftFacs.map(f => lim[f])], sub.map(p => p.value)) || sub.map(()=>0); return {x: r, obj: r.reduce((s,v,k)=>s+v*sub[k].value, 0)}; };
+  const counts = new Map(cand.map(c => [c, seed ? seed.get(c) || 0 : Math.floor((tot.get(c)||0) + 1e-6)]));
+  // Shadow prices bound every move: the LP's value is concave in the counts, so one more unit of d and one
+  // less of c can raise the total by at most y[d] - y[c]. Moves that can't beat the best found are skipped.
+  const memo = new Map(), bvec = () => [...cand.map(c => counts.get(c)), ...craftFacs.map(f => lim[f])];
+  const solveFixed = () => {
+    const key = cand.map(c => counts.get(c)).join(",");
+    let r = memo.get(key); if (r) return r;
+    const sol = simplex(rowsA, bvec(), sub.map(p => p.value));
+    const xs = sol || sub.map(() => 0), y = new Map(cand.map((c,ri) => [c, sol ? sol.y[ri] : 0]));
+    r = {x: xs, obj: xs.reduce((s,v,k)=>s+v*sub[k].value, 0), y}; memo.set(key, r); return r;
+  };
   let cur = solveFixed();
-  const freeIn = f => lim[f] - cand.reduce((s,c) => s + (I[c].fac===f ? counts.get(c) : 0), 0);
-  for (let step=0; step<200; step++){
+  const used0 = {}; for (const c of cand) used0[I[c].fac] = (used0[I[c].fac]||0) + counts.get(c);
+  const freeIn = f => lim[f] - (used0[f]||0);
+  const bump = (c, d) => { counts.set(c, counts.get(c)+d); used0[I[c].fac] += d; };
+  const EPS = 1e-7;
+  const fill = only => { for (let step=0; step<400; step++){
+    const ys = cur.y, ds = cand.filter(c => (!only || only.has(c)) && freeIn(I[c].fac) >= 1 - 1e-9 && ys.get(c) > EPS).sort((a,b) => ys.get(b) - ys.get(a));
     let best = null;
-    for (const c of cand){
-      if (freeIn(I[c].fac) < 1 - 1e-9) continue;
-      counts.set(c, counts.get(c)+1); const t = solveFixed(); counts.set(c, counts.get(c)-1);
-      if (t.obj > cur.obj + 1e-9 && (!best || t.obj > best.t.obj)) best = {c, t};
+    for (const d of ds){
+      if (best && ys.get(d) <= best.t.obj - cur.obj + EPS) break;
+      bump(d, 1); const t = solveFixed(); bump(d, -1);
+      if (t.obj > cur.obj + EPS && (!best || t.obj > best.t.obj)) best = {d, t};
     }
     if (!best) break;
-    counts.set(best.c, counts.get(best.c)+1); cur = best.t;
+    bump(best.d, 1); cur = best.t;
+  } };
+  // first pass only tops up ingredients the LP used (the plain greedy rounding); swaps can bring in others
+  fill(seed ? null : new Set(tot.keys()));
+  for (let pass=0; pass<(mode === "fill" ? 0 : 200); pass++){
+    const ys = cur.y, moves = [], minGain = Math.max(EPS, cur.obj * 1e-4); // skip moves worth under 0.01%
+    for (const c of cand){
+      if (!counts.get(c)) continue;
+      for (const d of cand){
+        if (d === c) continue;
+        const room = freeIn(I[d].fac) + (I[d].fac === I[c].fac ? 1 : 0), ub = ys.get(d) - ys.get(c);
+        if (room >= 1 - 1e-9 && ub > minGain) moves.push({c, d, ub});
+      }
+    }
+    moves.sort((a,b) => b.ub - a.ub);
+    let best = null;
+    for (const m of moves){
+      if (best && m.ub <= best.t.obj - cur.obj + EPS) break;
+      bump(m.c, -1); bump(m.d, 1); const t = solveFixed(); bump(m.d, -1); bump(m.c, 1);
+      if (t.obj > cur.obj + EPS && (!best || t.obj > best.t.obj)) best = {...m, t};
+    }
+    if (!best) break;
+    bump(best.c, -1); bump(best.d, 1); cur = best.t; fill();
   }
   const items = new Map(), used = {};
   sub.forEach((p,k) => { const R = cur.x[k]; if (R <= 1e-12) return; for (const [i,v] of p.use){ const it = items.get(i) || {e:I[i], tot:0, quick:v.quick, out:v.out, secs:v.secs, whole:isWhole(i), uses:[]}; it.tot += R*v.u; it.uses.push({e:p.e, perHour: R*3600*v.u/v.secs*v.out}); items.set(i, it); } });
   for (const it of items.values()){ it.count = it.whole ? counts.get(String(it.e.id)) ?? Math.ceil(it.tot - 1e-9) : it.tot; used[it.e.fac] = (used[it.e.fac]||0) + it.count; }
   const out = sub.map((p,k) => { const perHour = cur.x[k]*3600; return {e:p.e, perHour, net: perHour*(p.e.price - p.seedPer), revenue: perHour*p.e.price, seeds: perHour*p.seedPer, energy: perHour*(p.e.energy||0)}; }).filter(p => p.perHour > 1e-6).sort((a,b) => b.net - a.net);
   const sum = k => out.reduce((s,p)=>s+p[k],0);
-  return {products: out, items: [...items.values()].filter(it => it.count > 1e-9), used, lim, net: sum("net"), revenue: sum("revenue"), seeds: sum("seeds"), energy: sum("energy")};
+  return {mode, obj: cur.obj, lp: x.reduce((s,v,k)=>s+v*prods[k].value, 0), counts, products: out, items: [...items.values()].filter(it => it.count > 1e-9), used, lim, net: sum("net"), revenue: sum("revenue"), seeds: sum("seeds"), energy: sum("energy")};
 }
 
 function hybridPanel(ids, bestSingle, goal){
